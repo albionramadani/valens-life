@@ -1203,6 +1203,11 @@ body {
 	display: flex;
 }
 
+.valens-category-area .row {
+	--bs-gutter-x: 24px;
+	--bs-gutter-y: 24px;
+}
+
 .valens-category-card {
 	display: flex;
 	flex: 1;
@@ -1214,7 +1219,7 @@ body {
 	background: #8fe3d7;
 	border-radius: 12px;
 	padding: 38px 34px 34px;
-	margin-bottom: 24px;
+	margin-bottom: 0;
 	box-shadow: none;
 	transition: all 0.2s ease-in-out;
 	width: 100%;
