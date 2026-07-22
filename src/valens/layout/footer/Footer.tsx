@@ -20,7 +20,7 @@ const footer_data: DataType[] = [
       class_name: "col-lg-3",
       title: "Rreth Nesh",
       footer_link: [
-         { link: "/", link_title: "Ballina" },  
+         { link: "/#ballina", link_title: "Ballina" },  
          { link: "/#categories", link_title: "Kategorite" },  
          { link: "/#about", link_title: "Rreth Nesh" },
          { link: "/#products", link_title: "Produktet" },

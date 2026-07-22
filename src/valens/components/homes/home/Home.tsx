@@ -31,7 +31,7 @@ const CarefulSelectionIcon = () => (
 
 const HomeOneBanner = () => {
    return (
-      <section className="banner-area">
+      <section id="ballina" className="banner-area">
          <div className="container">
             <div className="row align-items-center">
                <div className="col-lg-6 col-md-10">

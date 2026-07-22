@@ -17,7 +17,7 @@ const menu_data: MenuItem[] = [
       page: "header_1",
       has_dropdown: false,
       title: "Ballina",
-      link: "/",
+      link: "/#ballina",
    },
 
    {
