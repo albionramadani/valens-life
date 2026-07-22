@@ -1,10 +1,10 @@
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface FaqItem {
   id: number;
   question: string;
-  answer: React.ReactElement;
+  answer: React.ReactNode;
   showAnswer: boolean;
 }
 
@@ -66,15 +66,12 @@ const faqDataStatic: FaqItem[] = [
 ];
 
 const HomeOneFaq = () => {
-  const [faqItems, setFaqItems] = useState<FaqItem[]>([]);
-
-  useEffect(() => {
-    const initial = faqDataStatic.map((faq, index) => ({
+  const [faqItems, setFaqItems] = useState<FaqItem[]>(() =>
+    faqDataStatic.map((faq, index) => ({
       ...faq,
       showAnswer: index === 0,
-    }));
-    setFaqItems(initial);
-  }, []);
+    }))
+  );
 
   const toggleAnswer = (index: number) => {
     setFaqItems((prev) =>
@@ -107,7 +104,7 @@ const HomeOneFaq = () => {
                   key={item.id}
                   className={`accordion-item ${item.showAnswer ? "is-open" : ""}`}
                 >
-                  <h2 className="accordion-header">
+                  <h2 className="accordion-header" id={`valensFaqHeading-${item.id}`}>
                     <button
                       type="button"
                       onClick={() => toggleAnswer(index)}
@@ -127,7 +124,9 @@ const HomeOneFaq = () => {
                   {item.showAnswer && (
                     <div
                       id={`valensFaqCollapse-${item.id}`}
-                      className="accordion-collapse collapse show"
+                      className="faq-answer"
+                      role="region"
+                      aria-labelledby={`valensFaqHeading-${item.id}`}
                     >
                       <div className="accordion-body">
                         <p>{item.answer}</p>
