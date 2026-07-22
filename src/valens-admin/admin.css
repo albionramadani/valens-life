@@ -1,0 +1,299 @@
+/*
+ * Admin panel scoped reset.
+ *
+ * The main site loads Bootstrap globally (Valens template) which resets
+ * body / headings / buttons / lists / anchors / tables via Bootstrap Reboot.
+ * Those bare element rules bleed into the admin panel and break shadcn / Tailwind
+ * spacing and typography. The rules below undo Bootstrap Reboot inside
+ * `:where(.admin-scope)` so the admin renders identical to the original Valens dashboard.
+ */
+
+.admin-scope {
+  /* Valens Admin — Paper & Ink */
+  --background: oklch(0.975 0.006 85);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.145 0 0);
+  --primary-foreground: oklch(0.985 0.004 85);
+  --secondary: oklch(0.93 0.009 85);
+  --secondary-foreground: oklch(0.2 0 0);
+  --muted: oklch(0.955 0.007 85);
+  --muted-foreground: oklch(0.49 0 0);
+  --accent: oklch(0.935 0.008 85);
+  --accent-foreground: oklch(0.145 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.88 0.009 85);
+  --input: oklch(0.84 0.008 85);
+  --ring: oklch(0.145 0 0);
+  --radius: 0.5rem;
+}
+
+/* Valens' storefront CSS reduces the root rem size. Restore the dashboard's
+   intended 16px scale so Tailwind spacing and controls cannot render tiny. */
+html:has(.admin-scope) {
+  font-size: 16px !important;
+}
+
+:where(.admin-scope) {
+  font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--foreground);
+  background-color: var(--background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: left;
+}
+
+:where(.admin-scope) h1,
+:where(.admin-scope) h2,
+:where(.admin-scope) h3,
+:where(.admin-scope) h4 {
+  font-family: "Sora", "Manrope", sans-serif;
+}
+
+:where(.admin-scope) *,
+:where(.admin-scope) *::before,
+:where(.admin-scope) *::after {
+  box-sizing: border-box;
+}
+
+/* Headings: Bootstrap sets margin-bottom .5rem, font-weight 500. Reset. */
+:where(.admin-scope) h1,
+:where(.admin-scope) h2,
+:where(.admin-scope) h3,
+:where(.admin-scope) h4,
+:where(.admin-scope) h5,
+:where(.admin-scope) h6 {
+  margin: 0;
+  padding: 0;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  font-family: inherit;
+  letter-spacing: normal;
+}
+
+/* Paragraphs / lists / figure resets */
+:where(.admin-scope) p,
+:where(.admin-scope) ul,
+:where(.admin-scope) ol,
+:where(.admin-scope) dl,
+:where(.admin-scope) figure,
+:where(.admin-scope) blockquote,
+:where(.admin-scope) pre {
+  margin: 0;
+  padding: 0;
+}
+
+:where(.admin-scope) ul,
+:where(.admin-scope) ol {
+  list-style: none;
+}
+
+/* Anchors: Bootstrap forces blue + underline. Inherit instead. */
+:where(.admin-scope) a {
+  color: inherit;
+  text-decoration: none;
+  background-color: transparent;
+}
+:where(.admin-scope) a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Buttons: Bootstrap forces its own font/padding/color/appearance. Reset. */
+:where(.admin-scope) button,
+:where(.admin-scope) input,
+:where(.admin-scope) select,
+:where(.admin-scope) textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  margin: 0;
+}
+
+:where(.admin-scope) button {
+  background-color: transparent;
+  background-image: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+:where(.admin-scope) button:not(:disabled) {
+  cursor: pointer;
+}
+
+:where(.admin-scope) input,
+:where(.admin-scope) textarea,
+:where(.admin-scope) select {
+  background-color: transparent;
+  border: 0;
+  outline: none;
+}
+
+:where(.admin-scope) img,
+:where(.admin-scope) svg {
+  display: block;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+/* Tables: Bootstrap collapses + adds border spacing / caption styling. Reset. */
+:where(.admin-scope) table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  caption-side: bottom;
+}
+
+:where(.admin-scope) th,
+:where(.admin-scope) td {
+  padding: 0;
+  text-align: inherit;
+  font-weight: inherit;
+  vertical-align: inherit;
+  border: 0;
+}
+
+:where(.admin-scope) label {
+  display: inline-block;
+  margin: 0;
+}
+
+:where(.admin-scope) hr {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+  opacity: 1;
+}
+
+:where(.admin-scope) code,
+:where(.admin-scope) pre,
+:where(.admin-scope) kbd,
+:where(.admin-scope) samp {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+/* Neutralize Bootstrap container widths that could clip full-bleed admin layouts */
+:where(.admin-scope) .container,
+:where(.admin-scope) .container-fluid {
+  max-width: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Professional operations-system foundation. These rules intentionally sit
+   after the reset and storefront styles to keep all 30+ admin views coherent. */
+.admin-scope main {
+  background: var(--background);
+}
+
+/* Bootstrap exposes the same utility names with !important declarations.
+   Keep the admin's semantic Tailwind utilities authoritative inside its scope. */
+.admin-scope .bg-primary { background-color: var(--primary) !important; }
+.admin-scope .bg-primary\/10 { background-color: color-mix(in oklab, var(--primary) 10%, transparent) !important; }
+.admin-scope .bg-primary\/90 { background-color: color-mix(in oklab, var(--primary) 90%, transparent) !important; }
+.admin-scope .bg-background { background-color: var(--background) !important; }
+.admin-scope .bg-card { background-color: var(--card) !important; }
+.admin-scope .bg-muted { background-color: var(--muted) !important; }
+.admin-scope .bg-accent { background-color: var(--accent) !important; }
+.admin-scope .bg-destructive { background-color: var(--destructive) !important; }
+.admin-scope .text-primary { color: var(--primary) !important; }
+.admin-scope .text-primary-foreground { color: var(--primary-foreground) !important; }
+.admin-scope .text-foreground { color: var(--foreground) !important; }
+.admin-scope .text-muted-foreground { color: var(--muted-foreground) !important; }
+.admin-scope .text-destructive { color: var(--destructive) !important; }
+.admin-scope .border-primary { border-color: var(--primary) !important; }
+.admin-scope .border-border { border-color: var(--border) !important; }
+.admin-scope .border-input { border-color: var(--input) !important; }
+
+.admin-scope .hover\:bg-primary\/90:hover {
+  background-color: color-mix(in oklab, var(--primary) 90%, transparent) !important;
+}
+
+.admin-scope .hover\:bg-accent:hover {
+  background-color: var(--accent) !important;
+}
+
+.admin-scope button,
+.admin-scope a,
+.admin-scope input,
+.admin-scope select,
+.admin-scope textarea {
+  transition-duration: 160ms !important;
+}
+
+/* Compact, rounded button defaults across all admin views */
+.admin-scope button {
+  border-radius: 0.5rem;
+}
+
+.admin-scope button[class*="h-11"] {
+  height: 2.25rem !important;
+  min-height: 2.25rem;
+  padding-left: 0.875rem !important;
+  padding-right: 0.875rem !important;
+  font-size: 0.875rem !important;
+}
+
+.admin-scope button[class*="h-10"] {
+  height: 2.125rem !important;
+  min-height: 2.125rem;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+  font-size: 0.875rem !important;
+}
+
+.admin-scope button[class*="h-9"] {
+  height: 2rem !important;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+}
+
+.admin-scope button[class*="bg-primary"],
+.admin-scope button[class*="bg-foreground"] {
+  box-shadow: 0 1px 2px color-mix(in oklab, var(--foreground) 16%, transparent);
+}
+
+.admin-scope button:focus-visible,
+.admin-scope a:focus-visible,
+.admin-scope input:focus-visible,
+.admin-scope select:focus-visible,
+.admin-scope textarea:focus-visible {
+  outline: 2px solid var(--ring) !important;
+  outline-offset: 2px;
+}
+
+.admin-scope input:not([type="checkbox"]):not([type="radio"]),
+.admin-scope select,
+.admin-scope textarea {
+  background-color: var(--card);
+}
+
+.admin-scope table thead {
+  background: color-mix(in oklab, var(--muted) 78%, var(--card));
+}
+
+.admin-scope table th {
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-scope *,
+  .admin-scope *::before,
+  .admin-scope *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
