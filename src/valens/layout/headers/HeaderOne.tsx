@@ -22,6 +22,7 @@ const HeaderOne = ({ style, hideNavLinks = false }: HeaderOneProps) => {
     const productItem = useSelector((state: any) => state.cart.cart);
     const pathname = useLocation({ select: (location) => location.pathname });
     const isHome = pathname === "/";
+    const shouldHideNavLinks = hideNavLinks || !isHome;
     const handleCartToggle = () => setCartOpen((prev) => !prev);
 
     return (
@@ -29,7 +30,7 @@ const HeaderOne = ({ style, hideNavLinks = false }: HeaderOneProps) => {
             <header id="home">
                 <div
                     id="sticky-header"
-                    className={`menu-area ${style ? "transparent-header" : ""} ${sticky ? "sticky-menu" : ""} ${hideNavLinks ? "valens-header-on-white" : ""}`}
+                    className={`menu-area ${style ? "transparent-header" : ""} ${sticky ? "sticky-menu" : ""} ${shouldHideNavLinks ? "valens-header-on-white" : ""}`}
                 >
                     <div className="container">
                         <div className="row">
@@ -41,7 +42,7 @@ const HeaderOne = ({ style, hideNavLinks = false }: HeaderOneProps) => {
                                                 <Image src={valensLogo} alt="Valens" className="valens-header-logo" priority />
                                             </Link>
                                         </div>
-                                        {!hideNavLinks ? (
+                                        {!shouldHideNavLinks ? (
                                             <div className="mobile-header-actions d-flex d-xl-none align-items-center">
                                                 <div className="header-shop-cart mobile-header-cart">
                                                     <a style={{ cursor: "pointer" }} onClick={handleCartToggle} className="cart-count" aria-label="Toggle cart">
@@ -55,12 +56,12 @@ const HeaderOne = ({ style, hideNavLinks = false }: HeaderOneProps) => {
                                                 </div>
                                             </div>
                                         ) : null}
-                                        {!hideNavLinks ? (
+                                        {!shouldHideNavLinks ? (
                                             <div className="navbar-wrap main-menu d-none d-xl-flex justify-content-center">
                                                 <NavMenuOne /> 
                                             </div>
                                         ) : null}
-                                        <div className={`header-action ${hideNavLinks ? 'd-block ms-auto' : 'd-none d-xl-block'}`}>
+                                        <div className={`header-action ${shouldHideNavLinks ? 'd-block ms-auto' : 'd-none d-xl-block'}`}>
                                             <ul>
                                                 <li className="header-shop-cart">
                                                     <a style={{ cursor: "pointer" }} onClick={handleCartToggle} className="cart-count"><i className="flaticon-shopping-cart"></i>
@@ -77,7 +78,7 @@ const HeaderOne = ({ style, hideNavLinks = false }: HeaderOneProps) => {
                     </div>
                 </div>
             </header>
-            {!hideNavLinks ? <Sidebar style={!isHome} isActive={isActive} setIsActive={setIsActive} /> : null}
+                {!shouldHideNavLinks ? <Sidebar style={!isHome} isActive={isActive} setIsActive={setIsActive} /> : null}
         </>
     );
 }
