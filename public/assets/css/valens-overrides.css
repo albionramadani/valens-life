@@ -1617,11 +1617,21 @@ html {
 
 .valens-popular-area .home-shop-item {
 	height: 100%;
+	min-height: 520px;
 	display: flex;
 	flex-direction: column;
 	margin: 0;
 	padding: 28px 28px 26px;
 	border-radius: 14px;
+}
+
+.valens-popular-area .home-shop-active .slick-slide {
+	height: auto;
+}
+
+.valens-popular-area .home-shop-active .slick-slide > div {
+	height: 100%;
+	display: flex !important;
 }
 
 .valens-popular-area .home-shop-thumb {
@@ -1655,12 +1665,27 @@ html {
 .valens-popular-area .home-shop-content .title {
 	font-size: 18px;
 	margin-bottom: 10px;
+	min-height: 54px;
+	line-clamp: 2;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 }
 
 .valens-popular-area .home-shop-content {
 	display: flex;
 	flex: 1;
 	flex-direction: column;
+}
+
+.valens-popular-area .valens-popular-subtitle {
+	min-height: 54px;
+	line-clamp: 2;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 }
 
 .valens-popular-area .home-shop-price {
@@ -1777,6 +1802,10 @@ html {
 		min-width: 96px;
 		padding: 0 12px !important;
 	}
+
+	.valens-popular-area .home-shop-item {
+		min-height: 490px;
+	}
 }
 
 /* Button style like the screenshot (mint pill) */
@@ -1817,6 +1846,16 @@ html {
 
 .valens-popular-area .home-shop-active .slick-arrow i {
 	position: static;
+}
+
+.valens-popular-area .home-shop-active .slick-dots {
+	position: static;
+	display: flex !important;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+	margin: 24px 0 0;
+	padding: 0;
 }
 
 /* Dots like the screenshot (mint circles + active pill) */
