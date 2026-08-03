@@ -126,6 +126,9 @@ const CategoryProductsArea = ({ products, title }: CategoryProductsAreaProps) =>
               <div key={item.id} className="col-xl-3 col-lg-4 col-md-6 d-flex">
                 <article className="home-shop-item valens-home-popular-card h-100 d-flex flex-column w-100">
                   <div className="home-shop-thumb">
+                    {item.valensSubtitle ? (
+                      <span className="valens-card-badge">{item.valensSubtitle}</span>
+                    ) : null}
                     <Link to="/shop-details/$id" params={{ id: String(item.id) }}>
                       <Image src={item.thumb} alt={item.title} />
                       {item.discount ? (
@@ -135,19 +138,20 @@ const CategoryProductsArea = ({ products, title }: CategoryProductsAreaProps) =>
                     <div className={`shop-thumb-shape ${item.class_name || ""}`}></div>
                   </div>
                   <div className="home-shop-content d-flex flex-column flex-grow-1">
-                    {item.valensSubtitle ? (
-                      <span className="valens-popular-category">{item.valensSubtitle}</span>
-                    ) : null}
                     <h4 className="title">
                       <Link to="/shop-details/$id" params={{ id: String(item.id) }}>
                         {item.title}
                       </Link>
                     </h4>
-                    <p className="valens-popular-subtitle">Lorem Ipsum</p>
-                    <span className="home-shop-price">
-                      {Number(item.price).toFixed(2).replace(".", ",")} €
-                    </span>
-                    <div className="shop-content-bottom mt-auto">
+                    <div className="valens-card-price-row mt-auto">
+                      <span className="home-shop-price">
+                        {Number(item.price).toFixed(2).replace(".", ",")} €
+                      </span>
+                      <span className="valens-card-stock">
+                        {item.stock_status === "out_of_stock" ? "Jashtë stokut" : "Në stok"}
+                      </span>
+                    </div>
+                    <div className="shop-content-bottom">
                       <button
                         type="button"
                         onClick={() => handleAddToCart(item)}

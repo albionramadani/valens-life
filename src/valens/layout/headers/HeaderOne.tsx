@@ -23,9 +23,10 @@ const HeaderOne = ({ style, hideNavLinks = false }: HeaderOneProps) => {
     const pathname = useLocation({ select: (location) => location.pathname });
     const isHome = pathname === "/";
     // Primary nav pages keep the full navigation menu visible so users can move
-    // between the dedicated nav-item pages (Ballina stays the homepage).
+    // between the dedicated nav-item pages (Ballina stays the homepage). Category
+    // detail pages (/kategoria/<slug>) also keep the nav visible.
     const navPages = ["/", "/kategorite", "/rreth-nesh", "/produktet", "/pyetje", "/kontakti"];
-    const isNavPage = navPages.includes(pathname);
+    const isNavPage = navPages.includes(pathname) || pathname.startsWith("/kategoria/");
     const shouldHideNavLinks = hideNavLinks || !isNavPage;
     const handleCartToggle = () => setCartOpen((prev) => !prev);
 

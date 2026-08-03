@@ -101,6 +101,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap",
       },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Marcellus&display=swap",
+      },
       { rel: "stylesheet", href: "/assets/css/bootstrap.min.css" },
       { rel: "stylesheet", href: "/assets/css/swiper-bundle.min.css" },
       { rel: "stylesheet", href: "/assets/css/slick.css" },

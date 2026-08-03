@@ -6,20 +6,93 @@ import UseCartInfo from '@v/hooks/UseCartInfo';
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, clear_cart, decrease_quantity, remove_cart_product } from '@v/redux/features/cartSlice';
 import RemoveIcon from '@v/svg/RemoveIcon';
+import { useEffect, useState } from 'react';
+
+const VALENS_LOGO = "/assets/img/logo/Isolation_Mode.svg";
+const IG_REDIRECT_SECONDS = 4;
+
+// Handle-i i Instagram-it të Valens (pa "@") — https://www.instagram.com/valens.ks
+const VALENS_INSTAGRAM = "valens.ks";
+
+const copyToClipboard = (text: string): boolean => {
+   try {
+      if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+         navigator.clipboard.writeText(text);
+         return true;
+      }
+   } catch {
+      // fall through to legacy fallback
+   }
+
+   try {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      return true;
+   } catch {
+      return false;
+   }
+};
 
 const CartArea = () => {
 
    const productItem = useSelector((state: any) => state.cart.cart);
    const dispatch = useDispatch();
    const { total } = UseCartInfo();
+   const [showIgPopup, setShowIgPopup] = useState(false);
+   const [igCopied, setIgCopied] = useState(false);
+   const [countdown, setCountdown] = useState(IG_REDIRECT_SECONDS);
 
    const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
       // Handle the form submission here
    };
 
+   const orderViaInstagram = () => {
+      const origin = typeof window !== "undefined" ? window.location.origin : "";
+      const lines = productItem.map((item: any, index: number) => {
+         const productUrl = `${origin}/shop-details/${item.id}`;
+         return `${index + 1}. ${item.title} (x${item.quantity})\n${productUrl}`;
+      });
+
+      const message =
+         `Përshëndetje Valens! 👋\n` +
+         `Dua të porosis këto produkte:\n\n` +
+         `${lines.join("\n\n")}\n\n` +
+         `Totali: $${total.toFixed(2)}`;
+
+      // Kopjo listën, pastaj shfaq popup-in me rikujtim para se ta hapim Instagram.
+      const copied = copyToClipboard(message);
+      setIgCopied(copied);
+      setShowIgPopup(true);
+   };
+
+   // Kur hapet popup-i: numëro mbrapsht dhe ridrejto automatikisht te Instagram.
+   useEffect(() => {
+      if (!showIgPopup) return;
+
+      setCountdown(IG_REDIRECT_SECONDS);
+      const tick = setInterval(() => {
+         setCountdown((c) => (c > 0 ? c - 1 : 0));
+      }, 1000);
+      const redirect = setTimeout(() => {
+         window.location.href = `https://ig.me/m/${VALENS_INSTAGRAM}`;
+      }, IG_REDIRECT_SECONDS * 1000);
+
+      return () => {
+         clearInterval(tick);
+         clearTimeout(redirect);
+      };
+   }, [showIgPopup]);
+
 
    return (
+    <>
       <section className="eg-cart__area mb-95 valens-cart-area">
          <div className="container">
 
@@ -112,13 +185,65 @@ const CartArea = () => {
                            <span>Totali</span>
                            <span>${total.toFixed(2)}</span>
                         </div>
-                        
+
+                        <button
+                           type="button"
+                           onClick={orderViaInstagram}
+                           className="eg-btn valens-cart-ig-btn"
+                        >
+                           <i className="fab fa-instagram" aria-hidden="true"></i>
+                           Porosit përmes Instagram
+                        </button>
+
                      </div>
                   </div>
                </div>
             )}
          </div>
       </section>
+
+      {showIgPopup && (
+         <div
+            className="valens-ig-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="valens-ig-modal-title"
+         >
+            <div className="valens-ig-modal__overlay" />
+            <div className="valens-ig-modal__box">
+               <div className="valens-ig-modal__logo">
+                  <img src={VALENS_LOGO} alt="Valens" />
+               </div>
+               <h3 id="valens-ig-modal-title" className="valens-ig-modal__title">
+                  {igCopied ? "Lista u kopjua ✓" : "Porosia juaj"}
+               </h3>
+               <p className="valens-ig-modal__text">
+                  {igCopied ? (
+                     <>
+                        Lista e produkteve u kopjua. Të lutem, kur të hapet
+                        Instagram, <strong>bëj vetëm paste (ngjit)</strong>{" "}
+                        mesazhin në bisedë.
+                     </>
+                  ) : (
+                     <>
+                        Hape bisedën në Instagram dhe na shkruaj produktet që
+                        dëshiron të porosisësh.
+                     </>
+                  )}
+               </p>
+
+               <div className="valens-ig-modal__redirect" aria-live="polite">
+                  <div className="valens-ig-modal__progress">
+                     <span className="valens-ig-modal__progress-bar" />
+                  </div>
+                  <p className="valens-ig-modal__redirect-text">
+                     Po ju ridrejtojmë te Instagram brenda {countdown}s…
+                  </p>
+               </div>
+            </div>
+         </div>
+      )}
+    </>
    )
 }
 
