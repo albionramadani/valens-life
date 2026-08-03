@@ -5,7 +5,7 @@ import FooterOne from "@v/layout/footer/Footer";
 import CategoryHero from "@v/components/inner-shop/category/CategoryHero";
 import CategoryProductsArea from "@v/components/inner-shop/category/CategoryProductsArea";
 import { getCategoryBySlug } from "@v/data/CategoryData";
-import { getPopularProducts } from "@v/utils/getPopularProducts";
+import { useStorefrontShopProducts } from "@/hooks/useStorefrontShopProducts";
 
 export const Route = createFileRoute("/kategoria/$slug")({
   head: () => ({ meta: [{ title: "Kategoria - Valens" }] }),
@@ -15,8 +15,22 @@ export const Route = createFileRoute("/kategoria/$slug")({
 function CategoryPage() {
   const { slug } = Route.useParams();
   const category = getCategoryBySlug(slug);
+  const { data: shopProducts = [] } = useStorefrontShopProducts();
+
   if (!category) throw notFound();
-  const products = getPopularProducts(4);
+
+  const normalizeCategory = (value: string) =>
+    value
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .trim()
+      .toLocaleLowerCase("sq");
+
+  const categoryName = normalizeCategory(category.name);
+  const products = shopProducts
+    .filter((product) => normalizeCategory(product.valensSubtitle) === categoryName)
+    .slice(0, 4);
+
   return (
     <Wrapper>
       <Header style={true} />
