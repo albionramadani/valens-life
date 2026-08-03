@@ -22,7 +22,11 @@ const HeaderOne = ({ style, hideNavLinks = false }: HeaderOneProps) => {
     const productItem = useSelector((state: any) => state.cart.cart);
     const pathname = useLocation({ select: (location) => location.pathname });
     const isHome = pathname === "/";
-    const shouldHideNavLinks = hideNavLinks || !isHome;
+    // Primary nav pages keep the full navigation menu visible so users can move
+    // between the dedicated nav-item pages (Ballina stays the homepage).
+    const navPages = ["/", "/kategorite", "/rreth-nesh", "/produktet", "/pyetje", "/kontakti"];
+    const isNavPage = navPages.includes(pathname);
+    const shouldHideNavLinks = hideNavLinks || !isNavPage;
     const handleCartToggle = () => setCartOpen((prev) => !prev);
 
     return (

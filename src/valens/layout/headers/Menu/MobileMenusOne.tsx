@@ -110,19 +110,25 @@ const MobileMenusOne = ({ setIsActive }: any) => {
     };
 
     const handleMenuNavigation = (e: any, menuLink: string) => {
-        if (!menuLink?.startsWith("/#")) {
+        if (menuLink?.startsWith("/#")) {
+            e.preventDefault();
+            const id = menuLink.replace("/#", "");
+
+            router({ to: menuLink });
+            setActiveSection(id);
+
+            if (currentRoute === "/") {
+                scrollToSection(id);
+            }
+
             setIsActive(false);
             return;
         }
 
-        e.preventDefault();
-        const id = menuLink.replace("/#", "");
-
-        router({ to: menuLink });
-        setActiveSection(id);
-
-        if (currentRoute === "/") {
-            scrollToSection(id);
+        // Internal route links -> SPA navigation to the dedicated page.
+        if (menuLink?.startsWith("/")) {
+            e.preventDefault();
+            router({ to: menuLink });
         }
 
         setIsActive(false);

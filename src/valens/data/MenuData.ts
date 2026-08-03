@@ -17,7 +17,7 @@ const menu_data: MenuItem[] = [
       page: "header_1",
       has_dropdown: false,
       title: "Ballina",
-      link: "/#ballina",
+      link: "/",
    },
 
    {
@@ -25,35 +25,35 @@ const menu_data: MenuItem[] = [
       page: "header_1",
       has_dropdown: false,
       title: "Kategorite",
-      link: "/#categories",
+      link: "/kategorite",
    },
    {
       id: 3,
       page: "header_1",
       has_dropdown: false,
       title: "Rreth nesh",
-      link: "/#about",
+      link: "/rreth-nesh",
    },
    {
       id: 4,
       page: "header_1",
       has_dropdown: false,
       title: "Produktet",
-      link: "/#products",
+      link: "/produktet",
    },
    {
       id: 5,
       page: "header_1",
       has_dropdown: false,
       title: "Pyetje",
-      link: "/#faq",
+      link: "/pyetje",
    },
    {
       id: 7,
       page: "header_1",
       has_dropdown: false,
       title: "Kontakti",
-      link: "/#contact",
+      link: "/kontakti",
    },
 ];
 export default menu_data;

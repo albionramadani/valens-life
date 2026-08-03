@@ -114,16 +114,23 @@ const NavMenuOne = ({ num = false }) => {
                         <a
                             href={menu.link}
                             onClick={(e) => {
-                                if (!menu.link?.startsWith("/#")) return;
+                                if (menu.link?.startsWith("/#")) {
+                                    e.preventDefault();
+                                    const id = menu.link.replace("/#", "");
 
-                                e.preventDefault();
-                                const id = menu.link.replace("/#", "");
+                                    router(menu.link);
+                                    setActiveSection(id);
 
-                                router(menu.link);
-                                setActiveSection(id);
+                                    if (currentRoute === "/") {
+                                        scrollToSection(id);
+                                    }
+                                    return;
+                                }
 
-                                if (currentRoute === "/") {
-                                    scrollToSection(id);
+                                // Internal route links -> SPA navigation to the dedicated page.
+                                if (menu.link?.startsWith("/")) {
+                                    e.preventDefault();
+                                    router({ to: menu.link });
                                 }
                             }}
                             className={`section-link ${(isMenuItemActive(menu.link) || (menu.sub_menus && menu.sub_menus.some((sub_m: any) => sub_m.link && isSubMenuItemActive(sub_m.link)))) ? "active" : ""}`}
