@@ -65,40 +65,24 @@ body {
 
 @font-face {
     font-family: "Contax Pro 55";
-    src: url("https://db.onlinewebfonts.com/t/55614bd50bc33409bc75bd853dc64478.eot");
-    src: url("https://db.onlinewebfonts.com/t/55614bd50bc33409bc75bd853dc64478.eot?#iefix")format("embedded-opentype"),
-    url("https://db.onlinewebfonts.com/t/55614bd50bc33409bc75bd853dc64478.woff2")format("woff2"),
-    url("https://db.onlinewebfonts.com/t/55614bd50bc33409bc75bd853dc64478.woff")format("woff"),
-    url("https://db.onlinewebfonts.com/t/55614bd50bc33409bc75bd853dc64478.ttf")format("truetype"),
-    url("https://db.onlinewebfonts.com/t/55614bd50bc33409bc75bd853dc64478.svg#Contax Pro 55")format("svg");
+	src: url("/assets/fonts/Contax Pro 55.ttf") format("truetype");
+	font-display: swap;
 }
 @font-face {
     font-family: "Contax W01 45 Light";
-    src: url("https://db.onlinewebfonts.com/t/81ca415c501b7e9bf06d4c9b3e783ce2.eot");
-    src: url("https://db.onlinewebfonts.com/t/81ca415c501b7e9bf06d4c9b3e783ce2.eot?#iefix")format("embedded-opentype"),
-    url("https://db.onlinewebfonts.com/t/81ca415c501b7e9bf06d4c9b3e783ce2.woff2")format("woff2"),
-    url("https://db.onlinewebfonts.com/t/81ca415c501b7e9bf06d4c9b3e783ce2.woff")format("woff"),
-    url("https://db.onlinewebfonts.com/t/81ca415c501b7e9bf06d4c9b3e783ce2.ttf")format("truetype"),
-    url("https://db.onlinewebfonts.com/t/81ca415c501b7e9bf06d4c9b3e783ce2.svg#Contax W01 45 Light")format("svg");
+	src: url("/assets/fonts/Contax W01 45 Light.ttf") format("truetype");
+	font-display: swap;
 }
 @font-face {
     font-family: "Contax W01 65 Medium";
-    src: url("https://db.onlinewebfonts.com/t/d81ca340fb94ceeae147d9f666039709.eot");
-    src: url("https://db.onlinewebfonts.com/t/d81ca340fb94ceeae147d9f666039709.eot?#iefix")format("embedded-opentype"),
-    url("https://db.onlinewebfonts.com/t/d81ca340fb94ceeae147d9f666039709.woff2")format("woff2"),
-    url("https://db.onlinewebfonts.com/t/d81ca340fb94ceeae147d9f666039709.woff")format("woff"),
-    url("https://db.onlinewebfonts.com/t/d81ca340fb94ceeae147d9f666039709.ttf")format("truetype"),
-    url("https://db.onlinewebfonts.com/t/d81ca340fb94ceeae147d9f666039709.svg#Contax W01 65 Medium")format("svg");
+	src: url("/assets/fonts/Contax W01 65 Medium.ttf") format("truetype");
+	font-display: swap;
 }
 
 @font-face {
     font-family: "Contax Pro 75 Bold Regular";
-    src: url("https://db.onlinewebfonts.com/t/0d3d42f344c7c7acf7b9b09c774dca21.eot");
-    src: url("https://db.onlinewebfonts.com/t/0d3d42f344c7c7acf7b9b09c774dca21.eot?#iefix")format("embedded-opentype"),
-    url("https://db.onlinewebfonts.com/t/0d3d42f344c7c7acf7b9b09c774dca21.woff2")format("woff2"),
-    url("https://db.onlinewebfonts.com/t/0d3d42f344c7c7acf7b9b09c774dca21.woff")format("woff"),
-    url("https://db.onlinewebfonts.com/t/0d3d42f344c7c7acf7b9b09c774dca21.ttf")format("truetype"),
-    url("https://db.onlinewebfonts.com/t/0d3d42f344c7c7acf7b9b09c774dca21.svg#Contax Pro 75 Bold Regular")format("svg");
+	src: url("/assets/fonts/Contax Pro 75 Bold Regular.ttf") format("truetype");
+	font-display: swap;
 }
 
 
@@ -1665,12 +1649,15 @@ html {
 .valens-popular-area .home-shop-content .title {
 	font-size: 18px;
 	margin-bottom: 10px;
-	min-height: 54px;
-	line-clamp: 2;
-	display: -webkit-box;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
+	min-height: auto;
+	height: auto;
+	line-clamp: unset;
+	display: block;
+	-webkit-line-clamp: unset;
+	-webkit-box-orient: initial;
+	overflow: visible;
+	white-space: normal;
+	word-break: break-word;
 }
 
 .valens-popular-area .home-shop-content {
@@ -1680,12 +1667,14 @@ html {
 }
 
 .valens-popular-area .valens-popular-subtitle {
-	min-height: 54px;
-	line-clamp: 2;
-	display: -webkit-box;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
+	min-height: auto;
+	height: auto;
+	line-clamp: unset;
+	display: block;
+	-webkit-line-clamp: unset;
+	-webkit-box-orient: initial;
+	overflow: visible;
+	white-space: normal;
 }
 
 .valens-popular-area .home-shop-price {
@@ -1849,26 +1838,7 @@ html {
 }
 
 .valens-popular-area .home-shop-active .slick-dots {
-	position: static;
-	display: flex !important;
-	justify-content: center;
-	align-items: center;
-	gap: 8px;
-	margin: 24px 0 0;
-	padding: 0;
-}
-
-/* Dots like the screenshot (mint circles + active pill) */
-.valens-popular-area .home-shop-active .slick-dots li button {
-	background: rgba(138, 229, 215, 0.55);
-	opacity: 1;
-}
-
-.valens-popular-area .home-shop-active .slick-dots li.slick-active button {
-	background: #276071;
-	width: 20px;
-	border-radius: 5px;
-	box-shadow: 0px 3px 3px rgba(39, 96, 113, 0.22);
+	display: none !important;
 }
 
 .valens-popular-head {
@@ -1932,6 +1902,471 @@ html {
 
 	.valens-popular-all-btn {
 		font-size: 0.93rem;
+	}
+}
+
+/* Homepage popular products */
+.valens-home-popular {
+	padding: 96px 0 112px;
+	background: #ffffff;
+	overflow: hidden;
+}
+
+.valens-home-popular .related-products-wrap {
+	position: relative;
+}
+
+.valens-home-popular .valens-popular-head {
+	margin-bottom: 42px;
+}
+
+.valens-home-popular .valens-popular-head .title {
+	font-family: "Contax Pro 55", Arial, sans-serif;
+	font-size: clamp(38px, 3.45vw, 58px);
+	font-weight: 400;
+	line-height: 1.08;
+	letter-spacing: -0.035em;
+	color: #252525;
+}
+
+.valens-home-popular .valens-popular-slider .slick-list {
+	overflow: hidden;
+	margin: 0 -15px;
+}
+
+.valens-home-popular .valens-popular-slider .slick-track {
+	display: flex;
+}
+
+.valens-home-popular .valens-popular-slider .slick-slide {
+	display: flex;
+	padding: 0 15px 16px;
+}
+
+.valens-home-popular .valens-home-popular-card {
+	min-height: 520px;
+	padding: 28px;
+	border: 1px solid rgba(39, 96, 113, 0.035);
+	border-radius: 16px;
+	background: #ffffff;
+	box-shadow: 0 16px 38px rgba(58, 78, 92, 0.09);
+	transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.valens-home-popular .valens-home-popular-card:hover {
+	transform: translateY(-5px);
+	border-color: rgba(39, 96, 113, 0.1);
+	box-shadow: 0 24px 48px rgba(58, 78, 92, 0.13);
+}
+
+.valens-home-popular .home-shop-thumb {
+	width: 100%;
+	max-width: none;
+	margin: 0 auto 18px;
+}
+
+.valens-home-popular .home-shop-thumb > a {
+	min-height: 220px;
+	align-items: center;
+}
+
+.valens-home-popular .home-shop-thumb img {
+	width: 100%;
+	height: 200px;
+	max-width: 160px;
+	object-fit: contain;
+	object-position: center;
+	transition: transform 220ms ease;
+}
+
+.valens-home-popular .valens-home-popular-card:hover .home-shop-thumb img {
+	transform: scale(1.025);
+}
+
+.valens-home-popular .home-shop-content .title {
+	min-height: 48px;
+	margin: 0 0 12px;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 1.32;
+	letter-spacing: -0.025em;
+	color: #252525;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	overflow: hidden;
+}
+
+.valens-home-popular .valens-popular-category {
+	display: inline-flex;
+	align-self: flex-start;
+	margin: 0 0 12px;
+	padding: 5px 12px;
+	border: 1px solid rgba(39, 96, 113, 0.2);
+	border-radius: 8px;
+	background: rgba(138, 229, 215, 0.1);
+	font-family: "Contax Pro 55", Arial, sans-serif;
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 1;
+	color: #276071;
+}
+
+.valens-home-popular .home-shop-content .title a {
+	color: inherit;
+}
+
+.valens-home-popular .valens-popular-subtitle {
+	min-height: auto;
+	margin: 0 0 18px;
+	font-family: "Contax Pro 55", Arial, sans-serif;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 1.35;
+	text-transform: none;
+	color: #7b7b7b;
+}
+
+.valens-home-popular .home-shop-price {
+	margin: 0;
+	font-size: 22px;
+	line-height: 1;
+	letter-spacing: -0.02em;
+	color: #252525;
+}
+
+.valens-home-popular .shop-content-bottom {
+	display: grid;
+	grid-template-columns: 1fr;
+	min-height: auto;
+	gap: 10px;
+	padding-top: 22px;
+}
+
+.valens-home-popular .shop-content-bottom .cart {
+	width: 100%;
+	height: 46px;
+	padding: 0 18px;
+	border: 1px solid #276071;
+	border-radius: 7px;
+	font-family: "Contax Pro 55", Arial, sans-serif;
+	font-size: 15px;
+	font-weight: 600;
+	box-shadow: none;
+	transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.valens-home-popular .shop-content-bottom .cart i {
+	display: none;
+}
+
+.valens-home-popular .shop-content-bottom .cart:hover {
+	transform: none;
+	background: #33768b;
+	box-shadow: none;
+}
+
+.valens-home-popular .shop-content-bottom .eg-btn.btn-two,
+.valens-home-popular .home-shop-item:hover .shop-content-bottom .eg-btn.btn-two {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 46px;
+	margin: 0;
+	padding: 0 18px;
+	border: 1px solid #276071;
+	border-radius: 7px;
+	background: #ffffff;
+	color: #276071;
+	font-family: "Contax Pro 55", Arial, sans-serif;
+	font-size: 15px;
+	font-weight: 600;
+	opacity: 1 !important;
+	visibility: visible !important;
+	pointer-events: auto !important;
+	transform: none !important;
+	transition: background-color 180ms ease, color 180ms ease;
+}
+
+.valens-home-popular .shop-content-bottom .eg-btn.btn-two:hover {
+	background: rgba(138, 229, 215, 0.14);
+	color: #276071;
+}
+
+.valens-home-popular .shop-content-bottom .cart:focus-visible,
+.valens-home-popular .valens-popular-all-btn:focus-visible,
+.valens-home-popular .slick-arrow:focus-visible {
+	outline: 3px solid rgba(39, 96, 113, 0.3);
+	outline-offset: 3px;
+}
+
+.valens-home-popular .home-shop-active .slick-arrow {
+	top: 50%;
+	z-index: 3;
+	width: 58px;
+	height: 58px;
+	background: #bceee8;
+	box-shadow: 0 10px 24px rgba(39, 96, 113, 0.1);
+	transition: transform 180ms ease, background-color 180ms ease;
+}
+
+.valens-home-popular .home-shop-active .slick-arrow:hover {
+	transform: translateY(-50%) scale(1.06);
+	background: #8ae5d7;
+}
+
+@media (max-width: 1199.98px) {
+	.valens-home-popular .valens-home-popular-card {
+		min-height: 520px;
+		padding: 28px;
+	}
+
+	.valens-home-popular .home-shop-thumb > a {
+		min-height: 220px;
+	}
+
+	.valens-home-popular .home-shop-thumb img {
+		height: 200px;
+	}
+
+	.valens-home-popular .home-shop-active .slick-arrow {
+		width: 50px;
+		height: 50px;
+		left: -45px;
+	}
+
+	.valens-home-popular .home-shop-active .slick-arrow.slick-next {
+		left: auto;
+		right: -45px;
+	}
+}
+
+@media (max-width: 991.98px) {
+	.valens-home-popular {
+		padding: 72px 0 88px;
+	}
+
+	.valens-home-popular .valens-popular-head .title {
+		font-size: 42px;
+	}
+}
+
+@media (max-width: 575.98px) {
+	.valens-home-popular {
+		padding: 56px 0 68px;
+	}
+
+	.valens-home-popular .valens-popular-head {
+		margin-bottom: 28px;
+	}
+
+	.valens-home-popular .valens-popular-head .title {
+		font-size: 34px;
+	}
+
+	.valens-home-popular .valens-popular-slider .slick-list {
+		overflow: hidden;
+		margin: 0 -10px;
+	}
+
+	.valens-home-popular .valens-popular-slider .slick-slide {
+		padding: 0 10px 14px;
+	}
+
+	.valens-home-popular .valens-home-popular-card {
+		min-height: 520px;
+		padding: 28px 24px 26px;
+	}
+
+	.valens-home-popular .home-shop-thumb > a {
+		min-height: 210px;
+	}
+
+	.valens-home-popular .home-shop-thumb img {
+		height: 195px;
+	}
+
+	.valens-home-popular .home-shop-content .title {
+		font-size: 19px;
+	}
+}
+
+/* The /shop grid keeps its own layout; only its product cards mirror the homepage. */
+.valens-shop-card-design .valens-home-popular-card {
+	min-height: 520px;
+	margin: 0;
+	padding: 28px;
+	border: 1px solid rgba(39, 96, 113, 0.035);
+	border-radius: 16px;
+	background: #ffffff;
+	box-shadow: 0 16px 38px rgba(58, 78, 92, 0.09);
+	transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.valens-shop-card-design .valens-home-popular-card:hover {
+	transform: translateY(-5px);
+	border-color: rgba(39, 96, 113, 0.1);
+	box-shadow: 0 24px 48px rgba(58, 78, 92, 0.13);
+}
+
+.valens-shop-card-design .home-shop-thumb {
+	width: 100%;
+	max-width: none;
+	margin: 0 auto 18px;
+}
+
+.valens-shop-card-design .home-shop-thumb > a {
+	min-height: 220px;
+	align-items: center;
+}
+
+.valens-shop-card-design .home-shop-thumb img {
+	width: 100%;
+	height: 200px;
+	max-width: 160px;
+	object-fit: contain;
+	object-position: center;
+	transition: transform 220ms ease;
+}
+
+.valens-shop-card-design .valens-home-popular-card:hover .home-shop-thumb img {
+	transform: scale(1.025);
+}
+
+.valens-shop-card-design .home-shop-content .title {
+	display: -webkit-box;
+	min-height: 48px;
+	margin: 0 0 12px;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 1.32;
+	letter-spacing: -0.025em;
+	color: #252525;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	overflow: hidden;
+}
+
+.valens-shop-card-design .home-shop-content .title a {
+	color: inherit;
+}
+
+.valens-shop-card-design .valens-popular-category {
+	display: inline-flex;
+	align-self: flex-start;
+	margin: 0 0 12px;
+	padding: 5px 12px;
+	border: 1px solid rgba(39, 96, 113, 0.2);
+	border-radius: 8px;
+	background: rgba(138, 229, 215, 0.1);
+	font-family: "Contax Pro 55", Arial, sans-serif;
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 1;
+	color: #276071;
+}
+
+.valens-shop-card-design .valens-popular-subtitle {
+	display: block;
+	min-height: auto;
+	height: auto;
+	margin: 0 0 18px;
+	font-family: "Contax Pro 55", Arial, sans-serif;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 1.35;
+	text-transform: none;
+	color: #7b7b7b;
+	overflow: visible;
+}
+
+.valens-shop-card-design .home-shop-price {
+	margin: 0;
+	font-size: 22px;
+	line-height: 1;
+	letter-spacing: -0.02em;
+	color: #252525;
+}
+
+.valens-shop-card-design .shop-content-bottom {
+	display: grid;
+	grid-template-columns: 1fr;
+	min-height: auto;
+	gap: 10px;
+	padding-top: 22px;
+}
+
+.valens-shop-card-design .shop-content-bottom .cart {
+	width: 100%;
+	height: 46px;
+	padding: 0 18px;
+	border: 1px solid #276071;
+	border-radius: 7px;
+	font-family: "Contax Pro 55", Arial, sans-serif;
+	font-size: 15px;
+	font-weight: 600;
+	box-shadow: none;
+}
+
+.valens-shop-card-design .shop-content-bottom .cart i {
+	display: none;
+}
+
+.valens-shop-card-design .shop-content-bottom .cart:hover {
+	background: #33768b;
+	box-shadow: none;
+}
+
+.valens-shop-card-design .shop-content-bottom .eg-btn.btn-two,
+.valens-shop-card-design .home-shop-item:hover .shop-content-bottom .eg-btn.btn-two {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 46px;
+	margin: 0;
+	padding: 0 18px;
+	border: 1px solid #276071;
+	border-radius: 7px;
+	background: #ffffff;
+	color: #276071;
+	font-family: "Contax Pro 55", Arial, sans-serif;
+	font-size: 15px;
+	font-weight: 600;
+	opacity: 1 !important;
+	visibility: visible !important;
+	pointer-events: auto !important;
+	transform: none !important;
+}
+
+.valens-shop-card-design .shop-content-bottom .eg-btn.btn-two:hover {
+	background: rgba(138, 229, 215, 0.14);
+	color: #276071;
+}
+
+.valens-shop-card-design .shop-content-bottom .cart:focus-visible,
+.valens-shop-card-design .shop-content-bottom .eg-btn:focus-visible {
+	outline: 3px solid rgba(39, 96, 113, 0.3);
+	outline-offset: 3px;
+}
+
+@media (max-width: 575.98px) {
+	.valens-shop-card-design .valens-home-popular-card {
+		min-height: 520px;
+		padding: 28px 24px 26px;
+	}
+
+	.valens-shop-card-design .home-shop-thumb > a {
+		min-height: 210px;
+	}
+
+	.valens-shop-card-design .home-shop-thumb img {
+		height: 195px;
+	}
+
+	.valens-shop-card-design .home-shop-content .title {
+		font-size: 19px;
 	}
 }
 

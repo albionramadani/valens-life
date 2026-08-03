@@ -99,6 +99,9 @@ const FooterOne = ({style}:any) => {
                   <div className="col-12">
                      <div className="copyright-text">
                         <p>Te gjitha te drejtat e rezervuara © {new Date().getFullYear()} Valens.</p>
+                        <span>
+                           {/* <a href="http://www.onlinewebfonts.com">Web Fonts</a> */}
+                        </span>
                      </div>
                   </div>
                </div>

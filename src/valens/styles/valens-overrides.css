@@ -80,40 +80,24 @@ body {
 
 @font-face {
     font-family: "Contax Pro 55";
-    src: url("https://db.onlinewebfonts.com/t/55614bd50bc33409bc75bd853dc64478.eot");
-    src: url("https://db.onlinewebfonts.com/t/55614bd50bc33409bc75bd853dc64478.eot?#iefix")format("embedded-opentype"),
-    url("https://db.onlinewebfonts.com/t/55614bd50bc33409bc75bd853dc64478.woff2")format("woff2"),
-    url("https://db.onlinewebfonts.com/t/55614bd50bc33409bc75bd853dc64478.woff")format("woff"),
-    url("https://db.onlinewebfonts.com/t/55614bd50bc33409bc75bd853dc64478.ttf")format("truetype"),
-    url("https://db.onlinewebfonts.com/t/55614bd50bc33409bc75bd853dc64478.svg#Contax Pro 55")format("svg");
+	src: url("/assets/fonts/Contax Pro 55.ttf") format("truetype");
+	font-display: swap;
 }
 @font-face {
     font-family: "Contax W01 45 Light";
-    src: url("https://db.onlinewebfonts.com/t/81ca415c501b7e9bf06d4c9b3e783ce2.eot");
-    src: url("https://db.onlinewebfonts.com/t/81ca415c501b7e9bf06d4c9b3e783ce2.eot?#iefix")format("embedded-opentype"),
-    url("https://db.onlinewebfonts.com/t/81ca415c501b7e9bf06d4c9b3e783ce2.woff2")format("woff2"),
-    url("https://db.onlinewebfonts.com/t/81ca415c501b7e9bf06d4c9b3e783ce2.woff")format("woff"),
-    url("https://db.onlinewebfonts.com/t/81ca415c501b7e9bf06d4c9b3e783ce2.ttf")format("truetype"),
-    url("https://db.onlinewebfonts.com/t/81ca415c501b7e9bf06d4c9b3e783ce2.svg#Contax W01 45 Light")format("svg");
+	src: url("/assets/fonts/Contax W01 45 Light.ttf") format("truetype");
+	font-display: swap;
 }
 @font-face {
     font-family: "Contax W01 65 Medium";
-    src: url("https://db.onlinewebfonts.com/t/d81ca340fb94ceeae147d9f666039709.eot");
-    src: url("https://db.onlinewebfonts.com/t/d81ca340fb94ceeae147d9f666039709.eot?#iefix")format("embedded-opentype"),
-    url("https://db.onlinewebfonts.com/t/d81ca340fb94ceeae147d9f666039709.woff2")format("woff2"),
-    url("https://db.onlinewebfonts.com/t/d81ca340fb94ceeae147d9f666039709.woff")format("woff"),
-    url("https://db.onlinewebfonts.com/t/d81ca340fb94ceeae147d9f666039709.ttf")format("truetype"),
-    url("https://db.onlinewebfonts.com/t/d81ca340fb94ceeae147d9f666039709.svg#Contax W01 65 Medium")format("svg");
+	src: url("/assets/fonts/Contax W01 65 Medium.ttf") format("truetype");
+	font-display: swap;
 }
 
 @font-face {
     font-family: "Contax Pro 75 Bold Regular";
-    src: url("https://db.onlinewebfonts.com/t/0d3d42f344c7c7acf7b9b09c774dca21.eot");
-    src: url("https://db.onlinewebfonts.com/t/0d3d42f344c7c7acf7b9b09c774dca21.eot?#iefix")format("embedded-opentype"),
-    url("https://db.onlinewebfonts.com/t/0d3d42f344c7c7acf7b9b09c774dca21.woff2")format("woff2"),
-    url("https://db.onlinewebfonts.com/t/0d3d42f344c7c7acf7b9b09c774dca21.woff")format("woff"),
-    url("https://db.onlinewebfonts.com/t/0d3d42f344c7c7acf7b9b09c774dca21.ttf")format("truetype"),
-    url("https://db.onlinewebfonts.com/t/0d3d42f344c7c7acf7b9b09c774dca21.svg#Contax Pro 75 Bold Regular")format("svg");
+	src: url("/assets/fonts/Contax Pro 75 Bold Regular.ttf") format("truetype");
+	font-display: swap;
 }
 
 
@@ -1680,12 +1664,15 @@ html {
 .valens-popular-area .home-shop-content .title {
 	font-size: 18px;
 	margin-bottom: 10px;
-	min-height: 54px;
-	line-clamp: 2;
-	display: -webkit-box;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
+	min-height: auto;
+	height: auto;
+	line-clamp: unset;
+	display: block;
+	-webkit-line-clamp: unset;
+	-webkit-box-orient: initial;
+	overflow: visible;
+	white-space: normal;
+	word-break: break-word;
 }
 
 .valens-popular-area .home-shop-content {
@@ -1695,12 +1682,14 @@ html {
 }
 
 .valens-popular-area .valens-popular-subtitle {
-	min-height: 54px;
-	line-clamp: 2;
-	display: -webkit-box;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
+	min-height: auto;
+	height: auto;
+	line-clamp: unset;
+	display: block;
+	-webkit-line-clamp: unset;
+	-webkit-box-orient: initial;
+	overflow: visible;
+	white-space: normal;
 }
 
 .valens-popular-area .home-shop-price {
@@ -1864,26 +1853,7 @@ html {
 }
 
 .valens-popular-area .home-shop-active .slick-dots {
-	position: static;
-	display: flex !important;
-	justify-content: center;
-	align-items: center;
-	gap: 8px;
-	margin: 24px 0 0;
-	padding: 0;
-}
-
-/* Dots like the screenshot (mint circles + active pill) */
-.valens-popular-area .home-shop-active .slick-dots li button {
-	background: rgba(138, 229, 215, 0.55);
-	opacity: 1;
-}
-
-.valens-popular-area .home-shop-active .slick-dots li.slick-active button {
-	background: #276071;
-	width: 20px;
-	border-radius: 5px;
-	box-shadow: 0px 3px 3px rgba(39, 96, 113, 0.22);
+	display: none !important;
 }
 
 .valens-popular-head {

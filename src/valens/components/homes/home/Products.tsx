@@ -86,14 +86,14 @@ const HomeOnePopularProducts = () => {
 
   const renderProductCard = (item: any, index: number) => {
     const displayTitle = item.title;
-    const displayDesc = item.valensSubtitle;
+    const displayCategory = item.valensSubtitle;
     const displayPrice = item.price;
     const displayDiscount = item.discount;
     const displayThumb = item.thumb;
 
     return (
       <div key={`${item.id}-${index}`} className="col-xl-3 col-lg-4 col-md-6 d-flex">
-        <div className="home-shop-item h-100 d-flex flex-column w-100">
+        <article className="home-shop-item valens-home-popular-card h-100 d-flex flex-column w-100">
           <div className="home-shop-thumb">
             <Link to="/shop-details/$id" params={{ id: String(item.id) }}>
               <Image src={displayThumb} alt={displayTitle} />
@@ -102,33 +102,40 @@ const HomeOnePopularProducts = () => {
             <div className={`shop-thumb-shape ${item.class_name || ""}`}></div>
           </div>
           <div className="home-shop-content d-flex flex-column flex-grow-1">
+            {displayCategory ? (
+              <span className="valens-popular-category">{displayCategory}</span>
+            ) : null}
             <h4 className="title">
               <Link to="/shop-details/$id" params={{ id: String(item.id) }}>
                 {displayTitle}
               </Link>
             </h4>
-            {displayDesc ? <p className="valens-popular-subtitle">{displayDesc}</p> : null}
-            <span className="home-shop-price">{Number(displayPrice).toFixed(2)}</span>
+            <p className="valens-popular-subtitle">Lorem Ipsum</p>
+            <span className="home-shop-price">
+              {Number(displayPrice).toFixed(2).replace(".", ",")} €
+            </span>
             <div className="shop-content-bottom mt-auto">
-              <a
-                style={{ cursor: "pointer" }}
+              <button
+                type="button"
                 onClick={() => handleAddToCart(item)}
                 className="cart"
+                aria-label={`Shto ${displayTitle} në shportë`}
               >
                 <i className="flaticon-shopping-cart-1"></i>
-              </a>
+                <span>Shto në shportë</span>
+              </button>
               <Link to="/shop-details/$id" params={{ id: String(item.id) }} className="eg-btn btn-two">
-                Bli Tani
+                Blej tani
               </Link>
             </div>
           </div>
-        </div>
+        </article>
       </div>
     );
   };
 
   return (
-    <section id="products" className="home-shop-area valens-popular-area">
+    <section id="products" className="home-shop-area valens-popular-area valens-home-popular">
       <div className="container">
         <div className="related-products-wrap">
           <div className="section-title mb-60 valens-popular-head">

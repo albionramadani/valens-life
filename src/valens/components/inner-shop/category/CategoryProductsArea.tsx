@@ -113,7 +113,7 @@ const CategoryProductsArea = ({ products, title }: CategoryProductsAreaProps) =>
   };
 
   return (
-    <section className="home-shop-area inner-home-shop valens-popular-area">
+    <section className="home-shop-area inner-home-shop valens-popular-area valens-shop-card-design">
       <div className="container">
         <div className="related-products-wrap">
           {title ? (
@@ -124,7 +124,7 @@ const CategoryProductsArea = ({ products, title }: CategoryProductsAreaProps) =>
           <div className="row valens-shop-grid gx-5 gy-4">
             {currentProducts.map((item) => (
               <div key={item.id} className="col-xl-3 col-lg-4 col-md-6 d-flex">
-                <div className="home-shop-item h-100 d-flex flex-column w-100">
+                <article className="home-shop-item valens-home-popular-card h-100 d-flex flex-column w-100">
                   <div className="home-shop-thumb">
                     <Link to="/shop-details/$id" params={{ id: String(item.id) }}>
                       <Image src={item.thumb} alt={item.title} />
@@ -135,29 +135,34 @@ const CategoryProductsArea = ({ products, title }: CategoryProductsAreaProps) =>
                     <div className={`shop-thumb-shape ${item.class_name || ""}`}></div>
                   </div>
                   <div className="home-shop-content d-flex flex-column flex-grow-1">
+                    {item.valensSubtitle ? (
+                      <span className="valens-popular-category">{item.valensSubtitle}</span>
+                    ) : null}
                     <h4 className="title">
                       <Link to="/shop-details/$id" params={{ id: String(item.id) }}>
                         {item.title}
                       </Link>
                     </h4>
-                    {item.valensSubtitle ? (
-                      <p className="valens-popular-subtitle">{item.valensSubtitle}</p>
-                    ) : null}
-                    <span className="home-shop-price">{Number(item.price).toFixed(2)}</span>
+                    <p className="valens-popular-subtitle">Lorem Ipsum</p>
+                    <span className="home-shop-price">
+                      {Number(item.price).toFixed(2).replace(".", ",")} €
+                    </span>
                     <div className="shop-content-bottom mt-auto">
-                      <a
-                        style={{ cursor: "pointer" }}
+                      <button
+                        type="button"
                         onClick={() => handleAddToCart(item)}
                         className="cart"
+                        aria-label={`Shto ${item.title} në shportë`}
                       >
                         <i className="flaticon-shopping-cart-1"></i>
-                      </a>
+                        <span>Shto në shportë</span>
+                      </button>
                       <Link to="/shop-details/$id" params={{ id: String(item.id) }} className="eg-btn btn-two">
-                        Bli Tani
+                        Blej tani
                       </Link>
                     </div>
                   </div>
-                </div>
+                </article>
               </div>
             ))}
           </div>
