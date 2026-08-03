@@ -1804,6 +1804,11 @@ body.search-visible {
 	padding-left: 15px;
 	padding-right: 15px;
 }
+
+.valens-popular-subtitle{
+	text-transform: capitalize;
+	font-weight: 700;
+}
 .related-product-active .slick-arrow,
 .home-shop-active .slick-arrow {
 	position: absolute;

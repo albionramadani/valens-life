@@ -1631,9 +1631,22 @@ html {
 }
 
 .valens-popular-area .home-shop-item {
+	height: 100%;
+	min-height: 520px;
+	display: flex;
+	flex-direction: column;
 	margin: 0;
 	padding: 28px 28px 26px;
 	border-radius: 14px;
+}
+
+.valens-popular-area .home-shop-active .slick-slide {
+	height: auto;
+}
+
+.valens-popular-area .home-shop-active .slick-slide > div {
+	height: 100%;
+	display: flex !important;
 }
 
 .valens-popular-area .home-shop-thumb {
@@ -1667,6 +1680,27 @@ html {
 .valens-popular-area .home-shop-content .title {
 	font-size: 18px;
 	margin-bottom: 10px;
+	min-height: 54px;
+	line-clamp: 2;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.valens-popular-area .home-shop-content {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+}
+
+.valens-popular-area .valens-popular-subtitle {
+	min-height: 54px;
+	line-clamp: 2;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 }
 
 .valens-popular-area .home-shop-price {
@@ -1674,7 +1708,119 @@ html {
 }
 
 .valens-popular-area .shop-content-bottom {
-	margin-top: 18px;
+	margin-top: auto;
+	padding-top: 18px;
+}
+
+.valens-popular-area .valens-shop-grid {
+	--bs-gutter-x: 1.5rem;
+	--bs-gutter-y: 1.5rem;
+}
+
+.valens-popular-area .valens-shop-pagination {
+	margin-top: 30px;
+	padding: 18px 22px;
+	border-radius: 24px;
+	border: 1px solid rgba(39, 96, 113, 0.12);
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(245, 251, 250, 0.96) 100%);
+	box-shadow: 0 18px 40px rgba(39, 96, 113, 0.08);
+	backdrop-filter: blur(8px);
+}
+
+.valens-popular-area .valens-shop-pagination__content {
+	gap: 12px;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.valens-popular-area .valens-shop-pagination__page,
+.valens-popular-area .valens-shop-pagination__control,
+.valens-popular-area .valens-shop-pagination__content .pagination-link {
+	min-width: 48px;
+	height: 48px;
+	padding: 0 16px !important;
+	border-radius: 999px;
+	border: 1px solid rgba(39, 96, 113, 0.14);
+	background: #ffffff !important;
+	color: #276071 !important;
+	box-shadow: 0 8px 18px rgba(39, 96, 113, 0.06);
+	font-family: "Contax W01 65 Medium", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+	font-size: 15px;
+	font-weight: 600;
+	letter-spacing: 0.01em;
+	transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.valens-popular-area .valens-shop-pagination__control {
+	min-width: 124px;
+	gap: 8px;
+	background: rgba(39, 96, 113, 0.04) !important;
+}
+
+.valens-popular-area .valens-shop-pagination__page:hover,
+.valens-popular-area .valens-shop-pagination__control:hover {
+	transform: translateY(-1px);
+	border-color: rgba(39, 96, 113, 0.22);
+	box-shadow: 0 12px 22px rgba(39, 96, 113, 0.1);
+	background: rgba(138, 229, 215, 0.14) !important;
+}
+
+.valens-popular-area .valens-shop-pagination__page[aria-current="page"] {
+	background: linear-gradient(180deg, #276071 0%, #1f5561 100%) !important;
+	color: #ffffff !important;
+	border-color: #276071;
+	box-shadow: 0 14px 24px rgba(39, 96, 113, 0.2);
+	transform: translateY(-1px);
+}
+
+.valens-popular-area .valens-shop-pagination__content .pagination-link svg,
+.valens-popular-area .valens-shop-pagination__content .pagination-link i {
+	width: 16px;
+	height: 16px;
+	flex-shrink: 0;
+}
+
+.valens-popular-area .valens-shop-pagination__content .pagination-link:focus-visible {
+	outline: 2px solid rgba(39, 96, 113, 0.35);
+	outline-offset: 2px;
+}
+
+.valens-popular-area .valens-shop-pagination__content span[aria-hidden="true"] {
+	width: 48px;
+	height: 48px;
+	color: rgba(39, 96, 113, 0.45);
+	border-radius: 999px;
+	background: rgba(39, 96, 113, 0.04);
+	border: 1px solid rgba(39, 96, 113, 0.08);
+}
+
+@media (max-width: 575.98px) {
+	.valens-popular-area .valens-shop-pagination {
+		padding: 14px;
+		border-radius: 20px;
+	}
+
+	.valens-popular-area .valens-shop-pagination__content {
+		gap: 8px;
+	}
+
+	.valens-popular-area .valens-shop-pagination__page,
+	.valens-popular-area .valens-shop-pagination__control,
+	.valens-popular-area .valens-shop-pagination__content .pagination-link,
+	.valens-popular-area .valens-shop-pagination__content span[aria-hidden="true"] {
+		height: 42px;
+		min-width: 42px;
+		font-size: 14px;
+	}
+
+	.valens-popular-area .valens-shop-pagination__control {
+		min-width: 96px;
+		padding: 0 12px !important;
+	}
+
+	.valens-popular-area .home-shop-item {
+		min-height: 490px;
+	}
 }
 
 /* Button style like the screenshot (mint pill) */
@@ -1715,6 +1861,16 @@ html {
 
 .valens-popular-area .home-shop-active .slick-arrow i {
 	position: static;
+}
+
+.valens-popular-area .home-shop-active .slick-dots {
+	position: static;
+	display: flex !important;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+	margin: 24px 0 0;
+	padding: 0;
 }
 
 /* Dots like the screenshot (mint circles + active pill) */

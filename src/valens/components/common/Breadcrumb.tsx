@@ -5,7 +5,7 @@ const Image = (p: any) => { const { src, alt = "", width, height, fill, priority
 const breadcrumbShape_1 = "/assets/img/others/video_shape01.png";
 const breadcrumbShape_2 = "/assets/img/others/video_shape02.png";
 type BreadcrumbProps = {
-   title: string;
+   title?: string;
    compact?: boolean;
    showTrail?: boolean;
 };
