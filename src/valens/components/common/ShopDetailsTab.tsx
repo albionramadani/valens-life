@@ -8,12 +8,20 @@ const product_nav_2 = "/assets/img/products/shop-details-thumb02.png";
 type productNavImg = StaticImageData[];
 const product_nav_img: productNavImg = [product_nav_1, product_nav_2]
 
+type GalleryImage = { url: string; alt?: string | null };
+
 type ShopDetailsTabProps = {
-   image?: StaticImageData;
+   image?: StaticImageData | string;
+   gallery?: GalleryImage[];
    alt?: string;
 };
 
-const ShopDetailsTab = ({ image, alt = "Product image" }: ShopDetailsTabProps) => {
+const ShopDetailsTab = ({ image, gallery = [], alt = "Product image" }: ShopDetailsTabProps) => {
+   const images: GalleryImage[] = gallery.length
+      ? gallery
+      : image
+         ? [{ url: typeof image === "string" ? image : (image as any).src || "", alt }]
+         : product_nav_img.map((src) => ({ url: src as string }));
 
    const [currentImageIndex, setCurrentImageIndex] = useState(0);
    const [isZoomed, setIsZoomed] = useState(false);
@@ -21,12 +29,14 @@ const ShopDetailsTab = ({ image, alt = "Product image" }: ShopDetailsTabProps) =
    const imageContainerRef = useRef<HTMLDivElement>(null);
 
    const handlePrev = () => {
-      setCurrentImageIndex((prev) => (prev === 0 ? product_nav_img.length - 1 : prev - 1));
+      setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
    };
 
    const handleNext = () => {
-      setCurrentImageIndex((prev) => (prev === product_nav_img.length - 1 ? 0 : prev + 1));
+      setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
    };
+
+   const activeImage = images[currentImageIndex] || images[0];
 
    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
       if (!imageContainerRef.current) return;
@@ -73,8 +83,8 @@ const ShopDetailsTab = ({ image, alt = "Product image" }: ShopDetailsTabProps) =
                      }}
                   >
                      <Image
-                        src={image ?? product_nav_img[currentImageIndex]}
-                        alt={alt}
+                        src={activeImage?.url || product_nav_img[0]}
+                        alt={activeImage?.alt || alt}
                         style={{ width: "100%", maxWidth: "280px", height: "auto" }}
                      />
                   </div>

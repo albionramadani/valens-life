@@ -1,12 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
-import Wrapper from "@v/layout/Wrapper";
-import ShopDetails from "@v/components/inner-shop/shop-details";
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/shop-details")({
-  head: () => ({ meta: [{ title: "Shop Details - Valens" }] }),
-  component: () => (
-    <Wrapper>
-      <ShopDetails />
-    </Wrapper>
-  ),
+  beforeLoad: ({ location }) => {
+    // /shop-details without an id — send shoppers back to the catalog.
+    if (location.pathname === "/shop-details" || location.pathname === "/shop-details/") {
+      throw redirect({ to: "/shop" });
+    }
+  },
+  component: () => <Outlet />,
 });
