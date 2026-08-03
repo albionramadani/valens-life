@@ -13,7 +13,12 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as IngredientRouteImport } from './routes/ingredient'
 import { Route as IngredientTwoRouteImport } from './routes/ingredient-two'
+import { Route as KategoriteRouteImport } from './routes/kategorite'
+import { Route as KontaktiRouteImport } from './routes/kontakti'
 import { Route as ParollerRouteImport } from './routes/paroller'
+import { Route as ProduktetRouteImport } from './routes/produktet'
+import { Route as PyetjeRouteImport } from './routes/pyetje'
+import { Route as RrethNeshRouteImport } from './routes/rreth-nesh'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as ShopDetailsRouteImport } from './routes/shop-details'
 import { Route as AdminSplatRouteImport } from './routes/admin.$'
@@ -40,9 +45,34 @@ const IngredientTwoRoute = IngredientTwoRouteImport.update({
   path: '/ingredient-two',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KategoriteRoute = KategoriteRouteImport.update({
+  id: '/kategorite',
+  path: '/kategorite',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KontaktiRoute = KontaktiRouteImport.update({
+  id: '/kontakti',
+  path: '/kontakti',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ParollerRoute = ParollerRouteImport.update({
   id: '/paroller',
   path: '/paroller',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProduktetRoute = ProduktetRouteImport.update({
+  id: '/produktet',
+  path: '/produktet',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PyetjeRoute = PyetjeRouteImport.update({
+  id: '/pyetje',
+  path: '/pyetje',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RrethNeshRoute = RrethNeshRouteImport.update({
+  id: '/rreth-nesh',
+  path: '/rreth-nesh',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShopRoute = ShopRouteImport.update({
@@ -76,7 +106,12 @@ export interface FileRoutesByFullPath {
   '/cart': typeof CartRoute
   '/ingredient': typeof IngredientRoute
   '/ingredient-two': typeof IngredientTwoRoute
+  '/kategorite': typeof KategoriteRoute
+  '/kontakti': typeof KontaktiRoute
   '/paroller': typeof ParollerRoute
+  '/produktet': typeof ProduktetRoute
+  '/pyetje': typeof PyetjeRoute
+  '/rreth-nesh': typeof RrethNeshRoute
   '/shop': typeof ShopRoute
   '/shop-details': typeof ShopDetailsRouteWithChildren
   '/admin/$': typeof AdminSplatRoute
@@ -88,7 +123,12 @@ export interface FileRoutesByTo {
   '/cart': typeof CartRoute
   '/ingredient': typeof IngredientRoute
   '/ingredient-two': typeof IngredientTwoRoute
+  '/kategorite': typeof KategoriteRoute
+  '/kontakti': typeof KontaktiRoute
   '/paroller': typeof ParollerRoute
+  '/produktet': typeof ProduktetRoute
+  '/pyetje': typeof PyetjeRoute
+  '/rreth-nesh': typeof RrethNeshRoute
   '/shop': typeof ShopRoute
   '/shop-details': typeof ShopDetailsRouteWithChildren
   '/admin/$': typeof AdminSplatRoute
@@ -101,7 +141,12 @@ export interface FileRoutesById {
   '/cart': typeof CartRoute
   '/ingredient': typeof IngredientRoute
   '/ingredient-two': typeof IngredientTwoRoute
+  '/kategorite': typeof KategoriteRoute
+  '/kontakti': typeof KontaktiRoute
   '/paroller': typeof ParollerRoute
+  '/produktet': typeof ProduktetRoute
+  '/pyetje': typeof PyetjeRoute
+  '/rreth-nesh': typeof RrethNeshRoute
   '/shop': typeof ShopRoute
   '/shop-details': typeof ShopDetailsRouteWithChildren
   '/admin/$': typeof AdminSplatRoute
@@ -115,7 +160,12 @@ export interface FileRouteTypes {
     | '/cart'
     | '/ingredient'
     | '/ingredient-two'
+    | '/kategorite'
+    | '/kontakti'
     | '/paroller'
+    | '/produktet'
+    | '/pyetje'
+    | '/rreth-nesh'
     | '/shop'
     | '/shop-details'
     | '/admin/$'
@@ -127,7 +177,12 @@ export interface FileRouteTypes {
     | '/cart'
     | '/ingredient'
     | '/ingredient-two'
+    | '/kategorite'
+    | '/kontakti'
     | '/paroller'
+    | '/produktet'
+    | '/pyetje'
+    | '/rreth-nesh'
     | '/shop'
     | '/shop-details'
     | '/admin/$'
@@ -139,7 +194,12 @@ export interface FileRouteTypes {
     | '/cart'
     | '/ingredient'
     | '/ingredient-two'
+    | '/kategorite'
+    | '/kontakti'
     | '/paroller'
+    | '/produktet'
+    | '/pyetje'
+    | '/rreth-nesh'
     | '/shop'
     | '/shop-details'
     | '/admin/$'
@@ -152,7 +212,12 @@ export interface RootRouteChildren {
   CartRoute: typeof CartRoute
   IngredientRoute: typeof IngredientRoute
   IngredientTwoRoute: typeof IngredientTwoRoute
+  KategoriteRoute: typeof KategoriteRoute
+  KontaktiRoute: typeof KontaktiRoute
   ParollerRoute: typeof ParollerRoute
+  ProduktetRoute: typeof ProduktetRoute
+  PyetjeRoute: typeof PyetjeRoute
+  RrethNeshRoute: typeof RrethNeshRoute
   ShopRoute: typeof ShopRoute
   ShopDetailsRoute: typeof ShopDetailsRouteWithChildren
   AdminSplatRoute: typeof AdminSplatRoute
@@ -189,11 +254,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IngredientTwoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/kategorite': {
+      id: '/kategorite'
+      path: '/kategorite'
+      fullPath: '/kategorite'
+      preLoaderRoute: typeof KategoriteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kontakti': {
+      id: '/kontakti'
+      path: '/kontakti'
+      fullPath: '/kontakti'
+      preLoaderRoute: typeof KontaktiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/paroller': {
       id: '/paroller'
       path: '/paroller'
       fullPath: '/paroller'
       preLoaderRoute: typeof ParollerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/produktet': {
+      id: '/produktet'
+      path: '/produktet'
+      fullPath: '/produktet'
+      preLoaderRoute: typeof ProduktetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pyetje': {
+      id: '/pyetje'
+      path: '/pyetje'
+      fullPath: '/pyetje'
+      preLoaderRoute: typeof PyetjeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rreth-nesh': {
+      id: '/rreth-nesh'
+      path: '/rreth-nesh'
+      fullPath: '/rreth-nesh'
+      preLoaderRoute: typeof RrethNeshRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shop': {
@@ -251,7 +351,12 @@ const rootRouteChildren: RootRouteChildren = {
   CartRoute: CartRoute,
   IngredientRoute: IngredientRoute,
   IngredientTwoRoute: IngredientTwoRoute,
+  KategoriteRoute: KategoriteRoute,
+  KontaktiRoute: KontaktiRoute,
   ParollerRoute: ParollerRoute,
+  ProduktetRoute: ProduktetRoute,
+  PyetjeRoute: PyetjeRoute,
+  RrethNeshRoute: RrethNeshRoute,
   ShopRoute: ShopRoute,
   ShopDetailsRoute: ShopDetailsRouteWithChildren,
   AdminSplatRoute: AdminSplatRoute,

@@ -3129,3 +3129,238 @@ html {
   --eg-body-font-family: "Roboto", system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
   --eg-heading-font-family: "Oswald", system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
 }
+
+/* Kontakti page (dedicated nav-item page) */
+.valens-contact-area {
+	padding: 20px 0 100px;
+}
+
+.valens-contact-area .footer-widget {
+	margin-bottom: 30px;
+}
+
+@media (max-width: 767px) {
+	.valens-contact-area {
+		padding: 10px 0 70px;
+	}
+}
+
+/* ==== Rreth nesh page (dedicated) — cream background design, product-blue partner ==== */
+.valens-rreth-area {
+	background-color: #f4f1e9;
+	padding: 150px 0 110px;
+}
+
+.valens-rreth-head {
+	margin-bottom: 34px;
+}
+
+.valens-rreth-title {
+	font-family: Georgia, "Times New Roman", serif;
+	font-weight: 400;
+	font-size: clamp(2.6rem, 5vw, 4rem);
+	line-height: 1.05;
+	color: #173d2c;
+	margin: 0 0 12px;
+}
+
+.valens-rreth-trail {
+	font-size: 0.95rem;
+	color: rgba(23, 61, 44, 0.6);
+}
+
+.valens-rreth-trail a {
+	color: rgba(23, 61, 44, 0.6);
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.valens-rreth-trail a:hover {
+	color: #173d2c;
+}
+
+.valens-rreth-trail .sep {
+	margin: 0 10px;
+}
+
+.valens-rreth-intro {
+	max-width: 900px;
+	margin-bottom: 48px;
+	font-size: clamp(1rem, 1.15vw, 1.18rem);
+	line-height: 1.9;
+	color: #3f5a54;
+}
+
+.valens-rreth-intro p:first-child {
+	color: #223f36;
+}
+
+.valens-rreth-intro p:not(:last-child) {
+	margin-bottom: 20px;
+}
+
+/* value cards */
+.valens-rreth-values {
+	margin: 0 0 8px;
+}
+
+.valens-rreth-card {
+	height: 100%;
+	background: #ffffff;
+	border-radius: 18px;
+	padding: 30px 26px;
+	box-shadow: 0 22px 46px rgba(23, 61, 44, 0.08);
+	border: 1px solid rgba(23, 61, 44, 0.05);
+}
+
+.valens-rreth-card-title {
+	font-family: Georgia, "Times New Roman", serif;
+	font-weight: 400;
+	font-size: 1.5rem;
+	color: #173d2c;
+	margin: 0 0 12px;
+}
+
+.valens-rreth-card-text {
+	font-size: 1rem;
+	line-height: 1.6;
+	color: #6b7b74;
+	margin: 0;
+}
+
+/* partner block — product blue (no green) */
+.valens-rreth-partner {
+	position: relative;
+	margin-top: 56px;
+	border-radius: 26px;
+	overflow: hidden;
+	/* One single colour across the whole block — the product photo colour. */
+	background: #a9c6d9;
+	display: grid;
+	grid-template-columns: 1.05fr 0.95fr;
+	align-items: stretch;
+	min-height: 300px;
+}
+
+.valens-rreth-partner-content {
+	padding: 54px 52px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.valens-rreth-partner-eyebrow {
+	display: inline-block;
+	font-size: 0.8rem;
+	letter-spacing: 2.5px;
+	font-weight: 700;
+	color: #14294f;
+	margin-bottom: 16px;
+}
+
+.valens-rreth-partner-title {
+	font-family: Georgia, "Times New Roman", serif;
+	font-weight: 400;
+	font-size: clamp(2rem, 3.2vw, 2.8rem);
+	color: #14294f;
+	margin: 0 0 18px;
+	line-height: 1.05;
+}
+
+.valens-rreth-partner-text {
+	font-size: 1.05rem;
+	line-height: 1.75;
+	color: rgba(20, 41, 79, 0.82);
+	margin: 0 0 30px;
+	max-width: 460px;
+}
+
+.valens-rreth-partner-btn {
+	align-self: flex-start;
+}
+
+.valens-rreth-partner-visual {
+	position: relative;
+	background: transparent;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 24px;
+}
+
+.valens-rreth-partner-img {
+	max-width: 100%;
+	max-height: 340px;
+	width: auto;
+	height: auto;
+	object-fit: contain;
+	filter: drop-shadow(0 24px 40px rgba(20, 41, 79, 0.28));
+}
+
+/* Tablet */
+@media (max-width: 991.98px) {
+	.valens-rreth-area {
+		padding: 130px 0 80px;
+	}
+
+	.valens-rreth-partner {
+		grid-template-columns: 1fr;
+	}
+
+	.valens-rreth-partner-content {
+		padding: 40px 34px;
+		text-align: center;
+		align-items: center;
+	}
+
+	.valens-rreth-partner-text {
+		max-width: 100%;
+	}
+
+	.valens-rreth-partner-btn {
+		align-self: center;
+	}
+
+	.valens-rreth-partner-visual {
+		padding: 30px 20px 34px;
+		min-height: 260px;
+	}
+
+	.valens-rreth-partner-img {
+		max-height: 260px;
+	}
+}
+
+/* Mobile */
+@media (max-width: 575.98px) {
+	.valens-rreth-area {
+		padding: 110px 0 60px;
+	}
+
+	.valens-rreth-partner-content {
+		padding: 32px 22px;
+	}
+
+	.valens-rreth-card {
+		padding: 24px 22px;
+	}
+
+	.valens-rreth-partner-img {
+		max-height: 220px;
+	}
+}
+
+/* Rreth nesh partner button — gold (matches mockup, removes brand green) */
+.valens-rreth-partner-btn.eg-btn {
+	background: #d8a94e;
+	color: #16305a;
+	font-weight: 700;
+}
+
+.valens-rreth-partner-btn.eg-btn::before {
+	background: #c89238;
+}
+
+.valens-rreth-partner-btn.eg-btn:hover {
+	color: #16305a;
+}
