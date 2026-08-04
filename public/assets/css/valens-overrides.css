@@ -2219,7 +2219,7 @@ html {
 	align-items: center;
 	justify-content: center;
 	padding: 26px;
-	background: linear-gradient(180deg, #f6f3eb 0%, #ede8dc 100%);
+	background: #ffffff;
 }
 
 .valens-shop-card-design .home-shop-thumb > a {
@@ -2242,21 +2242,23 @@ html {
 	transition: transform 220ms ease;
 }
 
-.valens-shop-card-design .valens-card-badge {
-	position: absolute;
-	top: 16px;
-	left: 16px;
-	z-index: 2;
-	padding: 5px 12px;
-	border-radius: 999px;
-	background: #0e3b2e;
-	color: #ffffff;
+.valens-shop-card-design .valens-card-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin: 0 0 4px;
+}
+
+.valens-shop-card-design .valens-card-tag {
+	padding: 6px 11px;
+	border-radius: 8px;
+	background: #f4f1e8;
+	color: #0e3b2e;
 	font-family: "Contax Pro 55", Arial, sans-serif;
-	font-size: 11px;
-	font-weight: 700;
-	letter-spacing: 0.08em;
-	text-transform: uppercase;
+	font-size: 12px;
+	font-weight: 500;
 	line-height: 1;
+	text-transform: capitalize;
 }
 
 .valens-shop-card-design .valens-home-popular-card:hover .home-shop-thumb img {
@@ -2334,8 +2336,8 @@ html {
 
 .valens-shop-card-design .home-shop-price {
 	margin: 0;
-	font-family: "Marcellus", Georgia, "Times New Roman", serif;
-	font-size: 26px;
+	font-size: 24px;
+	font-weight: 700;
 	line-height: 1;
 	letter-spacing: 0;
 	color: #0e3b2e;
@@ -3530,24 +3532,14 @@ html {
 	color: #16305a;
 }
 
-/* Category card 3D flip on hover (swaps background <-> text colours) */
+/* Category card — base (mobile / touch): plain static card, NO 3D flip.
+   The flip is enabled only on hover-capable devices (below) so touch devices
+   never trigger the 3D transform, which can render incorrectly on mobile. */
 .valens-category-flip {
 	position: relative;
 	display: flex;
 	flex: 1;
 	width: 100%;
-	transform-style: preserve-3d;
-	transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-
-.valens-category-card:hover .valens-category-flip,
-.valens-category-card:focus-visible .valens-category-flip {
-	transform: rotateY(180deg);
-}
-
-.valens-category-face {
-	-webkit-backface-visibility: hidden;
-	backface-visibility: hidden;
 }
 
 .valens-category-face--front {
@@ -3556,30 +3548,52 @@ html {
 }
 
 .valens-category-face--back {
-	position: absolute;
-	inset: 0;
-	transform: rotateY(180deg);
-	/* Swapped: background takes the front text colour, text takes the front background. */
-	background: #276071;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	display: none;
 }
 
-.valens-category-face--back .valens-category-title {
-	color: #8fe3d7;
+/* Enable the 3D flip only where real hover exists (desktop / mouse). */
+@media (hover: hover) and (pointer: fine) {
+	.valens-category-flip {
+		transform-style: preserve-3d;
+		transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+	}
+
+	.valens-category-card:hover .valens-category-flip,
+	.valens-category-card:focus-visible .valens-category-flip {
+		transform: rotateY(180deg);
+	}
+
+	.valens-category-face {
+		-webkit-backface-visibility: hidden;
+		backface-visibility: hidden;
+	}
+
+	.valens-category-face--back {
+		display: flex;
+		position: absolute;
+		inset: 0;
+		flex-direction: column;
+		justify-content: center;
+		transform: rotateY(180deg);
+		/* Swapped: background takes the front text colour, text takes the front background. */
+		background: #276071;
+	}
+
+	.valens-category-face--back .valens-category-title {
+		color: #8fe3d7;
+	}
+
+	.valens-category-face--back .valens-category-text {
+		color: rgba(143, 227, 215, 0.85);
+	}
+
+	.valens-category-face--back .valens-category-icon-img {
+		/* Recolour the dark icon so it reads on the dark flipped background. */
+		filter: brightness(0) invert(1);
+	}
 }
 
-.valens-category-face--back .valens-category-text {
-	color: rgba(143, 227, 215, 0.85);
-}
-
-.valens-category-face--back .valens-category-icon-img {
-	/* Recolour the dark icon so it reads on the dark flipped background. */
-	filter: brightness(0) invert(1);
-}
-
-@media (prefers-reduced-motion: reduce) {
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
 	.valens-category-flip {
 		transition: none;
 	}
@@ -3622,4 +3636,25 @@ html {
 	.valens-ig-modal__progress-bar {
 		animation-duration: 0.01s;
 	}
+}
+
+/* Tighten gap between breadcrumb and product grid (scoped to card-design pages;
+   homepage popular slider keeps its own spacing). */
+.valens-popular-area.valens-shop-card-design {
+	margin-top: 0;
+	padding-top: 24px;
+	padding-bottom: 70px;
+}
+
+.valens-shop-page .breadcrumb-bg.breadcrumb-compact {
+	padding-bottom: 22px;
+}
+
+/* Product card short description (under the title) */
+.valens-shop-card-design .valens-card-desc {
+	margin: 0 0 12px;
+	font-size: 14.5px;
+	font-weight: 400;
+	line-height: 1.6;
+	color: #5c6b64;
 }

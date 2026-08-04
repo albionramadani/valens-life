@@ -126,9 +126,6 @@ const CategoryProductsArea = ({ products, title }: CategoryProductsAreaProps) =>
               <div key={item.id} className="col-xl-3 col-lg-4 col-md-6 d-flex">
                 <article className="home-shop-item valens-home-popular-card h-100 d-flex flex-column w-100">
                   <div className="home-shop-thumb">
-                    {item.valensSubtitle ? (
-                      <span className="valens-card-badge">{item.valensSubtitle}</span>
-                    ) : null}
                     <Link to="/shop-details/$id" params={{ id: String(item.id) }}>
                       <Image src={item.thumb} alt={item.title} />
                       {item.discount ? (
@@ -143,6 +140,14 @@ const CategoryProductsArea = ({ products, title }: CategoryProductsAreaProps) =>
                         {item.title}
                       </Link>
                     </h4>
+                    <p className="valens-card-desc">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </p>
+                    {item.valensSubtitle ? (
+                      <div className="valens-card-tags">
+                        <span className="valens-card-tag">{item.valensSubtitle}</span>
+                      </div>
+                    ) : null}
                     <div className="valens-card-price-row mt-auto">
                       <span className="home-shop-price">
                         {Number(item.price).toFixed(2).replace(".", ",")} €
