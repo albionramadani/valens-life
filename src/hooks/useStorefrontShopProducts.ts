@@ -95,7 +95,10 @@ export const useStorefrontShopProducts = () =>
       storePayload(payload);
       return toCards(payload);
     },
-    initialData: () => toCards(readStoredPayload() || EMPTY_PAYLOAD),
+    // Use the STATIC snapshot for the first render so the server-rendered HTML and
+    // the client hydration match (localStorage differs from the server → hydration
+    // mismatch). The query still refetches on mount and updates with fresh data.
+    initialData: () => toCards({ ...EMPTY_PAYLOAD, ...(STOREFRONT_LIST_SNAPSHOTS.shop || {}) } as RawShopPayload),
     initialDataUpdatedAt: 0,
     staleTime: 10 * 60 * 1000,
     gcTime: 60 * 60 * 1000,

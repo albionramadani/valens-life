@@ -7,12 +7,12 @@ interface CategoryHeroProps {
 }
 
 const categoryImages: Record<string, string> = {
-  zemra: "/assets/img/categories/heart.png",
-  imuniteti: "/assets/img/categories/imuniteti.png",
-  gjumi: "/assets/img/categories/gjumi.png",
-  truri: "/assets/img/categories/brain.png",
-  femra: "/assets/img/categories/femra.png",
-  meshkuj: "/assets/img/categories/meshkuj.png",
+  zemra: "/assets/img/categories/heart.webp",
+  imuniteti: "/assets/img/categories/imuniteti.webp",
+  gjumi: "/assets/img/categories/gjumi.webp",
+  truri: "/assets/img/categories/brain.webp",
+  femra: "/assets/img/categories/femra.webp",
+  meshkuj: "/assets/img/categories/meshkuj.webp",
 };
 
 const categoryFeatures: Record<string, string[]> = {

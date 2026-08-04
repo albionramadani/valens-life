@@ -1,5 +1,4 @@
 "use client";
-import MobileMenusTwo from "@v/layout/headers/Menu/MobileMenusTwo";
 // next/image shim: use plain img
 const Image = (p: any) => { const { src, alt = "", width, height, fill, priority, loader, placeholder, blurDataURL, quality, sizes, ...rest } = p; const s = typeof src === "string" ? src : src?.src ?? ""; return <img src={s} alt={alt} width={width} height={height} {...rest} />; };
 import { Link } from "@tanstack/react-router";
@@ -17,7 +16,7 @@ const Sidebar = ({ style, isActive, setIsActive }: any) => {
                         <Link to="/"><Image src={valensLogo} alt="Valens" /></Link>
                     </div>
                     <div className="menu-outer">
-                        {style ? <MobileMenusTwo setIsActive={setIsActive} /> : <MobileMenusOne setIsActive={setIsActive} />}
+                        <MobileMenusOne setIsActive={setIsActive} />
                     </div>
                     <div className="social-links">
                         <ul className="clearfix">

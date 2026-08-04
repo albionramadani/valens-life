@@ -93,7 +93,7 @@ body {
 	display: flex;
 	align-items: center;
 	padding: 140px 0 60px;
-	background-image: url("/assets/img/bg/Sky.png");
+	background-image: url("/assets/img/bg/Sky.webp");
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;

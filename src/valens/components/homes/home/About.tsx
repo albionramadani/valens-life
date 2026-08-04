@@ -6,7 +6,7 @@ const HomeOneAboutValens = () => {
     <section
       id="about"
       className="valens-about-area"
-      style={{ backgroundImage: `url(/assets/img/bg/about-bg.png)` }}
+      style={{ backgroundImage: `url(/assets/img/bg/about-bg.webp)` }}
     >
       <div className="container">
         <div className="row align-items-center">

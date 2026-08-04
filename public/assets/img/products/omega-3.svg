@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" role="img" aria-label="Valens produkt">
+  <rect width="200" height="200" fill="#f4f6f5"/>
+  <g fill="none" stroke="#276071" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" opacity="0.55">
+    <path d="M84 44h32v14H84z"/>
+    <path d="M78 58h44a10 10 0 0 1 10 10v78a10 10 0 0 1-10 10H78a10 10 0 0 1-10-10V68a10 10 0 0 1 10-10z"/>
+    <path d="M68 96h64"/>
+  </g>
+  <text x="100" y="176" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#9aa7a2">Valens</text>
+</svg>

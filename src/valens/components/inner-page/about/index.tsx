@@ -2,7 +2,7 @@
 const Image = (p: any) => { const { src, alt = "", width, height, fill, priority, loader, placeholder, blurDataURL, quality, sizes, ...rest } = p; const s = typeof src === "string" ? src : src?.src ?? ""; return <img src={s} alt={alt} width={width} height={height} {...rest} />; };
 import { Link } from "@tanstack/react-router";
 
-const partnerImage = "/assets/img/bg/Supplements.png";
+const partnerImage = "/assets/img/bg/Supplements.webp";
 
 const aboutParagraphs = [
   "Ne besojmë se një jetë e shëndetshme fillon me zgjedhjet e duhura. Misioni ynë është t’ju ofrojmë produkte të përzgjedhura me kujdes që mbështesin energjinë, imunitetin dhe mirëqenien tuaj të përditshme.",

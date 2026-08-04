@@ -46,7 +46,7 @@ const HomeOneBanner = () => {
 
                      <div className="valens-hero-image valens-hero-image--mobile" aria-hidden="true">
                         <Image
-                           src="/assets/img/bg/Supplements.png"
+                           src="/assets/img/bg/Supplements.webp"
                            alt=""
                            priority
                            width={1131}
@@ -74,7 +74,7 @@ const HomeOneBanner = () => {
 
          <div className="valens-hero-image valens-hero-image--desktop" aria-hidden="true">
             <Image
-               src="/assets/img/bg/Supplements.png"
+               src="/assets/img/bg/Supplements.webp"
                alt=""
                priority
                width={1131}

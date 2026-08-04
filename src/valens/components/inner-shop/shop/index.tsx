@@ -14,7 +14,7 @@ const Shop = () => {
          <HeaderOne style={true} />
          <main className="main-area fix valens-shop-page">
             <h1 className="">Shop</h1>
-            {isLoading ? (
+            {isLoading && !products.length ? (
                <div className="container py-5 text-center">
                   <Loader2 className="animate-spin" size={22} />
                </div>
