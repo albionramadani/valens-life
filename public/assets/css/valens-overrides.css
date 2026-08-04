@@ -3209,7 +3209,7 @@ html {
 
 /* ==== Rreth nesh page (dedicated) — cream background design, product-blue partner ==== */
 .valens-rreth-area {
-	background-color: #f4f1e9;
+	background-color: #ffffff;
 	padding: 150px 0 110px;
 }
 
@@ -3268,24 +3268,25 @@ html {
 
 .valens-rreth-card {
 	height: 100%;
+	margin: 0 12px;
 	background: #ffffff;
-	border-radius: 18px;
-	padding: 30px 26px;
-	box-shadow: 0 22px 46px rgba(23, 61, 44, 0.08);
+	border-radius: 14px;
+	padding: 22px 20px;
+	box-shadow: 0 16px 34px rgba(23, 61, 44, 0.07);
 	border: 1px solid rgba(23, 61, 44, 0.05);
 }
 
 .valens-rreth-card-title {
 	font-family: Georgia, "Times New Roman", serif;
 	font-weight: 400;
-	font-size: 1.5rem;
+	font-size: 1.28rem;
 	color: #173d2c;
-	margin: 0 0 12px;
+	margin: 0 0 8px;
 }
 
 .valens-rreth-card-text {
-	font-size: 1rem;
-	line-height: 1.6;
+	font-size: 0.92rem;
+	line-height: 1.55;
 	color: #6b7b74;
 	margin: 0;
 }
@@ -3798,5 +3799,86 @@ html {
 		min-height: 42px;
 		padding: 9px 16px;
 		font-size: 14px;
+	}
+}
+
+/* Rreth nesh (homepage) — two-column card: text left on blue, product image right.
+   Stacks vertically on mobile (text then image). */
+.valens-about-split {
+	min-height: auto;
+	padding: 70px 0;
+	background-image: none !important;
+	background-color: #ffffff;
+}
+
+.valens-about-split .valens-about-card {
+	display: grid;
+	grid-template-columns: 1.05fr 0.95fr;
+	align-items: stretch;
+	border-radius: 24px;
+	overflow: hidden;
+	/* Blue background photo (3) — same blue as the product photo, so the text panel
+	   and the product image blend with no visible colour seam. */
+	background: #a6cee4 url("/assets/img/bg/about-blue.webp") center center / cover no-repeat;
+	min-height: 460px;
+}
+
+.valens-about-split .valens-about-card__content {
+	padding: 52px 54px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	transform: none;
+}
+
+.valens-about-split .valens-about-heading {
+	margin: 0 0 24px;
+}
+
+.valens-about-split .valens-about-content {
+	max-width: 560px;
+	color: rgba(20, 41, 79, 0.92);
+}
+
+.valens-about-split .valens-about-card__visual {
+	position: relative;
+	min-height: 100%;
+	overflow: hidden;
+	background: transparent;
+}
+
+.valens-about-split .valens-about-card__img {
+	width: 100%;
+	height: 100%;
+	/* Bottle is centred in the photo, so cover fills the column edge-to-edge while the
+	   whole product stays visible; the blue matches the card background (no seam). */
+	object-fit: cover;
+	object-position: center;
+	display: block;
+	/* Fade the LEFT edge of the photo into the blue panel so the middle seam melts away. */
+	-webkit-mask-image: linear-gradient(to right, transparent 0%, #000 22%, #000 100%);
+	mask-image: linear-gradient(to right, transparent 0%, #000 22%, #000 100%);
+}
+
+@media (max-width: 991.98px) {
+	.valens-about-split {
+		padding: 48px 0;
+	}
+	.valens-about-split .valens-about-card {
+		grid-template-columns: 1fr;
+		min-height: 0;
+	}
+	.valens-about-split .valens-about-card__content {
+		padding: 34px 26px;
+	}
+	.valens-about-split .valens-about-card__visual {
+		min-height: 320px;
+	}
+	.valens-about-split .valens-about-card__img {
+		height: 100%;
+		object-position: center;
+		/* On mobile the panel is above the image, so fade the TOP edge instead. */
+		-webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 100%);
+		mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 100%);
 	}
 }

@@ -11,10 +11,10 @@ const aboutParagraphs = [
 ];
 
 const valueCards = [
-  { title: "Origjinalitet", text: "Çdo produkt vjen përmes kanaleve zyrtare të Life Extension." },
-  { title: "Shkencë", text: "Formula të mbështetura në kërkim dhe përbërës të testuar." },
-  { title: "Përzgjedhje", text: "Jo katalog i pafund — vetëm produkte që i besojmë." },
-  { title: "Përkrahje", text: "Të ndihmojmë të zgjedhësh produktin e duhur për ty." },
+  { title: "Origjinalitet", text: "Produkte origjinale, të siguruara përmes kanaleve zyrtare të furnizimit." },
+  { title: "Shkencë", text: "Formula dhe përbërës të mbështetur në kërkime dhe standarde bashkëkohore." },
+  { title: "Qartësi", text: "Informacion i thjeshtë dhe i saktë për përbërjen dhe përdorimin e produktit." },
+  { title: "Përgjegjësi", text: "Kujdes në çdo hap, nga përzgjedhja e produkteve deri te informacioni që ju ofrojmë." },
 ];
 
 const AboutContent = () => {
@@ -23,11 +23,7 @@ const AboutContent = () => {
       <div className="container">
         <div className="valens-rreth-head">
           <h1 className="valens-rreth-title">Rreth nesh</h1>
-          <nav aria-label="Breadcrumbs" className="valens-rreth-trail">
-            <Link to="/">Home</Link>
-            <span className="sep">|</span>
-            <span>Rreth nesh</span>
-          </nav>
+          
         </div>
 
         <div className="valens-rreth-intro">
@@ -36,7 +32,7 @@ const AboutContent = () => {
           ))}
         </div>
 
-        <div className="row valens-rreth-values gy-4">
+        <div className="row valens-rreth-values gx-0 gy-4">
           {valueCards.map((card, index) => (
             <div key={index} className="col-lg-3 col-sm-6">
               <div className="valens-rreth-card">
@@ -52,8 +48,8 @@ const AboutContent = () => {
             <span className="valens-rreth-partner-eyebrow">PARTNERI YNË</span>
             <h3 className="valens-rreth-partner-title">Life Extension</h3>
             <p className="valens-rreth-partner-text">
-              Mbi katër dekada kërkim shkencor, formula të avancuara dhe testime
-              të pavarura për çdo grumbull produkti.
+              Mbi katër dekada përvojë, formula të mbështetura në shkencë dhe
+              kontroll i cilësisë për çdo seri prodhimi.
             </p>
             <Link to="/produktet" className="eg-btn valens-rreth-partner-btn">
               Shiko produktet
