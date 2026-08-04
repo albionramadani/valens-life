@@ -2405,6 +2405,33 @@ html {
 	outline-offset: 3px;
 }
 
+@media (min-width: 768px) {
+	.valens-shop-card-design .shop-content-bottom {
+		display: flex;
+		gap: 10px;
+	}
+
+	.valens-shop-card-design .shop-content-bottom .cart,
+	.valens-shop-card-design .shop-content-bottom .eg-btn.btn-two,
+	.valens-shop-card-design .home-shop-item:hover .shop-content-bottom .eg-btn.btn-two {
+		flex: 1 1 0%;
+		width: auto;
+		min-width: 0;
+		height: 46px;
+		padding: 0 16px;
+		border-radius: 999px;
+		font-size: 12.8px;
+		font-weight: 700;
+		letter-spacing: 0.03em;
+		cursor: pointer;
+		white-space: nowrap;
+	}
+}
+
+.valens-shop-details-page .valens-shop-card-design .valens-popular-head .title {
+	font-size: 35px;
+}
+
 @media (max-width: 575.98px) {
 	.valens-shop-card-design .valens-home-popular-card {
 		min-height: 520px;
@@ -2610,11 +2637,35 @@ html {
 }
 
 .valens-footer .copyright-text {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
 	text-align: center;
 }
 
 .valens-footer .copyright-text p {
+	margin: 0;
 	color: #276071;
+	opacity: 1;
+}
+
+.valens-footer .valens-webfonts-credit {
+	position: absolute;
+	right: 0;
+}
+
+.valens-footer .valens-webfonts-credit a {
+	color: #276071;
+	font-size: 14px;
+	font-weight: 500;
+	text-decoration: none;
+	opacity: 0.75;
+}
+
+.valens-footer .valens-webfonts-credit a:hover {
+	color: #1f5561;
 	opacity: 1;
 }
 

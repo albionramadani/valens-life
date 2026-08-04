@@ -21,7 +21,7 @@ const Error = () => {
                         <p>Na vjen keq, faqja që po kërkoni nuk ekziston ose është zhvendosur.</p>
                         <div className="eg-error__actions">
                            <Link className="eg-btn btn-two" to="/">Kthehu në kryefaqe</Link>
-                           <Link className="eg-btn btn-two" to="/shop">Shiko produktet</Link>
+                           <Link className="eg-btn btn-two" to="/produktet">Shiko produktet</Link>
                         </div>
                      </div>
                   </div>

@@ -80,11 +80,10 @@ const FooterOne = ({style}:any) => {
                         <div className="footer-widget">
                            <h4 className="fw-title">NA KONTAKTONI</h4>
                            <div className="footer-contact-wrap">
-                              <p>Prishtinë , 10000<br/>Icon Tower Rr. Tirana</p>
+                              <p>Rr. Gjilani, Nr. 204, Çagllavicë, 10000 Prishtinë, Kosovë</p>
                               <ul className="list-wrap">
                                  <li className="phone"><i className="fas fa-phone"></i> +383 100 100</li>
-                                 <li className="mail"><i className="fas fa-envelope"></i> info@valens.com</li>
-                                 <li className="website"><i className="fas fa-globe"></i> www.valens.com</li>
+                                 <li className="mail"><i className="fas fa-envelope"></i> info@valens.live</li>
                               </ul>
                            </div>
                         </div>
@@ -99,8 +98,8 @@ const FooterOne = ({style}:any) => {
                   <div className="col-12">
                      <div className="copyright-text">
                         <p>Te gjitha te drejtat e rezervuara © {new Date().getFullYear()} Valens.</p>
-                        <span>
-                           {/* <a href="http://www.onlinewebfonts.com">Web Fonts</a> */}
+                        <span className="valens-webfonts-credit">
+                           <a href="https://www.onlinewebfonts.com" target="_blank" rel="noreferrer">Web Fonts</a>
                         </span>
                      </div>
                   </div>
