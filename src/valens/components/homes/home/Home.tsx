@@ -49,6 +49,7 @@ const HomeOneBanner = () => {
                            src="/assets/img/bg/Supplements.webp"
                            alt=""
                            priority
+                           fetchPriority="high"
                            width={1131}
                            height={942}
                            sizes="(max-width: 991px) 92vw, 0px"
@@ -77,6 +78,7 @@ const HomeOneBanner = () => {
                src="/assets/img/bg/Supplements.webp"
                alt=""
                priority
+               fetchPriority="high"
                width={1131}
                height={942}
                sizes="(min-width: 992px) 55vw, 0px"

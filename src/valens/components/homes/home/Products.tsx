@@ -14,8 +14,8 @@ import { useStorefrontShopProducts } from "@/hooks/useStorefrontShopProducts";
 const CustomPrevArrow = (props: any) => {
   const { onClick } = props;
   return (
-    <button onClick={onClick} type="button" className="slick-prev slick-arrow">
-      <i className="flaticon-left-arrow"></i>
+    <button onClick={onClick} type="button" className="slick-prev slick-arrow" aria-label="Produkti i mëparshëm">
+      <i className="flaticon-left-arrow" aria-hidden="true"></i>
     </button>
   );
 };
@@ -23,8 +23,8 @@ const CustomPrevArrow = (props: any) => {
 const CustomNextArrow = (props: any) => {
   const { onClick } = props;
   return (
-    <button onClick={onClick} type="button" className="slick-next slick-arrow">
-      <i className="flaticon-right-arrow"></i>
+    <button onClick={onClick} type="button" className="slick-next slick-arrow" aria-label="Produkti tjetër">
+      <i className="flaticon-right-arrow" aria-hidden="true"></i>
     </button>
   );
 };

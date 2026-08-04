@@ -20,9 +20,9 @@ const Sidebar = ({ style, isActive, setIsActive }: any) => {
                     </div>
                     <div className="social-links">
                         <ul className="clearfix">
-                            <li><Link to="#"><i className="fab fa-facebook-f"></i></Link></li>
-                            <li><Link to="#"><i className="fab fa-instagram"></i></Link></li>
-                            <li><Link to="#"><i className="fab fa-tiktok"></i></Link></li>
+                            <li><Link to="#" aria-label="Facebook"><i className="fab fa-facebook-f" aria-hidden="true"></i></Link></li>
+                            <li><Link to="#" aria-label="Instagram"><i className="fab fa-instagram" aria-hidden="true"></i></Link></li>
+                            <li><Link to="#" aria-label="TikTok"><i className="fab fa-tiktok" aria-hidden="true"></i></Link></li>
                         </ul>
                     </div>
                 </nav>

@@ -30,8 +30,8 @@ const ScrollToTop = ({ style }: style_type) => {
    return (
       <>
 
-         <button onClick={scrollTop} type="button" className={`scroll-top scroll-to-target ${sticky && "open"}`}>
-            <i className="fas fa-angle-up"></i>
+         <button onClick={scrollTop} type="button" aria-label="Kthehu lart" className={`scroll-top scroll-to-target ${sticky && "open"}`}>
+            <i className="fas fa-angle-up" aria-hidden="true"></i>
          </button>
       </>
    );
