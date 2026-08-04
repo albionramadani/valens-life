@@ -26,7 +26,10 @@ const HeaderOne = ({ style, hideNavLinks = false }: HeaderOneProps) => {
     // between the dedicated nav-item pages (Ballina stays the homepage). Category
     // detail pages (/kategoria/<slug>) also keep the nav visible.
     const navPages = ["/", "/kategorite", "/rreth-nesh", "/produktet", "/pyetje", "/kontakti"];
-    const isNavPage = navPages.includes(pathname) || pathname.startsWith("/kategoria/");
+    const isNavPage =
+        navPages.includes(pathname) ||
+        pathname.startsWith("/kategoria/") ||
+        pathname.startsWith("/shop-details/");
     const shouldHideNavLinks = hideNavLinks || !isNavPage;
     const handleCartToggle = () => setCartOpen((prev) => !prev);
 

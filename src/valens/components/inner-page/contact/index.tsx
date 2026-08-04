@@ -1,14 +1,12 @@
 import HeaderOne from "@v/layout/headers/HeaderOne";
 import FooterOne from "@v/layout/footer/Footer";
-import Breadcrumb from "@v/components/common/Breadcrumb";
 import SocialIcon from "@v/components/common/SocialIcon";
 
 const ContactPage = () => {
   return (
     <>
       <HeaderOne style={true} />
-      <main className="main-area fix">
-        <Breadcrumb title="Kontakti" compact />
+      <main className="main-area fix valens-no-breadcrumb-page">
         <section className="valens-contact-area">
           <div className="container">
             <div className="section-title text-center mb-40">

@@ -28,7 +28,7 @@ function ShopDetailsPage() {
   if (isLoadingDetails) {
     return (
       <Wrapper>
-        <HeaderOne style={true} hideNavLinks />
+        <HeaderOne style={true} />
         <main className="main-area fix valens-shop-details-page">
           <Breadcrumb compact showTrail={false} />
           <div className="container py-5 text-center">
@@ -43,7 +43,7 @@ function ShopDetailsPage() {
   if (isError) {
     return (
       <Wrapper>
-        <HeaderOne style={true} hideNavLinks />
+        <HeaderOne style={true} />
         <main className="main-area fix valens-shop-details-page">
           <Breadcrumb compact showTrail={false} />
           <div className="container py-5">
@@ -61,7 +61,7 @@ function ShopDetailsPage() {
   if (!hasValidDetails) {
     return (
       <Wrapper>
-        <HeaderOne style={true} hideNavLinks />
+        <HeaderOne style={true} />
         <main className="main-area fix valens-shop-details-page">
           <Breadcrumb compact showTrail={false} />
           <div className="container py-5">
@@ -102,7 +102,7 @@ function ShopDetailsPage() {
 
   return (
     <Wrapper>
-      <HeaderOne style={true} hideNavLinks />
+      <HeaderOne style={true} />
       <main className="main-area fix valens-shop-details-page">
         <Breadcrumb compact showTrail={false} />
         <ShopDetailsArea single_product={singleProduct} key={singleProduct.id} />

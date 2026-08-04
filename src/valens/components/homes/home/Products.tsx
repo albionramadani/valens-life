@@ -102,19 +102,28 @@ const HomeOnePopularProducts = () => {
             <div className={`shop-thumb-shape ${item.class_name || ""}`}></div>
           </div>
           <div className="home-shop-content d-flex flex-column flex-grow-1">
-            {displayCategory ? (
-              <span className="valens-popular-category">{displayCategory}</span>
-            ) : null}
             <h4 className="title">
               <Link to="/shop-details/$id" params={{ id: String(item.id) }}>
                 {displayTitle}
               </Link>
             </h4>
-            <p className="valens-popular-subtitle">Lorem Ipsum</p>
-            <span className="home-shop-price">
-              {Number(displayPrice).toFixed(2).replace(".", ",")} €
-            </span>
-            <div className="shop-content-bottom mt-auto">
+            <p className="valens-card-desc">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </p>
+            {displayCategory ? (
+              <div className="valens-card-tags">
+                <span className="valens-card-tag">{displayCategory}</span>
+              </div>
+            ) : null}
+            <div className="valens-card-price-row mt-auto">
+              <span className="home-shop-price">
+                {Number(displayPrice).toFixed(2).replace(".", ",")} €
+              </span>
+              <span className="valens-card-stock">
+                {item.stock_status === "out_of_stock" ? "Jashtë stokut" : "Në stok"}
+              </span>
+            </div>
+            <div className="shop-content-bottom">
               <button
                 type="button"
                 onClick={() => handleAddToCart(item)}
@@ -154,7 +163,7 @@ const HomeOnePopularProducts = () => {
           ) : hasMounted ? (
             <Slider
               {...settings}
-              className="row home-shop-active valens-popular-slider"
+              className="row home-shop-active valens-popular-slider valens-shop-card-design"
               responsive={[
                 { breakpoint: 1200, settings: { slidesToShow: 3, arrows: true } },
                 { breakpoint: 992, settings: { slidesToShow: 2, arrows: false } },
@@ -164,7 +173,7 @@ const HomeOnePopularProducts = () => {
               {products.map((item, index) => renderProductCard(item, index))}
             </Slider>
           ) : (
-            <div className="row home-shop-active valens-popular-slider">
+            <div className="row home-shop-active valens-popular-slider valens-shop-card-design">
               {products.slice(0, 4).map((item, index) => renderProductCard(item, index))}
             </div>
           )}

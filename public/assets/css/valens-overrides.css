@@ -3658,3 +3658,40 @@ html {
 	line-height: 1.6;
 	color: #5c6b64;
 }
+
+@media (min-width: 992px) {
+	.valens-home-popular .valens-popular-slider .slick-slide .valens-home-popular-card {
+		width: calc(100% + 44px) !important;
+		margin-left: -22px;
+		margin-right: -22px;
+	}
+}
+
+/* Keep page content below the header when the breadcrumb hero is omitted. */
+.valens-no-breadcrumb-page {
+	padding-top: 130px;
+}
+
+.valens-no-breadcrumb-page--compact {
+	padding-top: 64px;
+}
+
+@media (max-width: 991.98px) {
+	.valens-no-breadcrumb-page {
+		padding-top: 100px;
+	}
+
+	.valens-no-breadcrumb-page--compact {
+		padding-top: 54px;
+	}
+}
+
+@media (max-width: 575.98px) {
+	.valens-no-breadcrumb-page {
+		padding-top: 84px;
+	}
+
+	.valens-no-breadcrumb-page--compact {
+		padding-top: 44px;
+	}
+}
