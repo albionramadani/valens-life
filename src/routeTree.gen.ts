@@ -19,7 +19,6 @@ import { Route as ParollerRouteImport } from './routes/paroller'
 import { Route as ProduktetRouteImport } from './routes/produktet'
 import { Route as PyetjeRouteImport } from './routes/pyetje'
 import { Route as RrethNeshRouteImport } from './routes/rreth-nesh'
-import { Route as ShopRouteImport } from './routes/shop'
 import { Route as ShopDetailsRouteImport } from './routes/shop-details'
 import { Route as AdminSplatRouteImport } from './routes/admin.$'
 import { Route as KategoriaSlugRouteImport } from './routes/kategoria.$slug'
@@ -75,11 +74,6 @@ const RrethNeshRoute = RrethNeshRouteImport.update({
   path: '/rreth-nesh',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ShopRoute = ShopRouteImport.update({
-  id: '/shop',
-  path: '/shop',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ShopDetailsRoute = ShopDetailsRouteImport.update({
   id: '/shop-details',
   path: '/shop-details',
@@ -112,7 +106,6 @@ export interface FileRoutesByFullPath {
   '/produktet': typeof ProduktetRoute
   '/pyetje': typeof PyetjeRoute
   '/rreth-nesh': typeof RrethNeshRoute
-  '/shop': typeof ShopRoute
   '/shop-details': typeof ShopDetailsRouteWithChildren
   '/admin/$': typeof AdminSplatRoute
   '/kategoria/$slug': typeof KategoriaSlugRoute
@@ -129,7 +122,6 @@ export interface FileRoutesByTo {
   '/produktet': typeof ProduktetRoute
   '/pyetje': typeof PyetjeRoute
   '/rreth-nesh': typeof RrethNeshRoute
-  '/shop': typeof ShopRoute
   '/shop-details': typeof ShopDetailsRouteWithChildren
   '/admin/$': typeof AdminSplatRoute
   '/kategoria/$slug': typeof KategoriaSlugRoute
@@ -147,7 +139,6 @@ export interface FileRoutesById {
   '/produktet': typeof ProduktetRoute
   '/pyetje': typeof PyetjeRoute
   '/rreth-nesh': typeof RrethNeshRoute
-  '/shop': typeof ShopRoute
   '/shop-details': typeof ShopDetailsRouteWithChildren
   '/admin/$': typeof AdminSplatRoute
   '/kategoria/$slug': typeof KategoriaSlugRoute
@@ -166,7 +157,6 @@ export interface FileRouteTypes {
     | '/produktet'
     | '/pyetje'
     | '/rreth-nesh'
-    | '/shop'
     | '/shop-details'
     | '/admin/$'
     | '/kategoria/$slug'
@@ -183,7 +173,6 @@ export interface FileRouteTypes {
     | '/produktet'
     | '/pyetje'
     | '/rreth-nesh'
-    | '/shop'
     | '/shop-details'
     | '/admin/$'
     | '/kategoria/$slug'
@@ -200,7 +189,6 @@ export interface FileRouteTypes {
     | '/produktet'
     | '/pyetje'
     | '/rreth-nesh'
-    | '/shop'
     | '/shop-details'
     | '/admin/$'
     | '/kategoria/$slug'
@@ -218,7 +206,6 @@ export interface RootRouteChildren {
   ProduktetRoute: typeof ProduktetRoute
   PyetjeRoute: typeof PyetjeRoute
   RrethNeshRoute: typeof RrethNeshRoute
-  ShopRoute: typeof ShopRoute
   ShopDetailsRoute: typeof ShopDetailsRouteWithChildren
   AdminSplatRoute: typeof AdminSplatRoute
   KategoriaSlugRoute: typeof KategoriaSlugRoute
@@ -296,13 +283,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RrethNeshRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/shop': {
-      id: '/shop'
-      path: '/shop'
-      fullPath: '/shop'
-      preLoaderRoute: typeof ShopRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/shop-details': {
       id: '/shop-details'
       path: '/shop-details'
@@ -357,7 +337,6 @@ const rootRouteChildren: RootRouteChildren = {
   ProduktetRoute: ProduktetRoute,
   PyetjeRoute: PyetjeRoute,
   RrethNeshRoute: RrethNeshRoute,
-  ShopRoute: ShopRoute,
   ShopDetailsRoute: ShopDetailsRouteWithChildren,
   AdminSplatRoute: AdminSplatRoute,
   KategoriaSlugRoute: KategoriaSlugRoute,
