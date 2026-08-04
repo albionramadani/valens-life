@@ -3676,6 +3676,77 @@ html {
 	padding-top: 64px;
 }
 
+.valens-no-breadcrumb-page--products {
+	padding-top: 104px;
+}
+
+/* Product category filter */
+.valens-product-filter {
+	margin-bottom: 38px;
+}
+
+.valens-product-filter__heading {
+	margin-bottom: 26px;
+	text-align: left;
+}
+
+.valens-product-filter__heading h1 {
+	margin: 0 0 8px;
+	font-family: "Marcellus", Georgia, "Times New Roman", serif;
+	font-size: clamp(40px, 4vw, 60px);
+	font-weight: 400;
+	line-height: 1.08;
+	letter-spacing: -0.02em;
+	color: #0e3b2e;
+	text-align: left;
+}
+
+.valens-product-filter__heading p {
+	margin: 0;
+	font-family: "Contax Pro 55", Arial, sans-serif;
+	font-size: 17px;
+	line-height: 1.55;
+	color: #5c6b64;
+	text-align: left;
+}
+
+.valens-product-filter__options {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+.valens-product-filter__button {
+	min-height: 48px;
+	padding: 10px 22px;
+	border: 1px solid rgba(39, 96, 113, 0.24);
+	border-radius: 999px;
+	background: #ffffff;
+	color: #276071;
+	font-family: "Contax Pro 55", Arial, sans-serif;
+	font-size: 15px;
+	font-weight: 600;
+	line-height: 1;
+	transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.valens-product-filter__button:hover {
+	transform: translateY(-1px);
+	border-color: #8ae5d7;
+	background: rgba(138, 229, 215, 0.14);
+}
+
+.valens-product-filter__button.is-active {
+	border-color: #276071;
+	background: #276071;
+	color: #ffffff;
+}
+
+.valens-product-filter__button:focus-visible {
+	outline: 3px solid rgba(138, 229, 215, 0.55);
+	outline-offset: 3px;
+}
+
 @media (max-width: 991.98px) {
 	.valens-no-breadcrumb-page {
 		padding-top: 100px;
@@ -3683,6 +3754,10 @@ html {
 
 	.valens-no-breadcrumb-page--compact {
 		padding-top: 54px;
+	}
+
+	.valens-no-breadcrumb-page--products {
+		padding-top: 84px;
 	}
 }
 
@@ -3693,5 +3768,35 @@ html {
 
 	.valens-no-breadcrumb-page--compact {
 		padding-top: 44px;
+	}
+
+	.valens-no-breadcrumb-page--products {
+		padding-top: 70px;
+	}
+
+	.valens-product-filter {
+		margin-bottom: 28px;
+	}
+
+	.valens-product-filter__heading {
+		margin-bottom: 20px;
+	}
+
+	.valens-product-filter__heading h1 {
+		font-size: 38px;
+	}
+
+	.valens-product-filter__heading p {
+		font-size: 15px;
+	}
+
+	.valens-product-filter__options {
+		gap: 8px;
+	}
+
+	.valens-product-filter__button {
+		min-height: 42px;
+		padding: 9px 16px;
+		font-size: 14px;
 	}
 }

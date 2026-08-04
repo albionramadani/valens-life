@@ -10,13 +10,13 @@ const ProductsPage = () => {
   return (
     <>
       <HeaderOne style={true} />
-      <main className="main-area fix valens-shop-page valens-no-breadcrumb-page">
+      <main className="main-area fix valens-shop-page valens-no-breadcrumb-page valens-no-breadcrumb-page--products">
         {isLoading && !products.length ? (
           <div className="container py-5 text-center">
             <Loader2 className="animate-spin" size={22} />
           </div>
         ) : (
-          <CategoryProductsArea products={products} />
+          <CategoryProductsArea products={products} enableCategoryFilter />
         )}
       </main>
       <FooterOne style={false} />

@@ -11,18 +11,45 @@ import { addToCart } from "@v/redux/features/cartSlice";
 interface CategoryProductsAreaProps {
   products: any[];
   title?: string;
+  enableCategoryFilter?: boolean;
 }
 
-const CategoryProductsArea = ({ products, title }: CategoryProductsAreaProps) => {
+const CategoryProductsArea = ({ products, title, enableCategoryFilter = false }: CategoryProductsAreaProps) => {
   const dispatch = useDispatch();
   const itemsPerPage = 16;
   const [currentPage, setCurrentPage] = useState(1);
+  const [activeCategory, setActiveCategory] = useState("all");
+
+  const capitalizeCategory = (category: string) =>
+    category.charAt(0).toLocaleUpperCase("sq") + category.slice(1).toLocaleLowerCase("sq");
+
+  const categories = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          products
+            .map((product) => String(product.valensSubtitle || "").trim())
+            .filter(Boolean),
+        ),
+      ).sort((a, b) => a.localeCompare(b, "sq")),
+    [products],
+  );
+
+  const filteredProducts = useMemo(
+    () =>
+      activeCategory === "all"
+        ? products
+        : products.filter(
+            (product) => String(product.valensSubtitle || "").trim() === activeCategory,
+          ),
+    [activeCategory, products],
+  );
 
   const handleAddToCart = (item: any) => {
     dispatch(addToCart(item));
   };
 
-  const totalPages = Math.max(1, Math.ceil(products.length / itemsPerPage));
+  const totalPages = Math.max(1, Math.ceil(filteredProducts.length / itemsPerPage));
 
   useEffect(() => {
     if (currentPage > totalPages) {
@@ -32,12 +59,18 @@ const CategoryProductsArea = ({ products, title }: CategoryProductsAreaProps) =>
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [products]);
+  }, [activeCategory, products]);
+
+  useEffect(() => {
+    if (activeCategory !== "all" && !categories.includes(activeCategory)) {
+      setActiveCategory("all");
+    }
+  }, [activeCategory, categories]);
 
   const currentProducts = useMemo(() => {
     const start = (currentPage - 1) * itemsPerPage;
-    return products.slice(start, start + itemsPerPage);
-  }, [currentPage, products]);
+    return filteredProducts.slice(start, start + itemsPerPage);
+  }, [currentPage, filteredProducts]);
 
   const pageNumbers = useMemo(() => {
     if (totalPages <= 7) {
@@ -119,6 +152,35 @@ const CategoryProductsArea = ({ products, title }: CategoryProductsAreaProps) =>
           {title ? (
             <div className="section-title mb-40 valens-popular-head">
               <h2 className="title">{title}</h2>
+            </div>
+          ) : null}
+          {enableCategoryFilter ? (
+            <div className="valens-product-filter" aria-label="Filtro produktet sipas kategorisë">
+              <div className="valens-product-filter__heading">
+                <h1>Produktet</h1>
+                <p>Zgjidh kategorinë që të përshtatet dhe gjej produktet që të nevojiten.</p>
+              </div>
+              <div className="valens-product-filter__options" role="group" aria-label="Kategoritë e produkteve">
+                <button
+                  type="button"
+                  className={`valens-product-filter__button${activeCategory === "all" ? " is-active" : ""}`}
+                  aria-pressed={activeCategory === "all"}
+                  onClick={() => setActiveCategory("all")}
+                >
+                  Të gjitha
+                </button>
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    type="button"
+                    className={`valens-product-filter__button${activeCategory === category ? " is-active" : ""}`}
+                    aria-pressed={activeCategory === category}
+                    onClick={() => setActiveCategory(category)}
+                  >
+                    {capitalizeCategory(category)}
+                  </button>
+                ))}
+              </div>
             </div>
           ) : null}
           <div className="row valens-shop-grid gx-5 gy-4">
