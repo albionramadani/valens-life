@@ -1909,7 +1909,7 @@ html {
 
 /* Homepage popular products */
 .valens-home-popular {
-	    padding: 40px 0;
+	    padding: 40px 0 0 0;
 	background: #ffffff;
 	overflow: hidden;
 }
