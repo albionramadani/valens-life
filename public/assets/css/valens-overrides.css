@@ -3861,7 +3861,7 @@ html {
    Stacks vertically on mobile (text then image). */
 .valens-about-split {
 	min-height: auto;
-	padding: 70px 0;
+	padding: 0px 0;
 	background-image: none !important;
 	background-color: #ffffff;
 }
