@@ -1152,9 +1152,9 @@ body {
 }
 
 .valens-category-subtitle {
-	font-family: "Contax W01 45 Light";
+	font-family: "Contax Pro 55";
 	margin: 16px auto 40px;
-	color: #494949;
+	color: #5c6b64;
 	font-size: 1.5rem;
 	line-height: 1.7;
 	letter-spacing: -0.5px;
@@ -1592,7 +1592,7 @@ html {
 	font-family: "Contax Pro 55", Arial, sans-serif;
 	font-weight: 400;
 	letter-spacing: -0.02em;
-	font-size: 52px;
+	font-size: 48px;
 }
 
 @media (max-width: 991.98px) {
@@ -1924,7 +1924,7 @@ html {
 
 .valens-home-popular .valens-popular-head .title {
 	font-family: "Contax Pro 55", Arial, sans-serif;
-	font-size: clamp(38px, 3.45vw, 58px);
+	font-size: 48px;
 	font-weight: 400;
 	line-height: 1.08;
 	letter-spacing: -0.035em;
@@ -2051,11 +2051,36 @@ html {
 	padding: 0 18px;
 	border: 1px solid #276071;
 	border-radius: 7px;
+	background: #ffffff;
+	color: #276071;
 	font-family: "Contax Pro 55", Arial, sans-serif;
 	font-size: 15px;
 	font-weight: 600;
 	box-shadow: none;
+	position: relative;
+	overflow: hidden;
+	isolation: isolate;
 	transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.valens-home-popular .shop-content-bottom .cart::before,
+.valens-shop-card-design .shop-content-bottom .cart::before {
+	content: "";
+	position: absolute;
+	width: 200%;
+	height: 200%;
+	top: 110%;
+	left: 50%;
+	border-radius: 50%;
+	background: #8AE5D7;
+	transform: translateX(-50%);
+	transition: top 800ms ease;
+	z-index: -1;
+}
+
+.valens-home-popular .shop-content-bottom .cart:hover::before,
+.valens-shop-card-design .shop-content-bottom .cart:hover::before {
+	top: -40%;
 }
 
 .valens-home-popular .shop-content-bottom .cart i {
@@ -2064,7 +2089,9 @@ html {
 
 .valens-home-popular .shop-content-bottom .cart:hover {
 	transform: none;
-	background: #33768b;
+	background: #ffffff;
+	border-color: #276071;
+	color: #276071;
 	box-shadow: none;
 }
 
@@ -2079,8 +2106,8 @@ html {
 	padding: 0 18px;
 	border: 1px solid #276071;
 	border-radius: 7px;
-	background: #ffffff;
-	color: #276071;
+	background: #276071;
+	color: #ffffff;
 	font-family: "Contax Pro 55", Arial, sans-serif;
 	font-size: 15px;
 	font-weight: 600;
@@ -2088,12 +2115,17 @@ html {
 	visibility: visible !important;
 	pointer-events: auto !important;
 	transform: none !important;
-	transition: background-color 180ms ease, color 180ms ease;
+	transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
 }
 
 .valens-home-popular .shop-content-bottom .eg-btn.btn-two:hover {
-	background: rgba(138, 229, 215, 0.14);
-	color: #276071;
+	background: #33768b;
+	border-color: #33768b;
+	color: #ffffff;
+}
+
+.valens-home-popular .shop-content-bottom .eg-btn.btn-two::before {
+	content: none;
 }
 
 .valens-home-popular .shop-content-bottom .cart:focus-visible,
@@ -2361,10 +2393,15 @@ html {
 	padding: 0 18px;
 	border: 1px solid #276071;
 	border-radius: 7px;
+	background: #ffffff;
+	color: #276071;
 	font-family: "Contax Pro 55", Arial, sans-serif;
 	font-size: 15px;
 	font-weight: 600;
 	box-shadow: none;
+	position: relative;
+	overflow: hidden;
+	isolation: isolate;
 }
 
 .valens-shop-card-design .shop-content-bottom .cart i {
@@ -2372,7 +2409,9 @@ html {
 }
 
 .valens-shop-card-design .shop-content-bottom .cart:hover {
-	background: #33768b;
+	background: #ffffff;
+	border-color: #276071;
+	color: #276071;
 	box-shadow: none;
 }
 
@@ -2387,8 +2426,8 @@ html {
 	padding: 0 18px;
 	border: 1px solid #276071;
 	border-radius: 7px;
-	background: #ffffff;
-	color: #276071;
+	background: #276071;
+	color: #ffffff;
 	font-family: "Contax Pro 55", Arial, sans-serif;
 	font-size: 15px;
 	font-weight: 600;
@@ -2396,11 +2435,17 @@ html {
 	visibility: visible !important;
 	pointer-events: auto !important;
 	transform: none !important;
+	transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
 }
 
 .valens-shop-card-design .shop-content-bottom .eg-btn.btn-two:hover {
-	background: rgba(138, 229, 215, 0.14);
-	color: #276071;
+	background: #33768b;
+	border-color: #33768b;
+	color: #ffffff;
+}
+
+.valens-shop-card-design .shop-content-bottom .eg-btn.btn-two::before {
+	content: none;
 }
 
 .valens-shop-card-design .shop-content-bottom .cart:focus-visible,
@@ -3269,16 +3314,16 @@ html {
 }
 
 .valens-rreth-head {
-	margin-bottom: 34px;
+	margin-bottom: 30px;
 }
 
 .valens-rreth-title {
-	font-family: Georgia, "Times New Roman", serif;
+	font-family: "Contax Pro 55", "Times New Roman", serif;
 	font-weight: 400;
 	font-size: clamp(2.6rem, 5vw, 4rem);
 	line-height: 1.05;
-	color: #173d2c;
-	margin: 0 0 12px;
+	color: #222222;
+	margin: 0;
 }
 
 .valens-rreth-trail {
@@ -3303,8 +3348,8 @@ html {
 .valens-rreth-intro {
 	max-width: 900px;
 	margin-bottom: 48px;
-	font-size: clamp(1rem, 1.15vw, 1.18rem);
-	line-height: 1.9;
+	font-size: 18px;
+	line-height: 1.8;
 	color: #3f5a54;
 }
 
@@ -3332,7 +3377,7 @@ html {
 }
 
 .valens-rreth-card-title {
-	font-family: Georgia, "Times New Roman", serif;
+	font-family: "Contax Pro 55", "Times New Roman", serif;
 	font-weight: 400;
 	font-size: 1.28rem;
 	color: #173d2c;
@@ -3377,7 +3422,7 @@ html {
 }
 
 .valens-rreth-partner-title {
-	font-family: Georgia, "Times New Roman", serif;
+	font-family: "Contax Pro 55", "Times New Roman", serif;
 	font-weight: 400;
 	font-size: clamp(2rem, 3.2vw, 2.8rem);
 	color: #14294f;
@@ -3732,6 +3777,14 @@ html {
 	padding-top: 64px;
 }
 
+.valens-no-breadcrumb-page--categories {
+	padding-top: 84px;
+}
+
+.valens-no-breadcrumb-page--questions {
+	padding-top: 64px;
+}
+
 .valens-no-breadcrumb-page--products {
 	padding-top: 104px;
 }
@@ -3753,7 +3806,7 @@ html {
 	font-weight: 400;
 	line-height: 1.08;
 	letter-spacing: -0.02em;
-	color: #0e3b2e;
+	color: #000;
 	text-align: left;
 }
 
@@ -3812,6 +3865,14 @@ html {
 		padding-top: 54px;
 	}
 
+	.valens-no-breadcrumb-page--categories {
+		padding-top: 70px;
+	}
+
+	.valens-no-breadcrumb-page--questions {
+		padding-top: 54px;
+	}
+
 	.valens-no-breadcrumb-page--products {
 		padding-top: 84px;
 	}
@@ -3823,6 +3884,14 @@ html {
 	}
 
 	.valens-no-breadcrumb-page--compact {
+		padding-top: 44px;
+	}
+
+	.valens-no-breadcrumb-page--categories {
+		padding-top: 58px;
+	}
+
+	.valens-no-breadcrumb-page--questions {
 		padding-top: 44px;
 	}
 
@@ -3935,5 +4004,151 @@ html {
 		/* On mobile the panel is above the image, so fade the TOP edge instead. */
 		-webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 100%);
 		mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 100%);
+	}
+}
+/* Keep button labels in their authored sentence case. */
+.eg-btn {
+	text-transform: none;
+}
+
+/* Shared page-heading layout: Kategoritë, Produktet and Rreth nesh. */
+.valens-section-heading-page {
+	padding-top: 84px;
+}
+
+.valens-section-heading-page .valens-category-area,
+.valens-section-heading-page .valens-popular-area.valens-shop-card-design,
+.valens-section-heading-page .valens-rreth-area {
+	padding-top: 30px;
+}
+
+.valens-section-heading-page .valens-category-area .section-title {
+	text-align: left !important;
+}
+
+.valens-section-heading-page .valens-category-subtitle {
+	max-width: none;
+	margin: 12px 0 40px;
+}
+
+.valens-section-heading-page .valens-rreth-head {
+	margin-bottom: 12px;
+}
+
+.valens-section-heading-page .valens-category-subtitle,
+.valens-section-heading-page .valens-product-filter__heading p,
+.valens-section-heading-page .valens-rreth-intro {
+	font-family: "Contax Pro 55", Arial, sans-serif;
+	font-size: 17px;
+	font-weight: 400;
+	line-height: 1.55;
+	letter-spacing: 0;
+	color: #5c6b64;
+	text-align: left;
+}
+
+.valens-section-heading-page .valens-rreth-intro p:first-child {
+	color: inherit;
+}
+
+.valens-section-heading-page .valens-category-area .section-title .title,
+.valens-section-heading-page .valens-product-filter__heading h1,
+.valens-section-heading-page .valens-rreth-title {
+	font-size: 48px;
+	font-weight: 400;
+	line-height: 1.15;
+	letter-spacing: -0.02em;
+	text-align: left;
+}
+
+@media (max-width: 991.98px) {
+	.valens-section-heading-page {
+		padding-top: 70px;
+	}
+
+	.valens-section-heading-page .valens-category-area,
+	.valens-section-heading-page .valens-popular-area.valens-shop-card-design,
+	.valens-section-heading-page .valens-rreth-area {
+		padding-top: 30px;
+	}
+
+	.valens-section-heading-page .valens-category-area .section-title .title,
+	.valens-section-heading-page .valens-product-filter__heading h1,
+	.valens-section-heading-page .valens-rreth-title {
+		font-size: 40px;
+	}
+}
+
+@media (max-width: 575.98px) {
+	.valens-section-heading-page {
+		padding-top: 58px;
+	}
+
+	.valens-section-heading-page .valens-category-area,
+	.valens-section-heading-page .valens-popular-area.valens-shop-card-design,
+	.valens-section-heading-page .valens-rreth-area {
+		padding-top: 24px;
+	}
+
+	.valens-section-heading-page .valens-category-area .section-title .title,
+	.valens-section-heading-page .valens-product-filter__heading h1,
+	.valens-section-heading-page .valens-rreth-title {
+		font-size: 32px;
+	}
+
+	.valens-section-heading-page .valens-category-subtitle,
+	.valens-section-heading-page .valens-product-filter__heading p {
+		font-size: 15px;
+	}
+}
+
+/* Dedicated typography for the Rreth nesh page description. */
+.valens-section-heading-page .valens-rreth-area .valens-rreth-intro .valens-rreth-description {
+	font-family: "Contax Pro 55", Arial, sans-serif;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 1.8;
+	letter-spacing: 0;
+	color: #3f5a54;
+}
+
+.valens-section-heading-page .valens-rreth-area .valens-rreth-head {
+	margin-bottom: 30px;
+}
+
+.valens-section-heading-page .valens-rreth-area .valens-rreth-title,
+.valens-section-heading-page .valens-rreth-area .valens-rreth-intro {
+	margin-top: 0;
+}
+
+/* Align the value-card grid with the text column above it. */
+.valens-rreth-area .valens-rreth-values {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 24px;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.valens-rreth-area .valens-rreth-values > [class*="col-"] {
+	width: auto;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.valens-rreth-area .valens-rreth-card {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+@media (max-width: 991.98px) {
+	.valens-rreth-area .valens-rreth-values {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 575.98px) {
+	.valens-rreth-area .valens-rreth-values {
+		grid-template-columns: 1fr;
 	}
 }

@@ -13,7 +13,7 @@ function KategoritePage() {
   return (
     <Wrapper>
       <HeaderOne style={true} />
-      <main className="main-area fix valens-no-breadcrumb-page valens-no-breadcrumb-page--compact">
+      <main className="main-area fix valens-no-breadcrumb-page  valens-section-heading-page ">
         <Categories />
       </main>
       <FooterOne style={true} />

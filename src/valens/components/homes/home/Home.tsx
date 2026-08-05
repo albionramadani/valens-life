@@ -64,8 +64,8 @@ const HomeOneBanner = () => {
                      </ul>
 
                      <div className="valens-cta">
-                        <Link to="/produktet" className="eg-btn btn-two">Shiko Produktet</Link>
-                        <Link to="/#contact" className="eg-btn">Na Kontakto</Link>
+                        <Link to="/produktet" className="eg-btn btn-two">Shiko produktet</Link>
+                        <Link to="/kontakti" className="eg-btn">Na kontakto</Link>
                      </div>
                   </div>
                </div>

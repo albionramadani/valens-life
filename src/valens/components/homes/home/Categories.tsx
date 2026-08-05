@@ -17,7 +17,7 @@ const HomeOneCategories = () => {
     <section id="categories" className="valens-category-area">
       <div className="container">
         <div className="section-title text-center">
-          <h2 className="title">Zgjidh sipas nevojës tënde</h2>
+          <h2 className="title">Kategoritë</h2>
           <p className="valens-category-subtitle">
             Zgjedh kategorinë që i përshtatet nevojave tua dhe gjej produktet e
             duhura për ty.

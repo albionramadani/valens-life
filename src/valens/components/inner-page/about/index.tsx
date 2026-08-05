@@ -28,7 +28,7 @@ const AboutContent = () => {
 
         <div className="valens-rreth-intro">
           {aboutParagraphs.map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
+            <p key={index} className="valens-rreth-description">{paragraph}</p>
           ))}
         </div>
 

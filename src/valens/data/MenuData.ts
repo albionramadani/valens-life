@@ -24,7 +24,7 @@ const menu_data: MenuItem[] = [
       id: 2,
       page: "header_1",
       has_dropdown: false,
-      title: "Kategorite",
+      title: "Kategoritë",
       link: "/kategorite",
    },
    {

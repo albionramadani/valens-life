@@ -13,7 +13,7 @@ function PyetjePage() {
   return (
     <Wrapper>
       <HeaderOne style={true} />
-      <main className="main-area fix valens-no-breadcrumb-page valens-no-breadcrumb-page--compact">
+      <main className="main-area fix valens-no-breadcrumb-page valens-no-breadcrumb-page--questions">
         <Faq />
       </main>
       <FooterOne style={true} />
