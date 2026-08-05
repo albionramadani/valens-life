@@ -13,7 +13,7 @@ function RrethNeshPage() {
   return (
     <Wrapper>
       <HeaderOne style={true} />
-      <main className="main-area fix">
+      <main className="main-area fix valens-section-heading-page">
         <AboutContent />
       </main>
       <FooterOne style={true} />
