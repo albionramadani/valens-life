@@ -151,7 +151,7 @@ const HomeOnePopularProducts = () => {
             <h2 className="title">Produktet më të kërkuara</h2>
             <div className="valens-popular-all-wrap">
               <Link to="/produktet" className="valens-popular-all-btn">
-                <span>Shiko Te Gjitha Produktet</span>
+                <span>Shiko te gjitha produktet</span>
                 <i className="flaticon-right-arrow" aria-hidden="true"></i>
               </Link>
             </div>

@@ -83,7 +83,7 @@ const FooterOne = ({style}:any) => {
                               <p>Rr. Gjilani, Nr. 204, Çagllavicë, 10000 Prishtinë, Kosovë</p>
                               <ul className="list-wrap">
                                  <li className="phone"><i className="fas fa-phone"></i> +383 100 100</li>
-                                 <li className="mail"><i className="fas fa-envelope"></i> info@valens.live</li>
+                                 <li className="mail"><i className="fas fa-envelope"></i> info@valens.life</li>
                               </ul>
                            </div>
                         </div>
@@ -92,20 +92,7 @@ const FooterOne = ({style}:any) => {
                </div>
             </div>
          </div>
-         <div className="copyright-wrap">
-            <div className="container">
-               <div className="row align-items-center">
-                  <div className="col-12">
-                     <div className="copyright-text">
-                        <p>Te gjitha te drejtat e rezervuara © {new Date().getFullYear()} Valens.</p>
-                        <span className="valens-webfonts-credit">
-                           <a href="https://www.onlinewebfonts.com" target="_blank" rel="noreferrer">Web Fonts</a>
-                        </span>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
+         
       </footer>
    )
 }
