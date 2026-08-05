@@ -1576,7 +1576,7 @@ html {
 
 /* Valens FAQ section */
 .valens-faq-area {
-	padding: 10px 0 90px;
+	padding: 30px 0 30px;
 	background: #ffffff;
 	scroll-margin-top: 120px;
 }
@@ -1909,7 +1909,7 @@ html {
 
 /* Homepage popular products */
 .valens-home-popular {
-	padding: 0px;
+	    padding: 40px 0;
 	background: #ffffff;
 	overflow: hidden;
 }
@@ -3861,7 +3861,7 @@ html {
    Stacks vertically on mobile (text then image). */
 .valens-about-split {
 	min-height: auto;
-	padding: 0px 0;
+	padding: 40px 0 0 0;
 	background-image: none !important;
 	background-color: #ffffff;
 }
