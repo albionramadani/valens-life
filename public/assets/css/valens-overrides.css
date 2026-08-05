@@ -1116,7 +1116,7 @@ body {
 
 /* Valens categories */
 .valens-category-area {
-	padding: 80px 0 70px;
+	padding: 30px 0 70px;
 	background: #ffffff;
 }
 
@@ -1297,7 +1297,7 @@ body {
 
 /* Valens about section */
 .valens-about-area {
-	padding: 70px 0 110px;
+	padding: 0;
 	min-height: 100vh;
 	min-height: 100svh;
 	display: block;
@@ -1576,7 +1576,7 @@ html {
 
 /* Valens FAQ section */
 .valens-faq-area {
-	padding: 80px 0 90px;
+	padding: 10px 0 90px;
 	background: #ffffff;
 	scroll-margin-top: 120px;
 }
@@ -1909,7 +1909,7 @@ html {
 
 /* Homepage popular products */
 .valens-home-popular {
-	padding: 96px 0 112px;
+	padding: 0px;
 	background: #ffffff;
 	overflow: hidden;
 }
