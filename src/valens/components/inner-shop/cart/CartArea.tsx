@@ -100,7 +100,7 @@ const CartArea = () => {
                <div className="mb-30">
                   <div className="empty_bag text-center">
                      <p className="py-3">Shporta juaj eshte bosh</p>
-                     <Link to={"/shop"}>
+                     <Link to={"/produktet"}>
                         <button className="eg-btn btn-two">Shko te produktet</button>
                      </Link>
                   </div>

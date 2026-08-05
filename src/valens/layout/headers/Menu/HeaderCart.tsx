@@ -19,7 +19,7 @@ const HeaderCart = ({ cartOpen, setCartOpen }: any) => {
                <div className="mb-30">
                   <div className="empty_bag text-center">
                      <p className="py-3">Your Bag is Empty</p>
-                     <Link to={"/shop"}>
+                     <Link to={"/produktet"}>
                         <button className="eg-btn">Go To Shop</button>
                      </Link>
                   </div>
