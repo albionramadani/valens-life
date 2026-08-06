@@ -24,15 +24,19 @@ const CategoryProductsArea = ({ products, title, enableCategoryFilter = false }:
   const capitalizeCategory = (category: string) =>
     category.charAt(0).toLocaleUpperCase("sq") + category.slice(1).toLocaleLowerCase("sq");
 
+  // A product's tags play the role of categories; fall back to the derived category.
+  const tagsOf = (product: any): string[] => {
+    const raw = Array.isArray(product.tags) && product.tags.length
+      ? product.tags
+      : [product.valensSubtitle];
+    return raw.map((t: string) => String(t || "").trim()).filter(Boolean);
+  };
+
   const categories = useMemo(
     () =>
-      Array.from(
-        new Set(
-          products
-            .map((product) => String(product.valensSubtitle || "").trim())
-            .filter(Boolean),
-        ),
-      ).sort((a, b) => a.localeCompare(b, "sq")),
+      Array.from(new Set(products.flatMap(tagsOf))).sort((a, b) =>
+        a.localeCompare(b, "sq"),
+      ),
     [products],
   );
 
@@ -40,9 +44,7 @@ const CategoryProductsArea = ({ products, title, enableCategoryFilter = false }:
     () =>
       activeCategory === "all"
         ? products
-        : products.filter(
-            (product) => String(product.valensSubtitle || "").trim() === activeCategory,
-          ),
+        : products.filter((product) => tagsOf(product).includes(activeCategory)),
     [activeCategory, products],
   );
 
@@ -214,12 +216,14 @@ const CategoryProductsArea = ({ products, title, enableCategoryFilter = false }:
                         {item.title}
                       </Link>
                     </h4>
-                    <p className="valens-card-desc">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                    {item.valensSubtitle ? (
+                    {item.shortDescription ? (
+                      <p className="valens-card-desc">{item.shortDescription}</p>
+                    ) : null}
+                    {item.tags && item.tags.length ? (
                       <div className="valens-card-tags">
-                        <span className="valens-card-tag">{item.valensSubtitle}</span>
+                        {item.tags.map((tag: string, i: number) => (
+                          <span key={i} className="valens-card-tag">{tag}</span>
+                        ))}
                       </div>
                     ) : null}
                     <div className="valens-card-price-row mt-auto">

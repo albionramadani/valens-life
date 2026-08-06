@@ -119,12 +119,14 @@ const HomeOnePopularProducts = () => {
                 {displayTitle}
               </Link>
             </h4>
-            <p className="valens-card-desc">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </p>
-            {displayCategory ? (
+            {item.shortDescription ? (
+              <p className="valens-card-desc">{item.shortDescription}</p>
+            ) : null}
+            {item.tags && item.tags.length ? (
               <div className="valens-card-tags">
-                <span className="valens-card-tag">{displayCategory}</span>
+                {item.tags.map((tag: string, i: number) => (
+                  <span key={i} className="valens-card-tag">{tag}</span>
+                ))}
               </div>
             ) : null}
             <div className="valens-card-price-row mt-auto">

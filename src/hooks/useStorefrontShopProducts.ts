@@ -10,6 +10,8 @@ type RawShopProduct = {
   base_price: number | null;
   category_id: string | null;
   stock_status: string | null;
+  description?: string | null;
+  tags?: string[] | null;
 };
 
 type RawShopCategory = {
@@ -31,46 +33,50 @@ export type ShopCardProduct = {
   valensSubtitle: string;
   stock_status: string;
   slug: string;
+  shortDescription: string;
+  tags: string[];
 };
 
 const EMPTY_PAYLOAD: RawShopPayload = { products: [], categories: [] };
 const FALLBACK_THUMB = "/assets/img/products/omega-3.svg";
-const SHOP_CACHE_KEY = "valens_storefront_shop_payload";
-
-const readStoredPayload = (): RawShopPayload | undefined => {
-  if (typeof window === "undefined") return undefined;
-  try {
-    const raw = window.localStorage.getItem(SHOP_CACHE_KEY);
-    if (raw) return { ...EMPTY_PAYLOAD, ...JSON.parse(raw) } as RawShopPayload;
-    return { ...EMPTY_PAYLOAD, ...(STOREFRONT_LIST_SNAPSHOTS.shop || {}) } as RawShopPayload;
-  } catch {
-    return { ...EMPTY_PAYLOAD, ...(STOREFRONT_LIST_SNAPSHOTS.shop || {}) } as RawShopPayload;
-  }
-};
-
-const storePayload = (payload: RawShopPayload) => {
-  if (typeof window === "undefined") return;
-  try {
-    window.localStorage.setItem(SHOP_CACHE_KEY, JSON.stringify(payload));
-  } catch {
-    // Ignore storage errors; network payload is still usable.
-  }
-};
 
 const toCards = (payload: RawShopPayload): ShopCardProduct[] => {
   const categoryName = new Map((payload.categories || []).map((c) => [c.id, c.name]));
 
-  return (payload.products || []).map((p) => ({
-    id: p.id,
-    title: p.name,
-    price: Number(p.base_price) || 0,
-    thumb: p.image_url || FALLBACK_THUMB,
-    class_name: "",
-    valensSubtitle: categoryName.get(p.category_id || "") || p.slug,
-    stock_status: p.stock_status || "in_stock",
-    slug: p.slug,
-  }));
+  return (payload.products || []).map((p) => {
+    const catName = categoryName.get(p.category_id || "") || "";
+    // Tags drive the "category" role: use the product's tags when the backend
+    // provides them; otherwise fall back to the single derived category.
+    const tags = Array.isArray(p.tags) && p.tags.length
+      ? p.tags.map((t) => String(t).trim()).filter(Boolean)
+      : (catName ? [catName] : []);
+
+    return {
+      id: p.id,
+      title: p.name,
+      price: Number(p.base_price) || 0,
+      thumb: p.image_url || FALLBACK_THUMB,
+      class_name: "",
+      valensSubtitle: catName || p.slug,
+      stock_status: p.stock_status || "in_stock",
+      slug: p.slug,
+      shortDescription: (p.description || "").toString().trim(),
+      tags,
+    };
+  });
 };
+
+// Deterministic seed built at module load from the bundled snapshot. Identical on
+// server and client (no hydration mismatch) so the product list paints instantly
+// instead of flashing empty while the live request is in flight.
+const SEED_CARDS: ShopCardProduct[] = (() => {
+  try {
+    const snap = STOREFRONT_LIST_SNAPSHOTS.shop;
+    return snap ? toCards({ ...EMPTY_PAYLOAD, ...snap } as RawShopPayload) : [];
+  } catch {
+    return [];
+  }
+})();
 
 export const useStorefrontShopProducts = () =>
   useQuery({
@@ -92,13 +98,12 @@ export const useStorefrontShopProducts = () =>
       if (!response.ok) throw new Error("Shop payload request failed");
 
       const payload = { ...EMPTY_PAYLOAD, ...((await response.json()) || {}) } as RawShopPayload;
-      storePayload(payload);
       return toCards(payload);
     },
-    // Deterministic EMPTY initial data (identical on server and client) avoids the
-    // SSR hydration mismatch. We intentionally do NOT seed from a bundled snapshot or
-    // localStorage — the live query below is the single source of truth for products.
-    initialData: () => [] as ShopCardProduct[],
+    // Seed from the bundled snapshot (deterministic → no SSR hydration mismatch) so
+    // products render instantly. initialDataUpdatedAt: 0 marks it stale, so the live
+    // query still refetches immediately and becomes the source of truth.
+    initialData: () => SEED_CARDS,
     initialDataUpdatedAt: 0,
     staleTime: 10 * 60 * 1000,
     gcTime: 60 * 60 * 1000,

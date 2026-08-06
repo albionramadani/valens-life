@@ -27,9 +27,13 @@ function CategoryPage() {
       .toLocaleLowerCase("sq");
 
   const categoryName = normalizeCategory(category.name);
-  const products = shopProducts
-    .filter((product) => normalizeCategory(product.valensSubtitle) === categoryName)
-    .slice(0, 4);
+  // A product belongs to this category when the category is one of its tags
+  // (tags play the role of categories; a product can carry several). Fall back
+  // to the single derived subtitle for products that have no tags yet.
+  const products = shopProducts.filter((product) => {
+    const names = product.tags && product.tags.length ? product.tags : [product.valensSubtitle];
+    return names.some((name) => normalizeCategory(String(name || "")) === categoryName);
+  });
 
   return (
     <Wrapper>

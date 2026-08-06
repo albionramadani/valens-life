@@ -7,6 +7,7 @@ import ShopDetailsArea from "@v/components/inner-shop/shop-details/ShopDetailsAr
 import CategoryProductsArea from "@v/components/inner-shop/category/CategoryProductsArea";
 import { Loader2 } from "lucide-react";
 import { useProductDetailsById } from "@/hooks/useProductDetailsById";
+import { useStorefrontShopProducts } from "@/hooks/useStorefrontShopProducts";
 
 const FALLBACK_THUMB = "/assets/img/products/omega-3.svg";
 
@@ -23,6 +24,9 @@ export const Route = createFileRoute("/shop-details/$id")({
 function ShopDetailsPage() {
   const { id } = Route.useParams();
   const { data: details, isLoading: isLoadingDetails, isError, error } = useProductDetailsById(id);
+  // The shop list already carries each product's short description + tags; use it
+  // to enrich the "related products" cards (the related payload has neither).
+  const { data: shopProducts = [] } = useStorefrontShopProducts();
   const hasValidDetails = !!details?.product?.id;
 
   if (isLoadingDetails) {
@@ -88,16 +92,22 @@ function ShopDetailsPage() {
     gallery: details.gallery,
   };
 
+  const shopById = new Map(shopProducts.map((p) => [p.id, p]));
   const relatedProducts = (details.related?.length
-    ? details.related.map((r) => ({
-        id: r.id,
-        title: r.name,
-        slug: r.slug,
-        price: Number(r.base_price) || 0,
-        thumb: r.image_url || FALLBACK_THUMB,
-        class_name: "",
-        valensSubtitle: r.categories?.name || "",
-      }))
+    ? details.related.map((r) => {
+        const enriched = shopById.get(r.id);
+        return {
+          id: r.id,
+          title: r.name,
+          slug: r.slug,
+          price: Number(r.base_price) || 0,
+          thumb: r.image_url || FALLBACK_THUMB,
+          class_name: "",
+          valensSubtitle: r.categories?.name || "",
+          shortDescription: enriched?.shortDescription || "",
+          tags: enriched?.tags || [],
+        };
+      })
     : []);
 
   return (

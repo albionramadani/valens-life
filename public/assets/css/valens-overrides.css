@@ -406,17 +406,35 @@ body {
 	}
 }
 
+/*
+ * Fade-in via a self-playing animation (not a JS-toggled class). The previous
+ * approach started at opacity:0 and only became visible once the `is-loaded`
+ * class was added on the image's onLoad event — but react-slick clones slides
+ * (the clones never fire React's onLoad) and cached images can also skip it, so
+ * those stayed permanently invisible. The animation always ends at opacity:1,
+ * so an image can never get stuck hidden regardless of the load event.
+ */
 .valens-lazy-image {
-	opacity: 0;
-	transform: translateY(8px) scale(0.985);
-	filter: blur(4px);
-	transition: opacity 420ms ease, transform 420ms ease, filter 420ms ease;
+	animation: valensLazyFade 420ms ease both;
 }
 
 .valens-lazy-image.is-loaded {
 	opacity: 1;
 	transform: none;
 	filter: none;
+}
+
+@keyframes valensLazyFade {
+	from {
+		opacity: 0;
+		transform: translateY(8px) scale(0.985);
+		filter: blur(4px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+		filter: none;
+	}
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -426,6 +444,8 @@ body {
 	}
 
 	.valens-lazy-image {
+		animation: none;
+		opacity: 1;
 		transform: none;
 		filter: none;
 		transition: none;
@@ -3799,6 +3819,15 @@ html {
 .valens-shop-card-design .valens-card-desc {
 	margin: 0 0 12px;
 	font-size: 14.5px;
+	font-weight: 400;
+	line-height: 1.6;
+	color: #5c6b64;
+}
+
+/* Product-details short description — sits above the price, like the cards. */
+.inner-shop-details-content .valens-details-desc {
+	margin: 6px 0 14px;
+	font-size: 15px;
 	font-weight: 400;
 	line-height: 1.6;
 	color: #5c6b64;

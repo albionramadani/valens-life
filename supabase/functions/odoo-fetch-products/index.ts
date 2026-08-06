@@ -60,7 +60,15 @@ function stockStatus(qty: number): string {
 
 function realPrice(value: unknown): number | null {
   const price = Number(value) || 0
-  return price > 1 ? price : null
+  return price > 0 ? price : null
+}
+
+// Every product/variant must carry a price so it is never hidden by the
+// storefront filters. Unpriced (0 / null) items fall back to a 1-euro floor.
+const PRICE_FLOOR = 1
+function pricedOr1(value: unknown): number {
+  const p = realPrice(value)
+  return p !== null ? p : PRICE_FLOOR
 }
 
 // Map Odoo attribute names -> frontend selector keys
@@ -246,7 +254,7 @@ Deno.serve(async (req) => {
     // ============ FETCH CATALOG ============
     const templates = await jsonRpcCall(uid, password, 'product.template', 'search_read',
       [[['sale_ok', '=', true]]],
-      { fields: ['name', 'list_price', 'default_code', 'description_sale', 'categ_id', 'qty_available', 'active', 'barcode', 'taxes_id'], limit: 1000 })
+      { fields: ['name', 'list_price', 'default_code', 'description_sale', 'categ_id', 'qty_available', 'active', 'barcode', 'taxes_id', 'product_tag_ids'], limit: 1000 })
 
     const variants = await jsonRpcCall(uid, password, 'product.product', 'search_read',
       [[['sale_ok', '=', true]]],
@@ -262,11 +270,20 @@ Deno.serve(async (req) => {
     }
 
     // ============ SYNC MODE ============
-    // 1) FIXED CATEGORIES — every Odoo product is mapped into one of the 6 store
-    //    buckets (Mac, iPad, iPhone, Watch, AirPods, Aksesorë). We do NOT create
-    //    categories from Odoo anymore.
-    const { data: fixedCats } = await supabase.from('categories').select('id, slug')
+    // 1) STORE CATEGORIES — the storefront's own category rows (Zemra, Truri,
+    //    Gjumi, Meshkuj, Femra, Imuniteti, …). A product is linked to a category
+    //    automatically by matching its tags against these rows (by name or slug);
+    //    the matched category id becomes the product's primary category_id. We do
+    //    NOT create categories from Odoo.
+    const { data: fixedCats } = await supabase.from('categories').select('id, slug, name')
     const fixedCatMap = new Map<string, string>((fixedCats || []).map((c: any) => [c.slug, c.id]))
+    // Accent/case-insensitive lookup: normalized name/slug -> category id.
+    const normCat = (s: string) => (s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase()
+    const catIdByLabel = new Map<string, string>()
+    for (const c of (fixedCats || [])) {
+      if (c.slug) catIdByLabel.set(normCat(c.slug), c.id)
+      if (c.name) catIdByLabel.set(normCat(c.name), c.id)
+    }
 
     // 1b) VAT RATES — resolve the % amount for every sales tax referenced by the
     //     templates so we can store a plain number (e.g. 8 or 18) per product.
@@ -306,6 +323,40 @@ Deno.serve(async (req) => {
       }
     }
 
+    // 1d) CATEGORIES-AS-TAGS — a Valens product can belong to several categories
+    //     (up to 4-5), entered in Odoo as "Product Tags" (product_tag_ids). We
+    //     resolve their display names so the storefront can show a chip per
+    //     category. Guarded: if the tag model is missing the read is skipped.
+    const tagName = new Map<number, string>()      // product.tag id -> name
+    {
+      const tagIds = new Set<number>()
+      for (const t of templates) for (const id of (t.product_tag_ids || [])) tagIds.add(id)
+      const tagArr = Array.from(tagIds)
+      for (let i = 0; i < tagArr.length; i += 200) {
+        const recs = await jsonRpcCall(uid, password, 'product.tag', 'read',
+          [tagArr.slice(i, i + 200)], { fields: ['name'] }).catch(() => [])
+        for (const r of recs) {
+          const nm = String(r.name || '').trim()
+          if (nm) tagName.set(r.id, nm)
+        }
+      }
+    }
+
+    // Short display name: Odoo names carry the size/packaging as a suffix that
+    // matches the sales description (e.g. "…, 90 vegetarian capsules"). We move
+    // that detail out of the name so the card shows a clean product name and the
+    // size lives in the short description instead. Only strips when the sales
+    // description is actually the trailing part of the name — otherwise untouched.
+    const shortName = (rawName: string, saleDesc: string | null): string => {
+      const n = (rawName || '').trim()
+      const d = (saleDesc || '').trim()
+      if (d && n.length > d.length && n.toLowerCase().endsWith(d.toLowerCase())) {
+        const cut = n.slice(0, n.length - d.length).replace(/[\s,;:·—–-]+$/, '').trim()
+        if (cut) return cut
+      }
+      return n
+    }
+
 
     // 2) PRODUCTS (templates)
     const tmplSlug = new Map<number, string>()
@@ -313,22 +364,43 @@ Deno.serve(async (req) => {
       const slug = slugify(t.name || `product-${t.id}`, t.id)
       tmplSlug.set(t.id, slug)
       const catName = Array.isArray(t.categ_id) ? String(t.categ_id[1] || '') : ''
-      const catUuid = fixedCatMap.get(classifyCategory(catName, t.name || '')) || null
       // Demo units from Odoo (e.g. "... (Demo)") must never appear on the web.
       const isDemo = /\(\s*demo\s*\)/i.test(t.name || '')
+      // Categories shown on the web = the product's tags, de-duplicated
+      // (case-insensitive) while preserving first-seen order.
+      const tags: string[] = []
+      const seenTags = new Set<string>()
+      for (const id of (t.product_tag_ids || [])) {
+        const v = (tagName.get(id) || '').trim()
+        if (!v) continue
+        const key = v.toLowerCase()
+        if (seenTags.has(key)) continue
+        seenTags.add(key)
+        tags.push(v)
+      }
+      // Primary category_id is derived automatically from the tags: the first
+      // tag that matches an existing store category (by name or slug) wins.
+      // Falls back to the Odoo-category classification when no tag matches.
+      let catUuid: string | null = null
+      for (const tg of tags) {
+        const hit = catIdByLabel.get(normCat(tg))
+        if (hit) { catUuid = hit; break }
+      }
+      if (!catUuid) catUuid = fixedCatMap.get(classifyCategory(catName, t.name || '')) || null
       const row: any = {
-        name: t.name || `Product ${t.id}`, slug, odoo_id: t.id,
+        name: shortName(t.name, t.description_sale) || `Product ${t.id}`, slug, odoo_id: t.id,
         description: t.description_sale || null,
+        tags,
         barcode: (t.barcode && String(t.barcode).trim()) || null,
         vat_rate: vatFor(t),
         subcategory: subcategoryFor(catName),
         category_id: catUuid, stock_status: stockStatus(t.qty_available || 0), is_active: t.active !== false && !isDemo,
       }
       if (brandByTmpl.has(t.id)) row.brand = brandByTmpl.get(t.id)
-      // Prices come from the pricelist sync; only the manual full sync sets them here.
+      // Prices come from the pricelist sync; only the manual full sync sets them
+      // here. A 0 / missing price is floored to 1 euro so the product still shows.
       if (includePrices) {
-        const price = realPrice(t.list_price)
-        if (price !== null) row.base_price = price
+        row.base_price = pricedOr1(t.list_price)
       }
       return row
     })
@@ -416,10 +488,11 @@ Deno.serve(async (req) => {
         attributes, color_hex: colorHex, is_active: v.active !== false,
       }
       if (tmplId && brandByTmpl.has(tmplId)) vr.brand = brandByTmpl.get(tmplId)
-      // Prices come from the pricelist sync; only the manual full sync sets them here.
+      // Prices come from the pricelist sync; only the manual full sync sets them
+      // here. A 0 / missing price is floored to 1 euro so the variant still shows.
       if (includePrices) {
         const price = realPrice(v.lst_price) ?? realPrice(v.list_price)
-        if (price !== null) vr.price = price
+        vr.price = price !== null ? price : PRICE_FLOOR
       }
       variantRows.push(vr)
     }
@@ -508,9 +581,21 @@ Deno.serve(async (req) => {
       if (error) console.error('Image queue:', error.message); else imagesQueued += Math.min(200, imageRows.length - i)
     }
 
-    // 5) Download a batch of images now (if requested)
+    // 5) Download pending images. A full product sync pulls them all by default
+    //    (in small batches, time-bounded) so photos appear without needing a
+    //    separate ?images= call; an explicit ?images=N still caps the amount.
     let imagesDownloaded = 0
-    if (imagesLimit > 0) imagesDownloaded = await downloadPendingImages(supabase, uid, password, imagesLimit)
+    const imageBudget = imagesLimit > 0 ? imagesLimit : (doSync ? 500 : 0)
+    if (imageBudget > 0) {
+      const startedAt = Date.now()
+      let batch = 0
+      do {
+        const take = Math.min(20, imageBudget - imagesDownloaded)
+        if (take <= 0) break
+        batch = await downloadPendingImages(supabase, uid, password, take)
+        imagesDownloaded += batch
+      } while (batch > 0 && imagesDownloaded < imageBudget && (Date.now() - startedAt) < 110000)
+    }
 
     // 6) last sync — track both a global last_sync_at (manual full sync) and per-scope timestamps
     const nowIso = new Date().toISOString()
@@ -523,6 +608,12 @@ Deno.serve(async (req) => {
     if (cfgRow) await supabase.from('odoo_config').update(update).eq('id', cfgRow.id)
 
     const { count: pending } = await supabase.from('product_images').select('id', { count: 'exact', head: true }).eq('url', '')
+
+    // Product-level fields (name, tags, short description) do not flow through the
+    // stock/price RPCs, so their changes would otherwise never reach the storefront
+    // cache. Rebuild it explicitly at the end of a product sync.
+    const { error: cacheErr } = await supabase.rpc('rebuild_storefront_page_cache')
+    if (cacheErr) console.error('Cache rebuild:', cacheErr.message)
 
     return new Response(JSON.stringify({
       success: true,

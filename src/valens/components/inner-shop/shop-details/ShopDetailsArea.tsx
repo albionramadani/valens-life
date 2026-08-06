@@ -27,7 +27,6 @@ const ShopDetailsArea = ({ single_product }: any) => {
    const stockStatus = String(single_product?.stock_status || "out_of_stock");
    const stockText = stockStatus === "in_stock" ? "Në stok" : stockStatus === "coming_soon" ? "Së shpejti" : "Jashtë stokut";
    const title = single_product?.title || single_product?.name || "Produkt";
-   const description = single_product?.description || "Përshkrimi i produktit do të shtohet së shpejti.";
    const image = single_product?.thumb || FALLBACK_THUMB;
 
    return (
@@ -44,11 +43,13 @@ const ShopDetailsArea = ({ single_product }: any) => {
                   <div className="col-lg-6">
                      <div className="inner-shop-details-content">
                         <h4 className="title">{title}</h4>
+                        {single_product?.description ? (
+                           <p className="valens-details-desc">{single_product.description}</p>
+                        ) : null}
                         <div className="inner-shop-details-price">
                            <h2 className="price">€{displayPrice.toFixed(2)}</h2>
                            <h5 className="stock-status">- {stockText}{stockStatus === "in_stock" && totalStock > 0 ? ` (${totalStock})` : ""}</h5>
                         </div>
-                        <p>{description}</p>
 
                         {hasVariants ? (
                            <div className="inner-shop-details-list">
