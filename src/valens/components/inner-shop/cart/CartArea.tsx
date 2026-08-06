@@ -1,7 +1,7 @@
 'use client'
 import { Link } from "@tanstack/react-router"
 // next/image shim: use plain img
-const Image = (p: any) => { const { src, alt = "", width, height, fill, priority, loader, placeholder, blurDataURL, quality, sizes, ...rest } = p; const s = typeof src === "string" ? src : src?.src ?? ""; return <img src={s} alt={alt} width={width} height={height} {...rest} />; };
+const Image = (p: any) => { const { src, alt = "", width, height, fill, priority, loader, placeholder, blurDataURL, quality, sizes, className = "", onLoad, onError, ...rest } = p; const s = typeof src === "string" ? src : src?.src ?? ""; return <img src={s} alt={alt} width={width} height={height} className={`valens-lazy-image ${className}`.trim()} onLoad={(event) => { event.currentTarget.classList.add("is-loaded"); onLoad?.(event); }} onError={(event) => { event.currentTarget.classList.add("is-loaded"); onError?.(event); }} {...rest} />; };
 import UseCartInfo from '@v/hooks/UseCartInfo';
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, clear_cart, decrease_quantity, remove_cart_product } from '@v/redux/features/cartSlice';
@@ -127,7 +127,15 @@ const CartArea = () => {
                                        <td className="eg-cart__meta d-flex align-items-center">
                                           <div className="eg-cart__meta-img">
                                              <Link to={`/shop-details/${item.id}`}>
-                                                <Image src={item.thumb} width={100} height={100} alt="bemet" />
+                                                <Image
+                                                   src={item.thumb}
+                                                   width={100}
+                                                   height={100}
+                                                   alt={item.title}
+                                                   loading="lazy"
+                                                   decoding="async"
+                                                   fetchPriority="low"
+                                                />
                                              </Link>
                                           </div>
                                           <h3 className="eg-cart__meta-title"><Link to={`/shop-details/${item.id}`}>{item.title}</Link></h3>
