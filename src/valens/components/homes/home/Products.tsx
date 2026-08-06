@@ -1,7 +1,7 @@
 
 // next/image shim: use plain img
 const Image = (p: any) => { const { src, alt = "", width, height, fill, priority, loader, placeholder, blurDataURL, quality, sizes, ...rest } = p; const s = typeof src === "string" ? src : src?.src ?? ""; return <img src={s} alt={alt} width={width} height={height} {...rest} />; };
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import SliderImport from "react-slick";
 import { useEffect, useState } from "react";
 const Slider: any = (SliderImport as any).default ?? SliderImport;
@@ -47,6 +47,7 @@ const getSliderLayout = (viewportWidth: number) => {
 
 const HomeOnePopularProducts = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [hasMounted, setHasMounted] = useState(false);
   const [viewportWidth, setViewportWidth] = useState(1200);
   const { data: products = [], isLoading } = useStorefrontShopProducts();
@@ -82,6 +83,11 @@ const HomeOnePopularProducts = () => {
 
   const handleAddToCart = (item: any) => {
     dispatch(addToCart(item));
+  };
+
+  const handleBuyNow = (item: any) => {
+    dispatch(addToCart(item));
+    void navigate({ to: "/cart" });
   };
 
   const renderProductCard = (item: any, index: number) => {
@@ -133,9 +139,14 @@ const HomeOnePopularProducts = () => {
                 <i className="flaticon-shopping-cart-1"></i>
                 <span>Shto në shportë</span>
               </button>
-              <Link to="/shop-details/$id" params={{ id: String(item.id) }} className="eg-btn btn-two">
+              <button
+                type="button"
+                onClick={() => handleBuyNow(item)}
+                className="eg-btn btn-two"
+                aria-label={`Blej ${displayTitle} tani`}
+              >
                 Blej tani
-              </Link>
+              </button>
             </div>
           </div>
         </article>

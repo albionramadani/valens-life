@@ -1,7 +1,7 @@
 
 // next/image shim: use plain img
 const Image = (p: any) => { const { src, alt = "", width, height, fill, priority, loader, placeholder, blurDataURL, quality, sizes, ...rest } = p; const s = typeof src === "string" ? src : src?.src ?? ""; return <img src={s} alt={alt} width={width} height={height} {...rest} />; };
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -16,6 +16,7 @@ interface CategoryProductsAreaProps {
 
 const CategoryProductsArea = ({ products, title, enableCategoryFilter = false }: CategoryProductsAreaProps) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const itemsPerPage = 16;
   const [currentPage, setCurrentPage] = useState(1);
   const [activeCategory, setActiveCategory] = useState("all");
@@ -47,6 +48,11 @@ const CategoryProductsArea = ({ products, title, enableCategoryFilter = false }:
 
   const handleAddToCart = (item: any) => {
     dispatch(addToCart(item));
+  };
+
+  const handleBuyNow = (item: any) => {
+    dispatch(addToCart(item));
+    void navigate({ to: "/cart" });
   };
 
   const totalPages = Math.max(1, Math.ceil(filteredProducts.length / itemsPerPage));
@@ -228,9 +234,14 @@ const CategoryProductsArea = ({ products, title, enableCategoryFilter = false }:
                         <i className="flaticon-shopping-cart-1"></i>
                         <span>Shto në shportë</span>
                       </button>
-                      <Link to="/shop-details/$id" params={{ id: String(item.id) }} className="eg-btn btn-two">
+                      <button
+                        type="button"
+                        onClick={() => handleBuyNow(item)}
+                        className="eg-btn btn-two"
+                        aria-label={`Blej ${item.title} tani`}
+                      >
                         Blej tani
-                      </Link>
+                      </button>
                     </div>
                   </div>
                 </article>

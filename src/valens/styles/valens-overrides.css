@@ -398,21 +398,17 @@ body {
 	}
 }
 
-/* Valens popular products: show Buy Now only on hover */
+/* Valens popular products: keep Buy Now visible; soften it on button hover */
 .valens-popular-area .home-shop-item .shop-content-bottom .eg-btn.btn-two {
-	opacity: 0;
-	visibility: hidden;
-	pointer-events: none;
-	transform: translateY(6px);
-	transition: opacity 180ms ease, transform 180ms ease, visibility 0s linear 180ms;
-}
-
-.valens-popular-area .home-shop-item:hover .shop-content-bottom .eg-btn.btn-two {
 	opacity: 1;
 	visibility: visible;
 	pointer-events: auto;
-	transform: translateY(0);
-	transition: opacity 180ms ease, transform 180ms ease;
+	transform: none;
+	transition: opacity 180ms ease;
+}
+
+.valens-popular-area .home-shop-item .shop-content-bottom .eg-btn.btn-two:hover {
+	opacity: 0.9;
 }
 
 @media (hover: none) {
