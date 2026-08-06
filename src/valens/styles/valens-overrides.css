@@ -399,6 +399,54 @@ body {
 }
 
 /* Valens popular products: keep Buy Now visible; soften it on button hover */
+::view-transition-old(root) {
+	animation: valens-page-out 180ms ease both;
+}
+
+::view-transition-new(root) {
+	animation: valens-page-in 280ms ease both;
+}
+
+@keyframes valens-page-out {
+	to {
+		opacity: 0;
+		transform: translateY(-4px);
+	}
+}
+
+@keyframes valens-page-in {
+	from {
+		opacity: 0;
+		transform: translateY(7px);
+	}
+}
+
+.valens-lazy-image {
+	opacity: 0;
+	transform: translateY(8px) scale(0.985);
+	filter: blur(4px);
+	transition: opacity 420ms ease, transform 420ms ease, filter 420ms ease;
+}
+
+.valens-lazy-image.is-loaded {
+	opacity: 1;
+	transform: none;
+	filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	::view-transition-old(root),
+	::view-transition-new(root) {
+		animation-duration: 1ms;
+	}
+
+	.valens-lazy-image {
+		transform: none;
+		filter: none;
+		transition: none;
+	}
+}
+
 .valens-popular-area .home-shop-item .shop-content-bottom .eg-btn.btn-two {
 	opacity: 1;
 	visibility: visible;

@@ -1,6 +1,6 @@
 
 // next/image shim: use plain img
-const Image = (p: any) => { const { src, alt = "", width, height, fill, priority, loader, placeholder, blurDataURL, quality, sizes, ...rest } = p; const s = typeof src === "string" ? src : src?.src ?? ""; return <img src={s} alt={alt} width={width} height={height} {...rest} />; };
+const Image = (p: any) => { const { src, alt = "", width, height, fill, priority, loader, placeholder, blurDataURL, quality, sizes, className = "", onLoad, onError, ...rest } = p; const s = typeof src === "string" ? src : src?.src ?? ""; return <img src={s} alt={alt} width={width} height={height} className={`valens-lazy-image ${className}`.trim()} onLoad={(event) => { event.currentTarget.classList.add("is-loaded"); onLoad?.(event); }} onError={(event) => { event.currentTarget.classList.add("is-loaded"); onError?.(event); }} {...rest} />; };
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { useEffect, useMemo, useState } from "react";
@@ -195,7 +195,13 @@ const CategoryProductsArea = ({ products, title, enableCategoryFilter = false }:
                 <article className="home-shop-item valens-home-popular-card h-100 d-flex flex-column w-100">
                   <div className="home-shop-thumb">
                     <Link to="/shop-details/$id" params={{ id: String(item.id) }}>
-                      <Image src={item.thumb} alt={item.title} />
+                      <Image
+                        src={item.thumb}
+                        alt={item.title}
+                        loading="lazy"
+                        decoding="async"
+                        fetchPriority="low"
+                      />
                       {item.discount ? (
                         <span className="discount"> -{item.discount}%</span>
                       ) : null}
