@@ -6,7 +6,8 @@ import UseCartInfo from '@v/hooks/UseCartInfo';
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, clear_cart, decrease_quantity, remove_cart_product } from '@v/redux/features/cartSlice';
 import RemoveIcon from '@v/svg/RemoveIcon';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 const VALENS_LOGO = "/assets/img/logo/Isolation_Mode.svg";
 const IG_REDIRECT_SECONDS = 4;
@@ -45,8 +46,11 @@ const CartArea = () => {
    const dispatch = useDispatch();
    const { total } = UseCartInfo();
    const [showIgPopup, setShowIgPopup] = useState(false);
+   const [showClearCartModal, setShowClearCartModal] = useState(false);
    const [igCopied, setIgCopied] = useState(false);
    const [countdown, setCountdown] = useState(IG_REDIRECT_SECONDS);
+   const cancelClearCartRef = useRef<HTMLButtonElement>(null);
+   const clearCartDialogRef = useRef<HTMLDialogElement>(null);
 
    const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
@@ -89,6 +93,38 @@ const CartArea = () => {
          clearTimeout(redirect);
       };
    }, [showIgPopup]);
+
+   useEffect(() => {
+      if (!showClearCartModal) return;
+
+      const dialog = clearCartDialogRef.current;
+      if (dialog && !dialog.open) dialog.showModal();
+
+      const previousOverflow = document.body.style.overflow;
+      const previousHtmlOverflow = document.documentElement.style.overflow;
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      document.body.classList.add("valens-clear-cart-open");
+      cancelClearCartRef.current?.focus();
+
+      const handleKeyDown = (event: KeyboardEvent) => {
+         if (event.key === "Escape") setShowClearCartModal(false);
+      };
+      document.addEventListener("keydown", handleKeyDown);
+
+      return () => {
+         if (dialog?.open) dialog.close();
+         document.body.style.overflow = previousOverflow;
+         document.documentElement.style.overflow = previousHtmlOverflow;
+         document.body.classList.remove("valens-clear-cart-open");
+         document.removeEventListener("keydown", handleKeyDown);
+      };
+   }, [showClearCartModal]);
+
+   const confirmClearCart = () => {
+      dispatch(clear_cart());
+      setShowClearCartModal(false);
+   };
 
 
    return (
@@ -175,7 +211,7 @@ const CartArea = () => {
                               </div>
                               <div className="col-xl-6 col-md-4 mb-25">
                                  <div className="eg-cart__update text-md-end">
-                                    <button onClick={() => dispatch(clear_cart())} type="button" className="eg-cart__update-btn eg-btn">Pastro shporten</button>
+                                    <button onClick={() => setShowClearCartModal(true)} type="button" className="eg-cart__update-btn eg-btn">Pastro shporten</button>
                                  </div>
                               </div>
                            </div>
@@ -209,6 +245,62 @@ const CartArea = () => {
             )}
          </div>
       </section>
+
+      {showClearCartModal && typeof document !== "undefined" && createPortal(
+         <dialog
+            ref={clearCartDialogRef}
+            className="valens-clear-cart-modal"
+            aria-labelledby="valens-clear-cart-title"
+            aria-describedby="valens-clear-cart-description"
+            onCancel={(event) => {
+               event.preventDefault();
+               setShowClearCartModal(false);
+            }}
+         >
+            <button
+               type="button"
+               className="valens-clear-cart-modal__backdrop"
+               aria-label="Mbyll dritaren"
+               onClick={() => setShowClearCartModal(false)}
+            />
+            <div className="valens-clear-cart-modal__panel">
+               <button
+                  type="button"
+                  className="valens-clear-cart-modal__close"
+                  aria-label="Mbyll"
+                  onClick={() => setShowClearCartModal(false)}
+               >
+                  <span aria-hidden="true">×</span>
+               </button>
+
+               <div className="valens-clear-cart-modal__content">
+                  <h3 id="valens-clear-cart-title">Pastro shportën?</h3>
+                  <p id="valens-clear-cart-description">
+                     A jeni të sigurt që dëshironi t’i largoni të gjitha produktet nga shporta?
+                  </p>
+               </div>
+
+               <div className="valens-clear-cart-modal__actions">
+                  <button
+                     ref={cancelClearCartRef}
+                     type="button"
+                     className="valens-clear-cart-modal__cancel"
+                     onClick={() => setShowClearCartModal(false)}
+                  >
+                     Anulo
+                  </button>
+                  <button
+                     type="button"
+                     className="valens-clear-cart-modal__confirm"
+                     onClick={confirmClearCart}
+                  >
+                     Pastro shportën
+                  </button>
+               </div>
+            </div>
+         </dialog>,
+         document.body
+      )}
 
       {showIgPopup && (
          <div
