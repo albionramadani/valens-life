@@ -68,7 +68,7 @@ const CartArea = () => {
          `Përshëndetje Valens! 👋\n` +
          `Dua të porosis këto produkte:\n\n` +
          `${lines.join("\n\n")}\n\n` +
-         `Totali: $${total.toFixed(2)}`;
+         `Totali: ${total.toFixed(2)} €`;
 
       // Kopjo listën, pastaj shfaq popup-in me rikujtim para se ta hapim Instagram.
       const copied = copyToClipboard(message);
@@ -150,7 +150,7 @@ const CartArea = () => {
                               <thead>
                                  <tr>
                                     <th>Produkti</th>
-                                    <th>Cmimi</th>
+                                    <th>Çmimi</th>
                                     <th>Sasia</th>
                                     {/* <th>Totali</th> */}
                                     <th></th>
@@ -176,7 +176,7 @@ const CartArea = () => {
                                           </div>
                                           <h3 className="eg-cart__meta-title"><Link to={`/shop-details/${item.id}`}>{item.title}</Link></h3>
                                        </td>
-                                       <td className="eg-cart__price"><span>{item.price}</span></td>
+                                       <td className="eg-cart__price"><span>{Number(item.price).toFixed(2)} €</span></td>
                                        <td className="eg-product-details__quantity-box">
                                           <div className="eg-product-details__quantity-box">
                                              <button onClick={() => dispatch(decrease_quantity(item))} className="eg-product-details__quantity-btn minus decrement"><i className="fa fa-minus"></i></button>
@@ -184,7 +184,6 @@ const CartArea = () => {
                                              <button onClick={() => dispatch(addToCart(item))} className="eg-product-details__quantity-btn plus increment"><i className="fa fa-plus"></i></button>
                                           </div>
                                        </td>
-                                       <td className="text-end">{item.total}</td>
                                        <td>
                                           <a style={{cursor:"pointer"}} onClick={() => dispatch(remove_cart_product(item))} className="table eg-cart__remove"><RemoveIcon /></a>
                                        </td>
@@ -227,7 +226,7 @@ const CartArea = () => {
                         </div> */}
                         <div className="eg-cart-checkout__total d-flex align-items-center justify-content-between">
                            <span>Totali</span>
-                           <span>${total.toFixed(2)}</span>
+                           <span>{total.toFixed(2)} €</span>
                         </div>
 
                         <button

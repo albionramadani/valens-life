@@ -48,7 +48,7 @@ const HeaderCart = ({ cartOpen, setCartOpen }: any) => {
                <span className="woocommerce-Price-amount">${total.toFixed(2)}</span>
             </p>
             <p className="checkout-link">
-               <Link to="/cart" className="button wc-forward">View cart</Link>
+               <Link to="/shporta" className="button wc-forward">Shko në shportë</Link>
             </p>
          </div>
          <div className={`${cartOpen ? "cart-overlay" : ""}`} onClick={() => setCartOpen(false)}></div>

@@ -9,6 +9,11 @@ const social_icon = [
       label: "Instagram",
       href: "https://www.instagram.com/valens.ks",
    },
+   {
+      icon: "fab fa-tiktok",
+      label: "TikTok",
+      href: "https://www.tiktok.com",
+   },
 ];
 
 const SocialIcon = () => {

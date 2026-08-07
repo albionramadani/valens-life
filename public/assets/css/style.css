@@ -6105,7 +6105,7 @@ body.search-visible {
  }
  .eg-cart__table thead tr th {
 	color: #222222;
-	font-family: 'Oswald', sans-serif;
+	font-family: 'Contax Pro 55', sans-serif;
 	font-size: 17px;
 	line-height: 30px;
 	font-weight: 600;
@@ -6156,7 +6156,7 @@ body.search-visible {
 	text-transform: uppercase;
 	margin: 0;
 	color: #222222;
-	font-family: 'Oswald', sans-serif;
+	font-family: 'Contax Pro 55', sans-serif;
 	-webkit-transition: all 0.3s 0s ease-out;
 	-moz-transition: all 0.3s 0s ease-out;
 	-ms-transition: all 0.3s 0s ease-out;
@@ -6503,7 +6503,7 @@ body.search-visible {
  }
  .eg-checkout__shipping-title label {
 	font-size: 26px;
-	font-family: 'Oswald', sans-serif;
+	font-family: 'Contax Pro 55', sans-serif;
 	color: #222222;
 	margin-top: 0px;
 	font-weight: 500;
