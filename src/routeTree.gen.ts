@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as CartRouteImport } from './routes/cart'
 import { Route as IngredientRouteImport } from './routes/ingredient'
 import { Route as IngredientTwoRouteImport } from './routes/ingredient-two'
 import { Route as KategoriteRouteImport } from './routes/kategorite'
@@ -20,6 +19,7 @@ import { Route as ProduktetRouteImport } from './routes/produktet'
 import { Route as PyetjeRouteImport } from './routes/pyetje'
 import { Route as RrethNeshRouteImport } from './routes/rreth-nesh'
 import { Route as ShopDetailsRouteImport } from './routes/shop-details'
+import { Route as ShportaRouteImport } from './routes/shporta'
 import { Route as AdminSplatRouteImport } from './routes/admin.$'
 import { Route as KategoriaSlugRouteImport } from './routes/kategoria.$slug'
 import { Route as ShopDetailsIdRouteImport } from './routes/shop-details.$id'
@@ -27,11 +27,6 @@ import { Route as ShopDetailsIdRouteImport } from './routes/shop-details.$id'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CartRoute = CartRouteImport.update({
-  id: '/cart',
-  path: '/cart',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IngredientRoute = IngredientRouteImport.update({
@@ -79,6 +74,11 @@ const ShopDetailsRoute = ShopDetailsRouteImport.update({
   path: '/shop-details',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ShportaRoute = ShportaRouteImport.update({
+  id: '/shporta',
+  path: '/shporta',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminSplatRoute = AdminSplatRouteImport.update({
   id: '/admin/$',
   path: '/admin/$',
@@ -97,7 +97,6 @@ const ShopDetailsIdRoute = ShopDetailsIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/cart': typeof CartRoute
   '/ingredient': typeof IngredientRoute
   '/ingredient-two': typeof IngredientTwoRoute
   '/kategorite': typeof KategoriteRoute
@@ -107,13 +106,13 @@ export interface FileRoutesByFullPath {
   '/pyetje': typeof PyetjeRoute
   '/rreth-nesh': typeof RrethNeshRoute
   '/shop-details': typeof ShopDetailsRouteWithChildren
+  '/shporta': typeof ShportaRoute
   '/admin/$': typeof AdminSplatRoute
   '/kategoria/$slug': typeof KategoriaSlugRoute
   '/shop-details/$id': typeof ShopDetailsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/cart': typeof CartRoute
   '/ingredient': typeof IngredientRoute
   '/ingredient-two': typeof IngredientTwoRoute
   '/kategorite': typeof KategoriteRoute
@@ -123,6 +122,7 @@ export interface FileRoutesByTo {
   '/pyetje': typeof PyetjeRoute
   '/rreth-nesh': typeof RrethNeshRoute
   '/shop-details': typeof ShopDetailsRouteWithChildren
+  '/shporta': typeof ShportaRoute
   '/admin/$': typeof AdminSplatRoute
   '/kategoria/$slug': typeof KategoriaSlugRoute
   '/shop-details/$id': typeof ShopDetailsIdRoute
@@ -130,7 +130,6 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/cart': typeof CartRoute
   '/ingredient': typeof IngredientRoute
   '/ingredient-two': typeof IngredientTwoRoute
   '/kategorite': typeof KategoriteRoute
@@ -140,6 +139,7 @@ export interface FileRoutesById {
   '/pyetje': typeof PyetjeRoute
   '/rreth-nesh': typeof RrethNeshRoute
   '/shop-details': typeof ShopDetailsRouteWithChildren
+  '/shporta': typeof ShportaRoute
   '/admin/$': typeof AdminSplatRoute
   '/kategoria/$slug': typeof KategoriaSlugRoute
   '/shop-details/$id': typeof ShopDetailsIdRoute
@@ -148,7 +148,6 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/cart'
     | '/ingredient'
     | '/ingredient-two'
     | '/kategorite'
@@ -158,13 +157,13 @@ export interface FileRouteTypes {
     | '/pyetje'
     | '/rreth-nesh'
     | '/shop-details'
+    | '/shporta'
     | '/admin/$'
     | '/kategoria/$slug'
     | '/shop-details/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/cart'
     | '/ingredient'
     | '/ingredient-two'
     | '/kategorite'
@@ -174,13 +173,13 @@ export interface FileRouteTypes {
     | '/pyetje'
     | '/rreth-nesh'
     | '/shop-details'
+    | '/shporta'
     | '/admin/$'
     | '/kategoria/$slug'
     | '/shop-details/$id'
   id:
     | '__root__'
     | '/'
-    | '/cart'
     | '/ingredient'
     | '/ingredient-two'
     | '/kategorite'
@@ -190,6 +189,7 @@ export interface FileRouteTypes {
     | '/pyetje'
     | '/rreth-nesh'
     | '/shop-details'
+    | '/shporta'
     | '/admin/$'
     | '/kategoria/$slug'
     | '/shop-details/$id'
@@ -197,7 +197,6 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  CartRoute: typeof CartRoute
   IngredientRoute: typeof IngredientRoute
   IngredientTwoRoute: typeof IngredientTwoRoute
   KategoriteRoute: typeof KategoriteRoute
@@ -207,6 +206,7 @@ export interface RootRouteChildren {
   PyetjeRoute: typeof PyetjeRoute
   RrethNeshRoute: typeof RrethNeshRoute
   ShopDetailsRoute: typeof ShopDetailsRouteWithChildren
+  ShportaRoute: typeof ShportaRoute
   AdminSplatRoute: typeof AdminSplatRoute
   KategoriaSlugRoute: typeof KategoriaSlugRoute
 }
@@ -218,13 +218,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cart': {
-      id: '/cart'
-      path: '/cart'
-      fullPath: '/cart'
-      preLoaderRoute: typeof CartRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ingredient': {
@@ -290,6 +283,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopDetailsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/shporta': {
+      id: '/shporta'
+      path: '/shporta'
+      fullPath: '/shporta'
+      preLoaderRoute: typeof ShportaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/$': {
       id: '/admin/$'
       path: '/admin/$'
@@ -328,7 +328,6 @@ const ShopDetailsRouteWithChildren = ShopDetailsRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  CartRoute: CartRoute,
   IngredientRoute: IngredientRoute,
   IngredientTwoRoute: IngredientTwoRoute,
   KategoriteRoute: KategoriteRoute,
@@ -338,6 +337,7 @@ const rootRouteChildren: RootRouteChildren = {
   PyetjeRoute: PyetjeRoute,
   RrethNeshRoute: RrethNeshRoute,
   ShopDetailsRoute: ShopDetailsRouteWithChildren,
+  ShportaRoute: ShportaRoute,
   AdminSplatRoute: AdminSplatRoute,
   KategoriaSlugRoute: KategoriaSlugRoute,
 }
