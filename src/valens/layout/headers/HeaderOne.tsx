@@ -25,7 +25,7 @@ const HeaderOne = ({ style, hideNavLinks = false }: HeaderOneProps) => {
     // Primary nav pages keep the full navigation menu visible so users can move
     // between the dedicated nav-item pages (Ballina stays the homepage). Category
     // detail pages (/kategoria/<slug>) also keep the nav visible.
-    const navPages = ["/", "/kategorite", "/rreth-nesh", "/produktet", "/pyetje", "/kontakti"];
+    const navPages = ["/", "/kategorite", "/rreth-nesh", "/produktet", "/pyetje", "/kontakti", "/cart"];
     const isNavPage =
         navPages.includes(pathname) ||
         pathname.startsWith("/kategoria/") ||

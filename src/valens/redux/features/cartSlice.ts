@@ -102,10 +102,7 @@ const cartSlice = createSlice({
       saveFingerprint(state.cart);
     },
     clear_cart: (state) => {
-      const confirmMsg = window.confirm("Are you sure you want to delete your bag?");
-      if (confirmMsg) {
-        state.cart = [];
-      }
+      state.cart = [];
       saveFingerprint(state.cart);
     },
     // Rebuild the in-memory cart from fingerprint entries already enriched with
