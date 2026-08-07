@@ -7,6 +7,7 @@ export type ProductDetailsById = {
     name: string;
     slug: string;
     description: string | null;
+    long_description: string | null;
     base_price: number;
     sale_price: number | null;
     image_url: string | null;
@@ -58,7 +59,7 @@ export const useProductDetailsById = (productId?: string) =>
 
       const p = products[0];
 
-      const [variantsRes, galleryRes, relatedRes] = await Promise.all([
+      const [variantsRes, galleryRes, relatedRes, longRes] = await Promise.all([
         supabase
           .from("product_variants")
           .select("id,name,sku,price,stock,attributes,color_hex,is_active")
@@ -80,11 +81,18 @@ export const useProductDetailsById = (productId?: string) =>
               .order("name")
               .limit(4)
           : Promise.resolve({ data: [] as any[], error: null }),
+        // Long description (Odoo internal notes). Tolerant: if the column has not
+        // been added to the DB yet, the error is ignored and it stays null.
+        supabase.from("products").select("long_description").eq("id", p.id).limit(1),
       ]);
 
       if (variantsRes.error) throw variantsRes.error;
       if (galleryRes.error) throw galleryRes.error;
       if (relatedRes.error) throw relatedRes.error;
+
+      const longDescription = longRes.error
+        ? null
+        : ((longRes.data?.[0] as any)?.long_description ?? null);
 
       const variants = (variantsRes.data || []).filter((v) => Number(v.price) > 0);
       const gallery = (galleryRes.data || []).filter((g) => !!g.url && g.url !== "-");
@@ -96,6 +104,7 @@ export const useProductDetailsById = (productId?: string) =>
           name: p.name || "",
           slug: p.slug || "",
           description: p.description || null,
+          long_description: longDescription,
           base_price: Number(p.base_price) || 0,
           sale_price: p.sale_price ?? null,
           image_url: p.image_url || null,

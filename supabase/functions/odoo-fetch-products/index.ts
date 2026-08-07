@@ -71,6 +71,38 @@ function pricedOr1(value: unknown): number {
   return p !== null ? p : PRICE_FLOOR
 }
 
+// Convert Odoo rich-text (HTML) notes into plain text that PRESERVES line breaks
+// (so bullet lists show one item per line, matching Odoo) and decodes entities.
+function htmlToText(input: unknown): string {
+  let t = String(input ?? '')
+  if (!t) return ''
+  // Block-level / break tags become newlines.
+  t = t.replace(/<\s*br\s*\/?>/gi, '\n')
+       .replace(/<\/\s*(p|div|li|ul|ol|h[1-6]|tr|table)\s*>/gi, '\n')
+       .replace(/<\s*li[^>]*>/gi, '• ')
+  // Drop every remaining tag.
+  t = t.replace(/<[^>]+>/g, '')
+  // Decode the entities Odoo commonly emits.
+  t = t.replace(/&nbsp;/gi, ' ')
+       .replace(/&amp;/gi, '&')
+       .replace(/&lt;/gi, '<')
+       .replace(/&gt;/gi, '>')
+       .replace(/&quot;/gi, '"')
+       .replace(/&#0?39;|&apos;/gi, "'")
+       .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+  // Normalise whitespace: tabs -> space, trim each line, collapse blank runs.
+  t = t.replace(/\r/g, '').replace(/\t/g, ' ')
+       .split('\n').map((l) => l.replace(/[ ]{2,}/g, ' ').trim()).join('\n')
+       .replace(/\n{3,}/g, '\n\n')
+       .trim()
+  return t
+}
+
+// Odoo ships default POS / invoicing helper products (deposit, down payment,
+// settle invoice, tips, service/booking fees, "Default Product (POS)"). These are
+// not real catalogue items and must never appear on the storefront.
+const JUNK_NAME_RE = /\b(booking\s*fee|service\s*fee|deposit|down\s*payment|settle\s*(due|invoice)|tips|default\s*product)/i
+
 // Map Odoo attribute names -> frontend selector keys
 function attrKey(odooAttrName: string): string {
   const n = (odooAttrName || '').toLowerCase()
@@ -254,7 +286,7 @@ Deno.serve(async (req) => {
     // ============ FETCH CATALOG ============
     const templates = await jsonRpcCall(uid, password, 'product.template', 'search_read',
       [[['sale_ok', '=', true]]],
-      { fields: ['name', 'list_price', 'default_code', 'description_sale', 'categ_id', 'qty_available', 'active', 'barcode', 'taxes_id', 'product_tag_ids'], limit: 1000 })
+      { fields: ['name', 'list_price', 'default_code', 'description_sale', 'description', 'categ_id', 'qty_available', 'active', 'barcode', 'taxes_id', 'product_tag_ids', 'type'], limit: 1000 })
 
     const variants = await jsonRpcCall(uid, password, 'product.product', 'search_read',
       [[['sale_ok', '=', true]]],
@@ -387,14 +419,21 @@ Deno.serve(async (req) => {
         if (hit) { catUuid = hit; break }
       }
       if (!catUuid) catUuid = fixedCatMap.get(classifyCategory(catName, t.name || '')) || null
+      // Odoo "Internal Notes" (the `description` field) becomes the long product
+      // description on the detail page. Convert HTML->text keeping line breaks.
+      const longDesc = htmlToText(t.description)
+      // Hide Odoo's default POS/invoicing helper products (services, combos, or
+      // names like Deposit / Settle Invoice / Default Product (POS) …).
+      const isJunk = t.type === 'service' || t.type === 'combo' || JUNK_NAME_RE.test(String(t.name || ''))
       const row: any = {
         name: shortName(t.name, t.description_sale) || `Product ${t.id}`, slug, odoo_id: t.id,
         description: t.description_sale || null,
+        long_description: longDesc || null,
         tags,
         barcode: (t.barcode && String(t.barcode).trim()) || null,
         vat_rate: vatFor(t),
         subcategory: subcategoryFor(catName),
-        category_id: catUuid, stock_status: stockStatus(t.qty_available || 0), is_active: t.active !== false && !isDemo,
+        category_id: catUuid, stock_status: stockStatus(t.qty_available || 0), is_active: t.active !== false && !isDemo && !isJunk,
       }
       if (brandByTmpl.has(t.id)) row.brand = brandByTmpl.get(t.id)
       // Prices come from the pricelist sync; only the manual full sync sets them

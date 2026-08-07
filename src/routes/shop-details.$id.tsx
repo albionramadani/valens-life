@@ -88,6 +88,7 @@ function ShopDetailsPage() {
     valensSubtitle: details.product.categories?.name || "",
     stock_status: details.product.stock_status || "out_of_stock",
     description: details.product.description,
+    longDescription: details.product.long_description,
     variants: details.variants,
     gallery: details.gallery,
   };
