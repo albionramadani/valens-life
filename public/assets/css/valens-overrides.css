@@ -4179,8 +4179,19 @@ body.valens-clear-cart-open > *:not(.valens-clear-cart-modal):not(script):not(st
 	gap: 12px;
 	margin-top: 6px;
 }
-.inner-shop-details-content .inner-shop-perched-info .sd-cart-wrap {
+.inner-shop-details-content .inner-shop-perched-info .sd-cart-wrap,
+.inner-shop-details-content .inner-shop-perched-info .sd-cart-wrap form {
 	margin: 0;
+}
+/* Kill the stray bottom margin that pushed the qty box above the buttons' centre. */
+.inner-shop-details-content .inner-shop-perched-info .quickview-cart-plus-minus {
+	margin: 0;
+	height: 46px;
+}
+
+/* A little breathing room between the qty box and the first button. */
+.inner-shop-details-content .inner-shop-perched-info .valens-details-actions {
+	margin-left: 20px;
 }
 
 /* Action buttons — 100% identical to the product-list cards (pill radius). */
